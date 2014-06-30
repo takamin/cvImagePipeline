@@ -161,11 +161,14 @@ namespace cvUtils {
 			void setParam(std::string filter_instance_name, std::string parameter_name, int value);
 			ImageProcessor& operator[](std::string filter_instance_name);
 			void execute();
+			bool loadXml(const std::string& filename);
 		};
 
 		class __declspec(dllexport) VideoCapture : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
+			TParam<int> deviceIndex;
+			TParam<std::string> filename;
 			TParam<double> width;
 			TParam<double> height;
 			TParam<int> startFrame;

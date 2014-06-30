@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="pugxml">
+      <UniqueIdentifier>{7b70d84b-2853-4a24-b510-5c3f1bb5b4ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpticalFlowFarneback.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="ImageProcessor.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="pugixml-1.4\src\pugixml.cpp">
+      <Filter>pugxml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +101,15 @@
     <ClInclude Include="..\..\include\ImageProcessor.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="pugixml-1.4\src\pugiconfig.hpp">
+      <Filter>pugxml</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml-1.4\src\pugixml.hpp">
+      <Filter>pugxml</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="cvImageBlock.rc">
+    <ResourceCompile Include="cvImagePipeline.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
   </ItemGroup>

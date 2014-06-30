@@ -29,3 +29,9 @@ And its properties be able to accessed by its name.
 ## sample code
 
 see the sample program [capture](https://github.com/takamin/cvImageBlock/blob/master/src/capture/capture.cpp).
+
+
+----
+
+This library is using a xml parser [pugixml-1.4](http://pugixml.org/).
+

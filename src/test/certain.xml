@@ -1,0 +1,10 @@
+<cvImagePipeline>
+	<Processor class="VideoCapture" name="cap">
+		<Property name="deviceIndex" value="0"/>
+	</Processor>
+	<Processor class="Resizer" name="resizer">
+		<Property name="width" value="160"/>
+		<Property name="height" value="120"/>
+	</Processor>
+	<Processor class="ImageWindow" name="window"/>
+</cvImagePipeline>

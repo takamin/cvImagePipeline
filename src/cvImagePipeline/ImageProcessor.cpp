@@ -1,6 +1,8 @@
 #include "ImageProcessor.h"
 #include <typeinfo>
 #include <time.h>
+#include "pugixml-1.4/src/pugixml.hpp" // for ImgProcSet::loadXml
+using namespace std;
 
 namespace cvUtils {
 	namespace Filter {
@@ -258,17 +260,65 @@ namespace cvUtils {
 				setOutputMat(last->getOutputMat());
 			}
 		}
+
+		/**
+		 * create procesor pipeline from xml file. 
+		 */
+		bool ImgProcSet::loadXml(const std::string& filename) {
+			using namespace pugi;
+			xml_document document;
+			xml_parse_result result = document.load_file(filename.c_str());
+			if(result.status != status_ok) {
+				return false;
+			}
+			xml_node root_node = document.document_element();
+#ifdef _DEBUG
+			cerr << "[ImgProcSet::loadXml]" << "root node name = " << root_node.name() << endl;
+#endif
+			xpath_node_set processor_node_set = root_node.select_nodes("Processor");
+			xpath_node_set::const_iterator processor = processor_node_set.begin();
+			while(processor != processor_node_set.end()) {
+				xpath_node_set property_node_set = processor->node().select_nodes("Property");
+				xml_attribute attr_proc_class = processor->node().attribute("class");
+				xml_attribute attr_proc_name = processor->node().attribute("name");
+#ifdef _DEBUG
+				cerr << "[ImgProcSet::loadXml]  " << "Processor "
+					<< attr_proc_class.name() << " = " << attr_proc_class.as_string() << ", "
+					<< attr_proc_name.name() << " = " << attr_proc_name.as_string() << endl;
+#endif
+				ImageProcessor& proc = add(attr_proc_class.as_string(), attr_proc_name.as_string());
+				xpath_node_set::const_iterator property = property_node_set.begin();
+				while(property != property_node_set.end()) {
+					xml_attribute attr_prop_name = property->node().attribute("name");
+					xml_attribute attr_prop_value = property->node().attribute("value");
+#ifdef _DEBUG
+					cerr << "[ImgProcSet::loadXml]    " << "Property "
+						<< attr_prop_name.name() << " = " << attr_prop_name.as_string() << ", "
+						<< attr_prop_value.name() << " = " << attr_prop_value.as_string() << endl;
+#endif
+					proc.property(attr_prop_name.as_string()).setString(attr_prop_value.as_string());
+					property++;
+				}
+				processor++;
+			}
+			return true;
+		}
+
 		
 		///////////////////////////////////////////////////////////////////////////
 		// class VideoCapture
 
 		IMPLEMENT_CVFILTER(VideoCapture);
 		VideoCapture::VideoCapture()
-		:	startFrame("startFrame", 0), stopFrame("stopFrame", -1),
+		:	
+			deviceIndex("deviceIndex", -1), filename("filename", ""),
+			startFrame("startFrame", 0), stopFrame("stopFrame", -1),
 			width("width", 0.0),
 			height("height", 0.0),
 			frameNumber(0)
 		{
+			defParam(deviceIndex);
+			defParam(filename);
 			defParam(startFrame);
 			defParam(stopFrame);
 			defParam(width);
@@ -300,7 +350,13 @@ namespace cvUtils {
 		}
 		bool VideoCapture::capture() {
 			if(!videoCapture.isOpened()) {
-				return false;
+				if(deviceIndex >= 0) {
+					open(deviceIndex);
+				} else if((string)filename != "") {
+					open((string)filename);
+				} else {
+					return false;
+				}
 			}
 			cv::Mat mat;
 			while(frameNumber < startFrame) {
@@ -311,7 +367,6 @@ namespace cvUtils {
 			if(frameNumber >= startFrame && (stopFrame < startFrame || frameNumber <= stopFrame)) {
 				setOutputMat(mat.clone());
 			} else {
-				//cv::Mat zero(cv::Mat::zeros(mat.rows, mat.cols, mat.type()));
 				cv::Mat zero;
 				setOutputMat(zero);
 			}

@@ -96,6 +96,7 @@
     <ClCompile Include="LabeledObject.cpp" />
     <ClCompile Include="Labeler.cpp" />
     <ClCompile Include="OpticalFlowPyrLK.cpp" />
+    <ClCompile Include="pugixml-1.4\src\pugixml.cpp" />
     <ClCompile Include="TrackingObject.cpp" />
     <ClCompile Include="OpticalFlowFarneback.cpp" />
     <ClCompile Include="ImageProcessor.cpp" />
@@ -110,6 +111,8 @@
     <ClInclude Include="..\..\include\LabeledObject.h" />
     <ClInclude Include="..\..\include\Labeler.h" />
     <ClInclude Include="..\..\include\OpticalFlowPyrLK.h" />
+    <ClInclude Include="pugixml-1.4\src\pugiconfig.hpp" />
+    <ClInclude Include="pugixml-1.4\src\pugixml.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="..\..\include\TrackingObject.h" />
     <ClInclude Include="..\..\include\OpticalFlowFarneback.h" />
