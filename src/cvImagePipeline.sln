@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cvImagePipeline", "cvImageBlock\cvImageBlock.vcxproj", "{B45CECA4-94F4-4613-99AC-3FF69962601C}"
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cvImagePipeline", "cvImagePipeline\cvImagePipeline.vcxproj", "{B45CECA4-94F4-4613-99AC-3FF69962601C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "capture", "capture\capture.vcxproj", "{747D90AA-020B-4A6D-B861-C067E60CC1D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B45CECA4-94F4-4613-99AC-3FF69962601C} = {B45CECA4-94F4-4613-99AC-3FF69962601C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
