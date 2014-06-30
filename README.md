@@ -3,9 +3,12 @@ cvImageBlock
 
 ## description
 
-Image processing library with OpenCV.
+Image processing pipeline library with OpenCV for Windows.
 
 All image processings are executed by image processor block.
+
+* OpenCV 2.4.8 on C:\\opencv
+* Visual Studio 2010 VC++
 
 ## image processor block isa class ImageProcessor
 
