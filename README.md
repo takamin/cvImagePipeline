@@ -26,6 +26,12 @@ some properties that is accessable with its name.
 A image processor is able to create by its class name.
 And its properties be able to accessed by its name.
 
+## create processor by xml
+
+creates processor set from xml by ImgProcSet::loadXml(const string& filename).
+
+see the sample xml [certain.xml](https://github.com/takamin/cvImageBlock/blob/master/src/test/certain.xml).
+
 ## sample code
 
 see the sample program [capture](https://github.com/takamin/cvImageBlock/blob/master/src/capture/capture.cpp).
