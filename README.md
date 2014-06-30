@@ -17,7 +17,7 @@ To build, following items are required.
 The image processor is a instance of a class that is
 derived from ImageProcessor.
 ImageProcessor provide output image as cv::Mat.
-it can connect to other processor's inout.
+it can connect to other processor's input.
 And the class may have input images and
 some properties that is accessable with its name.
 
