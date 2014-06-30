@@ -1,28 +1,31 @@
-cvImageBlock
-============
+cvImagePipeline
+===============
 
 ## description
 
 Image processing pipeline library with OpenCV for Windows.
 
-All image processings are executed by image processor block.
+All image processings are executed by image processor.
+
+To build, following items are required.
 
 * OpenCV 2.4.8 on C:\\opencv
 * Visual Studio 2010 VC++
 
-## image processor block isa class ImageProcessor
+## class ImageProcessor
 
-The image processor block is a instance of a class that is
+The image processor is a instance of a class that is
 derived from ImageProcessor.
-it has input and output image, and it may have some processing properties.
+ImageProcessor provide output image as cv::Mat.
+it can connect to other processor's inout.
+And the class may have input images and
+some properties that is accessable with its name.
 
-The output image can connect to other processor's input.
-
-## creation
+## create processor by name
 
 A image processor is able to create by its class name.
 And its properties be able to accessed by its name.
 
 ## sample code
 
-see the sample program [capture](https://github.com/takamin/cvImageBlock/blob/master/src/capture/capture.cpp)
+see the sample program [capture](https://github.com/takamin/cvImageBlock/blob/master/src/capture/capture.cpp).
