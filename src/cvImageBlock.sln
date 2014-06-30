@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cvImageBlock", "cvImageBlock\cvImageBlock.vcxproj", "{B45CECA4-94F4-4613-99AC-3FF69962601C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "capture", "capture\capture.vcxproj", "{747D90AA-020B-4A6D-B861-C067E60CC1D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug(x64)|Any CPU = Debug(x64)|Any CPU
@@ -55,6 +57,42 @@ Global
 		{B45CECA4-94F4-4613-99AC-3FF69962601C}.Release|Win32.ActiveCfg = Release|Win32
 		{B45CECA4-94F4-4613-99AC-3FF69962601C}.Release|Win32.Build.0 = Release|Win32
 		{B45CECA4-94F4-4613-99AC-3FF69962601C}.Release|x64.ActiveCfg = Release|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|Any CPU.ActiveCfg = Debug(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|Itanium.ActiveCfg = Debug(x64)|Itanium
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|Itanium.Build.0 = Debug(x64)|Itanium
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|Mixed Platforms.ActiveCfg = Debug(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|Mixed Platforms.Build.0 = Debug(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|Win32.ActiveCfg = Debug(x64)|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|Win32.Build.0 = Debug(x64)|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|x64.ActiveCfg = Debug(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug(x64)|x64.Build.0 = Debug(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|Itanium.ActiveCfg = Debug|Itanium
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|Itanium.Build.0 = Debug|Itanium
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|Mixed Platforms.Build.0 = Debug|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|Win32.Build.0 = Debug|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|x64.ActiveCfg = Debug|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Debug|x64.Build.0 = Debug|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|Any CPU.ActiveCfg = Release(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|Itanium.ActiveCfg = Release(x64)|Itanium
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|Itanium.Build.0 = Release(x64)|Itanium
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|Mixed Platforms.ActiveCfg = Release(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|Mixed Platforms.Build.0 = Release(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|Win32.ActiveCfg = Release(x64)|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|Win32.Build.0 = Release(x64)|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|x64.ActiveCfg = Release(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release(x64)|x64.Build.0 = Release(x64)|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|Any CPU.ActiveCfg = Release|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|Itanium.ActiveCfg = Release|Itanium
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|Itanium.Build.0 = Release|Itanium
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|Mixed Platforms.ActiveCfg = Release|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|Mixed Platforms.Build.0 = Release|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|Win32.ActiveCfg = Release|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|Win32.Build.0 = Release|Win32
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|x64.ActiveCfg = Release|x64
+		{747D90AA-020B-4A6D-B861-C067E60CC1D9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
