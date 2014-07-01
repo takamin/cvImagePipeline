@@ -22,7 +22,7 @@
     <ProjectGuid>{747D90AA-020B-4A6D-B861-C067E60CC1D9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cvvideo</RootNamespace>
-    <ProjectName>capture</ProjectName>
+    <ProjectName>sample</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -214,14 +214,19 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;..\..\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>cvImagePipeline.lib;opencv_core248d.lib;opencv_highgui248d.lib;opencv_imgproc248d.lib;opencv_superres248d.lib;vfw32.lib;opencv_video248d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Debug;C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\$(Configuration);C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
+      <OutputFile>$(ProjectDir)$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)..\bin\$(Configuration)\*.dll $(ProjectDir)$(Configuration)</Command>
+      <Message>DLLを実行フォルダへコピー</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug(x64)|Win32'">
     <ClCompile>
@@ -229,12 +234,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;..\..\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opencv_core248d.lib;opencv_highgui248d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\$(Configuration);</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Itanium'">
@@ -269,7 +275,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -299,7 +305,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;..\..\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -307,8 +313,15 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>cvImagePipeline.lib;opencv_core248.lib;opencv_highgui248.lib;opencv_imgproc248.lib;opencv_superres248.lib;vfw32.lib;opencv_video248.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\Release;C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\$(Configuration);C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
+      <OutputFile>$(ProjectDir)$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)..\bin\$(Configuration)\*.dll $(ProjectDir)$(Configuration)</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>DLLを実行フォルダへコピー</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(x64)|Win32'">
     <ClCompile>
@@ -318,7 +331,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;..\..\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -326,6 +339,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>opencv_core248.lib;opencv_highgui248.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\$(Configuration);</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Itanium'">
@@ -370,7 +384,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -113,4 +113,8 @@
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE" />
+    <None Include="..\..\README.md" />
+  </ItemGroup>
 </Project>

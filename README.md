@@ -30,11 +30,11 @@ And its properties be able to accessed by its name.
 
 creates processor set from xml by ImgProcSet::loadXml(const string& filename).
 
-see the sample xml [certain.xml](https://github.com/takamin/cvImageBlock/blob/master/src/test/certain.xml).
+see the sample xml [certain.xml](https://github.com/takamin/cvImageBlock/blob/master/test/certain.xml).
 
 ## sample code
 
-see the sample program [capture](https://github.com/takamin/cvImageBlock/blob/master/src/capture/capture.cpp).
+see the sample program [capture.cpp](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp).
 
 
 ----

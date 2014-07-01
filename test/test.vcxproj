@@ -49,14 +49,19 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Debug;C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\$(Configuration);C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
       <AdditionalDependencies>cvImagePipeline.lib;opencv_core248d.lib;opencv_highgui248d.lib;opencv_imgproc248d.lib;opencv_superres248d.lib;vfw32.lib;opencv_video248d.lib;opencv_features2d248.lib;opencv_nonfree248.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(ProjectDir)$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)..\bin\$(Configuration)\*.dll $(ProjectDir)$(Configuration)</Command>
+      <Message>DLLを実行フォルダへコピー</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -66,16 +71,23 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>../Release;C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\$(Configuration);C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
       <AdditionalDependencies>cvImagePipeline.lib;opencv_core248.lib;opencv_highgui248.lib;opencv_imgproc248.lib;opencv_superres248.lib;vfw32.lib;opencv_video248.lib;opencv_features2d248.lib;opencv_nonfree248.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(ProjectDir)$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)..\bin\$(Configuration)\*.dll $(ProjectDir)$(Configuration)</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>DLLを実行フォルダへコピー</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

@@ -40,14 +40,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
-    <LibraryPath>C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
+    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
-    <LibraryPath>C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
+    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -56,6 +58,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CVUTILS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -63,6 +66,7 @@
       <AdditionalDependencies>opencv_core248d.lib;opencv_highgui248d.lib;opencv_imgproc248d.lib;opencv_superres248d.lib;vfw32.lib;opencv_video248d.lib;opencv_features2d248d.lib;opencv_nonfree248d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>
       </ImportLibrary>
+      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,6 +78,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CVUTILS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;C:\opencv\build\include\;C:\opencv\build\include\opencv;C:\opencv\build\include\opencv2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,6 +88,7 @@
       <AdditionalDependencies>opencv_core248.lib;opencv_highgui248.lib;opencv_imgproc248.lib;opencv_superres248.lib;vfw32.lib;opencv_video248.lib;opencv_features2d248.lib;opencv_nonfree248.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>
       </ImportLibrary>
+      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -120,6 +126,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="cvImagePipeline.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE" />
+    <None Include="..\..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

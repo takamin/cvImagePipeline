@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cvImagePipeline", "cvImagePipeline\cvImagePipeline.vcxproj", "{B45CECA4-94F4-4613-99AC-3FF69962601C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "capture", "capture\capture.vcxproj", "{747D90AA-020B-4A6D-B861-C067E60CC1D9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample", "..\sample\sample.vcxproj", "{747D90AA-020B-4A6D-B861-C067E60CC1D9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B45CECA4-94F4-4613-99AC-3FF69962601C} = {B45CECA4-94F4-4613-99AC-3FF69962601C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{CEE8FD9D-4543-4DA6-AAB4-E061BFC0C98F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "..\test\test.vcxproj", "{CEE8FD9D-4543-4DA6-AAB4-E061BFC0C98F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B45CECA4-94F4-4613-99AC-3FF69962601C} = {B45CECA4-94F4-4613-99AC-3FF69962601C}
 	EndProjectSection

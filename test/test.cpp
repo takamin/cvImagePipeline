@@ -36,11 +36,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		counter);
 
 	test("imgProcSet.loadXml returns false when no xml file",
-		(false == imgProcSet.loadXml("..\\test\\ReadMe.txt")),
+		(false == imgProcSet.loadXml("..\\ReadMe.txt")),
 		counter);
 
 	test("imgProcSet.loadXml returns true certain xml file",
-		(true == imgProcSet.loadXml("..\\test\\certain.xml")),
+		(true == imgProcSet.loadXml("..\\certain.xml")),
 		counter);
 	while(true) {
 		imgProcSet.execute();
