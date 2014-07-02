@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ImageProcessor.h"
 #include "AverageMat.h"
+#include "SubMat.h"
 
 using namespace std;
 using namespace cvUtils;
@@ -27,6 +28,26 @@ void test(const string& name, bool result, test_counter& counter) {
 	}
 	cerr << "[" << result_str << "] test " << counter.test_count << ". " << name << endl;
 }
+
+template<class T> bool is_equal(const T& a, const T& b)
+{
+	return (a == b);
+}
+bool is_equal(const float& a, const float& b) {
+	return (abs(a - b) < FLT_EPSILON);
+}
+bool is_equal(const double& a, const double& b) {
+	return (abs(a - b) < DBL_EPSILON);
+}
+template<class PixelT>bool testPixel(const cv::Mat& image, int x, int y, int ch, PixelT test_value) {
+	PixelT* p = (PixelT*)(image.data + image.step * y);
+	p += x * image.channels();
+	if(is_equal(p[ch], test_value)) {
+		return true;
+	}
+	cerr << "test fail: expected " << test_value << " at (" << x << ", " << y << ", " << ch << "), but " << p[ch] << std::endl;
+	return false;
+}
 int _tmain(int argc, _TCHAR* argv[])
 {
 	test_counter counter;
@@ -37,11 +58,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		counter);
 
 	test("imgProcSet.loadXml returns false when no xml file",
-		(false == imgProcSet.loadXml("..\\ReadMe.txt")),
+		(false == imgProcSet.loadXml("..\\..\\test\\ReadMe.txt")),
 		counter);
 
 	test("imgProcSet.loadXml returns true certain xml file",
-		(true == imgProcSet.loadXml("..\\certain.xml")),
+		(true == imgProcSet.loadXml("..\\..\\test\\certain.xml")),
 		counter);
 	
 	//while(true) {
@@ -117,9 +138,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	cv::Mat avgInput32F3_2(cv::Mat::zeros(3, 3, CV_32FC3));
 	cv::Mat avgInput32F3_3(cv::Mat::zeros(3, 3, CV_32FC3));
 
-	avgInput32F3_1 = avgInput32F3_1 + 100.0;
-	avgInput32F3_2 = avgInput32F3_2 + 200.0;
-	avgInput32F3_3 = avgInput32F3_3 + 300.0;
+	avgInput32F3_1 = cv::Scalar(100.0, 100.0, 100.0);
+	avgInput32F3_2 = cv::Scalar(200.0, 200.0, 200.0);
+	avgInput32F3_3 = cv::Scalar(300.0, 300.0, 300.0);
 
 	averager32FC3.setInputMat(avgInput32F3_0);
 	averager32FC3.execute();
@@ -134,29 +155,77 @@ int _tmain(int argc, _TCHAR* argv[])
 	test("AverageMat output image channels() equals to input",
 		(output.channels() == avgInput32F3_0.channels()), counter);
 
-	test("AverageMat average[0] value(0,0)", (output.data[output.step*0+ch*0+0] == 0), counter);
-	test("AverageMat average[0] value(1,1)", (output.data[output.step*1+ch*1+1] == 0), counter);
-	test("AverageMat average[0] value(2,2)", (output.data[output.step*2+ch*2+2] == 0), counter);
+	test("AverageMat average[0] value(0,0)", testPixel<float>(output, 0, 0, 0, 0.0), counter);
+	test("AverageMat average[0] value(1,1)", testPixel<float>(output, 1, 1, 1, 0.0), counter);
+	test("AverageMat average[0] value(2,2)", testPixel<float>(output, 2, 2, 2, 0.0), counter);
 	
 	averager32FC3.setInputMat(avgInput32F3_1);
 	averager32FC3.execute();
 	output = averager32FC3.getOutputMat();
-	test("AverageMat average[1] value(0,0)", (output.data[output.step*0+ch*0+0] == 50.0), counter);
-	test("AverageMat average[1] value(1,1)", (output.data[output.step*1+ch*1+1] == 50.0), counter);
-	test("AverageMat average[1] value(2,2)", (output.data[output.step*2+ch*2+2] == 50.0), counter);
+	test("AverageMat average[1] value(0,0)", testPixel<float>(output, 0, 0, 0, 50.0), counter);
+	test("AverageMat average[1] value(1,1)", testPixel<float>(output, 1, 1, 1, 50.0), counter);
+	test("AverageMat average[1] value(2,2)", testPixel<float>(output, 2, 2, 2, 50.0), counter);
 
 	averager32FC3.setInputMat(avgInput32F3_2);
 	averager32FC3.execute();
 	output = averager32FC3.getOutputMat();
-	test("AverageMat average[2] value(0,0)", (output.data[output.step*0+ch*0+0] == 150.0), counter);
-	test("AverageMat average[2] value(1,1)", (output.data[output.step*1+ch*1+1] == 150.0), counter);
-	test("AverageMat average[2] value(2,2)", (output.data[output.step*2+ch*2+2] == 150.0), counter);
+	test("AverageMat average[2] value(0,0)", testPixel<float>(output, 0, 0, 0, 150.0), counter);
+	test("AverageMat average[2] value(1,1)", testPixel<float>(output, 1, 1, 1, 150.0), counter);
+	test("AverageMat average[2] value(2,2)", testPixel<float>(output, 2, 2, 2, 150.0), counter);
 
 	averager32FC3.setInputMat(avgInput32F3_3);
 	averager32FC3.execute();
 	output = averager32FC3.getOutputMat();
-	test("AverageMat average[3] value(0,0)", (output.data[output.step*0+ch*0+0] == 250.0), counter);
-	test("AverageMat average[3] value(1,1)", (output.data[output.step*1+ch*1+1] == 250.0), counter);
-	test("AverageMat average[3] value(2,2)", (output.data[output.step*2+ch*2+2] == 250.0), counter);
+	test("AverageMat average[3] value(0,0)", testPixel<float>(output, 0, 0, 0, 250.0), counter);
+	test("AverageMat average[3] value(1,1)", testPixel<float>(output, 1, 1, 1, 250.0), counter);
+	test("AverageMat average[3] value(2,2)", testPixel<float>(output, 2, 2, 2, 250.0), counter);
+
+	// SubMat 32FC3
+
+	SubMat sub32FC3;
+	cv::Mat subInput32F3_0;
+	cv::Mat subInput32F3_1;
+
+	subInput32F3_0 = cv::Mat::zeros(3, 3, CV_32FC3);
+	subInput32F3_1 = cv::Mat::zeros(3, 2, CV_32FC3);
+	sub32FC3.setInputMat(subInput32F3_0);
+	sub32FC3.setInputMat("subImage", subInput32F3_1);
+	sub32FC3.execute();
+	output = sub32FC3.getOutputMat();
+	test("SubMat cannot calc between differ image. output image is not empty()",
+		(!output.empty()), counter);
+
+	subInput32F3_0 = cv::Mat::zeros(3, 3, CV_32FC3);
+	subInput32F3_1 = cv::Mat::zeros(3, 3, CV_32FC3);
+	sub32FC3.setInputMat(subInput32F3_0);
+	sub32FC3.setInputMat("subImage", subInput32F3_1);
+
+	subInput32F3_0 = cv::Scalar(100.0, 50.0, 25.0);
+	subInput32F3_1 = cv::Scalar(200.0, 100.0, 50.0);
+	sub32FC3.execute();
+	output = sub32FC3.getOutputMat();
+	ch = output.channels();
+	test("SubMat output image rows equals to input",
+		(output.rows == subInput32F3_0.rows), counter);
+	test("SubMat output image cols equals to input",
+		(output.cols == subInput32F3_0.cols), counter);
+	test("SubMat output image type() equals to input",
+		(output.type() == subInput32F3_0.type()), counter);
+	test("SubMat output image channels() equals to input",
+		(output.channels() == subInput32F3_0.channels()), counter);
+
+	test("SubMat result value(0,0)", testPixel<float>(output, 0, 0, 0, -100.0), counter);
+	test("SubMat result value(1,1)", testPixel<float>(output, 1, 1, 1, -50.0), counter);
+	test("SubMat result value(2,2)", testPixel<float>(output, 2, 2, 2, -25.0), counter);
+
+	subInput32F3_0 = cv::Scalar(200.0, 100.0, 50.0);
+	subInput32F3_1 = cv::Scalar(100.0, 50.0, 25.0);
+	sub32FC3.execute();
+	output = sub32FC3.getOutputMat();
+	test("SubMat result value(0,0)", testPixel<float>(output, 0, 0, 0, 100.0), counter);
+	test("SubMat result value(1,1)", testPixel<float>(output, 1, 1, 1, 50.0), counter);
+	test("SubMat result value(2,2)", testPixel<float>(output, 2, 2, 2, 25.0), counter);
+
+
 	return 0;
 }

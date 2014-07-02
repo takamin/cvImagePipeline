@@ -13,3 +13,8 @@ External Reference Specification
 #### Property
 
 * int averageCount 平均するフレームの数。初期値は30。
+
+
+## class SubImage
+
+画像から画素単位で、他の画像の値を減算する。
