@@ -221,7 +221,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>cvImagePipeline.lib;opencv_core248d.lib;opencv_highgui248d.lib;opencv_imgproc248d.lib;opencv_superres248d.lib;vfw32.lib;opencv_video248d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\bin\$(Configuration);C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
-      <OutputFile>$(ProjectDir)$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>$(ProjectDir)..\bin\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)..\bin\$(Configuration)\*.dll $(ProjectDir)$(Configuration)</Command>
@@ -314,7 +314,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>cvImagePipeline.lib;opencv_core248.lib;opencv_highgui248.lib;opencv_imgproc248.lib;opencv_superres248.lib;vfw32.lib;opencv_video248.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\bin\$(Configuration);C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
-      <OutputFile>$(ProjectDir)$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>$(ProjectDir)..\bin\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)..\bin\$(Configuration)\*.dll $(ProjectDir)$(Configuration)</Command>

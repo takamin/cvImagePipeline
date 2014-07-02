@@ -92,6 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AverageMat.cpp" />
     <ClCompile Include="createVideoAverageImage.cpp" />
     <ClCompile Include="cvUtils.cpp" />
     <ClCompile Include="EqualizeHist.cpp" />
@@ -108,6 +109,7 @@
     <ClCompile Include="ImageProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\AverageMat.h" />
     <ClInclude Include="..\..\include\cvUtils.h" />
     <ClInclude Include="..\..\include\EqualizeHist.h" />
     <ClInclude Include="..\..\include\FeatureMatcher.h" />
@@ -130,6 +132,8 @@
   <ItemGroup>
     <None Include="..\..\LICENSE" />
     <None Include="..\..\README.md" />
+    <None Include="..\CHANGE_LOG.md" />
+    <None Include="..\ERS.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

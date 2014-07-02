@@ -60,6 +60,9 @@
     <ClCompile Include="pugixml-1.4\src\pugixml.cpp">
       <Filter>pugxml</Filter>
     </ClCompile>
+    <ClCompile Include="AverageMat.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -107,6 +110,9 @@
     <ClInclude Include="pugixml-1.4\src\pugixml.hpp">
       <Filter>pugxml</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\AverageMat.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="cvImagePipeline.rc">
@@ -116,5 +122,7 @@
   <ItemGroup>
     <None Include="..\..\LICENSE" />
     <None Include="..\..\README.md" />
+    <None Include="..\CHANGE_LOG.md" />
+    <None Include="..\ERS.md" />
   </ItemGroup>
 </Project>
