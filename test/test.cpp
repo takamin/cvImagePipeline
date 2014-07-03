@@ -192,8 +192,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	sub32FC3.setInputMat("subImage", subInput32F3_1);
 	sub32FC3.execute();
 	output = sub32FC3.getOutputMat();
-	test("SubMat cannot calc between differ image. output image is not empty()",
-		(!output.empty()), counter);
+	test("SubMat cannot calc between differ image. output image is empty()",
+		(output.empty()), counter);
 
 	subInput32F3_0 = cv::Mat::zeros(3, 3, CV_32FC3);
 	subInput32F3_1 = cv::Mat::zeros(3, 3, CV_32FC3);

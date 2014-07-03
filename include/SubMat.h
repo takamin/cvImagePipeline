@@ -10,10 +10,6 @@ namespace cvUtils {
 			SubMat();
 			virtual ~SubMat();
 			void execute();
-		private:
-#pragma warning(disable:4251)
-			cv::Mat average_image;
-#pragma warning(default:4251)
 		};
 	}
 }

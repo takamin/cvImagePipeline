@@ -13,7 +13,6 @@ namespace cvUtils {
 			void execute();
 		private:
 #pragma warning(disable:4251)
-			cv::Mat average_image;
 			std::list<cv::Mat> image_buffer;
 #pragma warning(default:4251)
 			int buffer_count;
