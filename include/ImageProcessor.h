@@ -100,13 +100,16 @@ namespace cvUtils {
 			ImageProcessor();
 			virtual ~ImageProcessor();
 			virtual void reset();
+			virtual void onPropetyChange(Property& property);
+			virtual void onInputMatConnected(const std::string& inputMatName);
+			virtual void onOutputMatConnectedTo(ImageProcessor& dst, const std::string& inputMatName);
+
 			template<class T> ImageProcessor& property(const std::string& parameter_name, T value) {
 				parameters.set(parameter_name, value);
+				onPropetyChange(parameters[parameter_name]);
 				return *this;
 			}
-			Property& ImageProcessor::property(const std::string& parameter_name) {
-				return parameters[parameter_name];
-			}
+			ImageProcessor& setPropertyAsString(const std::string& parameter_name, const std::string& value);
 			const Property& ImageProcessor::property(const std::string& parameter_name) const {
 				return parameters[parameter_name];
 			}
@@ -129,13 +132,13 @@ namespace cvUtils {
 			static ImageProcessor* createFilter(std::string name);
 			static void entryFilter(std::string name, FILTER_FACTORY creator);
 			ImageProcessor& operator << (const ImageProcessor& dst);
-			const ImageProcessor& operator >> (ImageProcessor& dst) const;
+			ImageProcessor& operator >> (ImageProcessor& dst);
 			struct FilterInput {
 				ImageProcessor* filter;
 				std::string name;
 			};
 			FilterInput input(std::string name);
-			const ImageProcessor& operator >> (FilterInput& dst) const;
+			ImageProcessor& operator >> (FilterInput& dst);
 		};
 
 		class __declspec(dllexport) ImagePoint : public ImageProcessor {

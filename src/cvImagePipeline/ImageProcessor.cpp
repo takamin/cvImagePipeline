@@ -55,9 +55,10 @@ namespace cvUtils {
 			return *this;
 		}
 
-		const ImageProcessor&
-		ImageProcessor::operator >> (ImageProcessor& dst) const {
+		ImageProcessor&
+		ImageProcessor::operator >> (ImageProcessor& dst) {
 			dst.setInputMat(getOutputMat());
+			onOutputMatConnectedTo(dst, "");
 			return dst;
 		}
 
@@ -69,16 +70,18 @@ namespace cvUtils {
 			return mnp;
 		}
 
-		const ImageProcessor&
+		ImageProcessor&
 		ImageProcessor::operator >> (
-			ImageProcessor::FilterInput& mnp) const
+			ImageProcessor::FilterInput& mnp)
 		{
 			mnp.filter->setInputMat(mnp.name, getOutputMat());
+			onOutputMatConnectedTo(*mnp.filter, mnp.name);
 			return *this;
 		}
 
 		void ImageProcessor::setInputMat(const cv::Mat& mat) {
 			inputMat[""] = &mat;
+			onInputMatConnected("");
 		}
 
 		void ImageProcessor::setInputMat(
@@ -86,10 +89,45 @@ namespace cvUtils {
 			const cv::Mat& mat)
 		{
 			inputMat[name] = &mat;
+			onInputMatConnected(name);
 		}
 
 		void ImageProcessor::setOutputMat(const cv::Mat& mat) {
 			outputMat = mat;
+		}
+
+		ImageProcessor& ImageProcessor::setPropertyAsString(
+			const std::string& parameter_name,
+			const std::string& value)
+		{
+			parameters[parameter_name].setString(value);
+			onPropetyChange(parameters[parameter_name]);
+			return *this;
+		}
+
+		void ImageProcessor::onPropetyChange(Property& property) {
+#ifdef _DEBUG
+			std::cout << "ImageProcessor::onPropetyChange("
+				<< "class " << typeid(property).name() << " "
+				<< property.getName() << " = \""
+				<< property.getString() << "\")"
+				<< std::endl;
+#endif
+		}
+		void ImageProcessor::onInputMatConnected(const std::string& inputMatName) {
+#ifdef _DEBUG
+			std::cout << "ImageProcessor::onInputMatConnected(\""
+				<< inputMatName << "\")" << std::endl;
+#endif
+		}
+		void ImageProcessor::onOutputMatConnectedTo(
+			ImageProcessor& dst,
+			const std::string& inputMatName)
+		{
+#ifdef _DEBUG
+			std::cout << "ImageProcessor::onOutputMatConnectedTo("
+				<< "class " << typeid(dst).name() << " inputMatName=\"" << inputMatName << "\")" << std::endl;
+#endif
 		}
 
 		/////////////////////////////////////////////////////////////////////
@@ -215,9 +253,11 @@ namespace cvUtils {
 				std::list<ImageProcessor*>::reverse_iterator back = procs.rbegin();
 				if(back != procs.rend()) {
 					ImageProcessor* last = *back;
-					proc.setInputMat(last->getOutputMat());
+					proc >> *last;
+					//proc.setInputMat(last->getOutputMat());
 				} else {
-					proc.setInputMat(getInputMat());
+					proc >> *this;
+					//proc.setInputMat(getInputMat());
 				}
 				refOutputMat() = proc.getOutputMat();
 			}
@@ -296,7 +336,7 @@ namespace cvUtils {
 						<< attr_prop_name.name() << " = " << attr_prop_name.as_string() << ", "
 						<< attr_prop_value.name() << " = " << attr_prop_value.as_string() << endl;
 #endif
-					proc.property(attr_prop_name.as_string()).setString(attr_prop_value.as_string());
+					proc.setPropertyAsString(attr_prop_name.as_string(), attr_prop_value.as_string());
 					property++;
 				}
 				processor++;
