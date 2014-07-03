@@ -189,10 +189,11 @@ namespace cvUtils {
 		public:
 			DECLARE_CVFILTER;
 		private:
-			std::string windowName;
+			bool windowCreated;
 			int frameNumber;
 			int tick;
 		public:
+			TParam<std::string> windowName;
 			TParam<bool> showFrameNumber;
 			TParam<bool> showFPS;
 		public:
