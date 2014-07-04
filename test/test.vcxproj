@@ -90,6 +90,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="certain.xml" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

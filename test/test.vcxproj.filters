@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="certain.xml" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

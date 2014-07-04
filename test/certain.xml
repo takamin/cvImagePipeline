@@ -2,9 +2,16 @@
 	<Processor class="VideoCapture" name="cap">
 		<Property name="deviceIndex" value="0"/>
 	</Processor>
-	<Processor class="Resizer" name="resizer">
+	<Processor class="Resizer" name="resizer" autoBind="false">
 		<Property name="width" value="160"/>
 		<Property name="height" value="120"/>
+    <Input from="cap"/>
 	</Processor>
-	<Processor class="ImageWindow" name="window"/>
+	<Processor class="ImageWindow" name="window">
+    <Property name="windowName" value="window1"/>
+  </Processor>
+  <Processor class="ImageWindow" name="window2" autoBind="false">
+    <Property name="windowName" value="window2"/>
+    <Input from="cap"/>
+  </Processor>
 </cvImagePipeline>

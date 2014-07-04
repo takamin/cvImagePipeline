@@ -10,6 +10,8 @@
 #include <opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+#include "../src/cvImagePipeline/pugixml-1.4/src/pugixml.hpp"
+
 #pragma warning(disable:4251)
 
 
@@ -139,6 +141,8 @@ namespace cvUtils {
 			};
 			FilterInput input(std::string name);
 			ImageProcessor& operator >> (FilterInput& dst);
+		public:
+			void setPropertyByXmlNode(pugi::xml_node property);
 		};
 
 		class __declspec(dllexport) ImagePoint : public ImageProcessor {
@@ -166,6 +170,9 @@ namespace cvUtils {
 			ImageProcessor& operator[](std::string filter_instance_name);
 			void execute();
 			bool loadXml(const std::string& filename);
+		private:
+			void addProcessorByXmlNode(pugi::xml_node processor);
+			void setInputMatByXmlNode(ImageProcessor& imageProcessor, pugi::xml_node input);
 		};
 
 		class __declspec(dllexport) VideoCapture : public ImageProcessor {

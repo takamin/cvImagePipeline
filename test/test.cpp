@@ -83,12 +83,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		(true == imgProcSet.loadXml("..\\..\\test\\certain.xml")),
 		counter);
 	
-	//while(true) {
-	//	imgProcSet.execute();
-	//	if(cvWaitKey(1) == '\x1b') {
-	//		break;
-	//	}
-	//}
+	while(true) {
+		imgProcSet.execute();
+		if(cvWaitKey(1) == '\x1b') {
+			break;
+		}
+	}
 
 
 	/////////////////////////////////////////////////////////////////////////

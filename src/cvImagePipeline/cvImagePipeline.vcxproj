@@ -100,6 +100,7 @@
     <ClCompile Include="FeatureTracker.cpp" />
     <ClCompile Include="FlowTracker.cpp" />
     <ClCompile Include="ImageDataPtr.cpp" />
+    <ClCompile Include="ImgProcSet.cpp" />
     <ClCompile Include="LabeledObject.cpp" />
     <ClCompile Include="Labeler.cpp" />
     <ClCompile Include="OpticalFlowPyrLK.cpp" />
