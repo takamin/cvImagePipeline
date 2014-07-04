@@ -291,11 +291,6 @@ namespace cvUtils {
 				(*proc)->execute();
 				proc++;
 			}
-			std::list<ImageProcessor*>::reverse_iterator back = procs.rbegin();
-			if(back != procs.rend()) {
-				ImageProcessor* last = *back;
-				setOutputMat(last->getOutputMat());
-			}
 		}
 
 		/**
@@ -448,7 +443,6 @@ namespace cvUtils {
 						double fps = (double)CLOCKS_PER_SEC / (curr_tick - tick); 
 						ss << std::fixed << fps << "[fps] ";
 					}
-					//std::cout << ss.str() << std::endl;
 					cv::putText(im2show, ss.str(), cv::Point(15, 15),
 						cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5,
 						cv::Scalar(0,255,0), 1); 
