@@ -253,11 +253,9 @@ namespace cvUtils {
 				std::list<ImageProcessor*>::reverse_iterator back = procs.rbegin();
 				if(back != procs.rend()) {
 					ImageProcessor* last = *back;
-					proc >> *last;
-					//proc.setInputMat(last->getOutputMat());
+					*last >> proc;
 				} else {
-					proc >> *this;
-					//proc.setInputMat(getInputMat());
+					*this >> proc;
 				}
 				refOutputMat() = proc.getOutputMat();
 			}

@@ -226,6 +226,24 @@ int _tmain(int argc, _TCHAR* argv[])
 	test("SubMat result value(1,1)", testPixel<float>(output, 1, 1, 1, 50.0), counter);
 	test("SubMat result value(2,2)", testPixel<float>(output, 2, 2, 2, 25.0), counter);
 
+	// test auto bind
+	cv::Mat autoBindInpMat(cv::Mat::zeros(8,8,CV_8UC1));
+	ImgProcSet proc;
+	proc.setInputMat(autoBindInpMat);
+	proc.add("ImagePoint", "p0");
+	proc.add("ImagePoint", "p1");
+	const cv::Mat& autoBindOutMat = proc.getInputMat();
+
+	proc.execute();
+	test("ImgProcSet auto bind #1.", testPixel<unsigned char>(autoBindOutMat, 0, 0, 0, 0), counter);
+	
+	autoBindInpMat = cv::Scalar(1);
+	proc.execute();
+	test("ImgProcSet auto bind #2.", testPixel<unsigned char>(autoBindOutMat, 0, 0, 0, 1), counter);
+
+	autoBindInpMat = cv::Scalar(255);
+	proc.execute();
+	test("ImgProcSet auto bind #3.", testPixel<unsigned char>(autoBindOutMat, 0, 0, 0, 255), counter);
 
 	return 0;
 }
