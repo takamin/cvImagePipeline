@@ -218,6 +218,7 @@ namespace cvUtils {
 		IMPLEMENT_CVFILTER(ImgProcSet);
 
 		ImgProcSet::ImgProcSet()
+			: lastAutoProcessor(0)
 		{
 		}
 		ImgProcSet::~ImgProcSet()
@@ -258,6 +259,7 @@ namespace cvUtils {
 					proc.setInputMat(getInputMat());
 				}
 				refOutputMat() = proc.getOutputMat();
+				lastAutoProcessor = &proc;
 			}
 			procs.push_back(&proc);
 			return proc;
@@ -290,6 +292,9 @@ namespace cvUtils {
 			while(proc != procs.end()) {
 				(*proc)->execute();
 				proc++;
+			}
+			if(lastAutoProcessor != 0) {
+				setOutputMat(lastAutoProcessor->getOutputMat());
 			}
 		}
 

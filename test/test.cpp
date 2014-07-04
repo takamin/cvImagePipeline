@@ -48,6 +48,24 @@ template<class PixelT>bool testPixel(const cv::Mat& image, int x, int y, int ch,
 	cerr << "test fail: expected " << test_value << " at (" << x << ", " << y << ", " << ch << "), but " << p[ch] << std::endl;
 	return false;
 }
+bool testPixel(const cv::Mat& image, int x, int y, int ch, unsigned char test_value) {
+	unsigned char* p = (unsigned char*)(image.data + image.step * y);
+	p += x * image.channels();
+	if(is_equal(p[ch], test_value)) {
+		return true;
+	}
+	cerr << "test fail: expected " << (int)test_value << " at (" << x << ", " << y << ", " << ch << "), but " << (int)p[ch] << std::endl;
+	return false;
+}
+bool testPixel(const cv::Mat& image, int x, int y, int ch, char test_value) {
+	char* p = (char*)(image.data + image.step * y);
+	p += x * image.channels();
+	if(is_equal(p[ch], test_value)) {
+		return true;
+	}
+	cerr << "test fail: expected " << (int)test_value << " at (" << x << ", " << y << ", " << ch << "), but " << (int)p[ch] << std::endl;
+	return false;
+}
 int _tmain(int argc, _TCHAR* argv[])
 {
 	test_counter counter;
@@ -245,5 +263,25 @@ int _tmain(int argc, _TCHAR* argv[])
 	proc.execute();
 	test("ImgProcSet auto bind #3.", testPixel<unsigned char>(autoBindOutMat, 0, 0, 0, 255), counter);
 
+	// test auto bind
+	cv::Mat lastAutoBindInpMat(cv::Mat::zeros(8,8,CV_8UC1));
+	cv::Mat lastAutoBindInp2Mat(cv::Mat::zeros(8,8,CV_8UC1));
+	ImgProcSet procLastAutoBind;
+	procLastAutoBind.setInputMat(lastAutoBindInpMat);
+	procLastAutoBind.add("ImagePoint", "input");
+	procLastAutoBind.add("ImagePoint", "auto");
+	procLastAutoBind.add("ImagePoint", "not_auto", false).setInputMat(lastAutoBindInp2Mat);
+	//const cv::Mat& lastAutoBindOutMat = procLastAutoBind.getOutputMat();
+	cv::Mat lastAutoBindOutMat;
+	lastAutoBindInpMat = cv::Scalar(128);
+	lastAutoBindInp2Mat = cv::Scalar(64);
+	procLastAutoBind.execute();
+	lastAutoBindOutMat = procLastAutoBind.getOutputMat();
+	test("ImgProcSet output is last auto bind #1.", testPixel(lastAutoBindOutMat, 0, 0, 0, (unsigned char)128), counter);
+	lastAutoBindInpMat = cv::Scalar(1);
+	lastAutoBindInp2Mat = cv::Scalar(255);
+	procLastAutoBind.execute();
+	lastAutoBindOutMat = procLastAutoBind.getOutputMat();
+	test("ImgProcSet output is last auto bind #2.", testPixel(lastAutoBindOutMat, 0, 0, 0, (unsigned char)1), counter);
 	return 0;
 }

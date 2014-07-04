@@ -156,6 +156,7 @@ namespace cvUtils {
 			std::list<ImageProcessor*> procs;
 			std::vector<ImageProcessor*> dyn_filters;
 			std::hash_map<std::string, ImageProcessor*> name_to_filter;
+			const ImageProcessor* lastAutoProcessor;
 		public:
 			ImgProcSet();
 			~ImgProcSet();
