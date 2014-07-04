@@ -275,7 +275,6 @@ namespace cvUtils {
 #endif
 			} else {
 				filter->property(parameter_name, value);
-				//filter->setParam(parameter_name, value);
 			}
 		}
 		ImageProcessor& ImgProcSet::operator[](
@@ -396,18 +395,12 @@ namespace cvUtils {
 					return false;
 				}
 			}
-			cv::Mat mat;
+			cv::Mat& mat = refOutputMat(); 
 			while(frameNumber < startFrame) {
 				videoCapture >> mat;
 				frameNumber++;
 			}
 			videoCapture >> mat;
-			if(frameNumber >= startFrame && (stopFrame < startFrame || frameNumber <= stopFrame)) {
-				setOutputMat(mat.clone());
-			} else {
-				cv::Mat zero;
-				setOutputMat(zero);
-			}
 			frameNumber++;
 			return true;
 		}
