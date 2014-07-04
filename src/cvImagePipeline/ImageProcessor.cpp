@@ -255,7 +255,7 @@ namespace cvUtils {
 					ImageProcessor* last = *back;
 					*last >> proc;
 				} else {
-					*this >> proc;
+					proc.setInputMat(getInputMat());
 				}
 				refOutputMat() = proc.getOutputMat();
 			}
