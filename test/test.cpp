@@ -2,9 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "ImageProcessor.h"
-#include "AverageMat.h"
-#include "SubMat.h"
+#include "cvImagePipeline.h"
 
 using namespace std;
 using namespace cvImagePipeline;
