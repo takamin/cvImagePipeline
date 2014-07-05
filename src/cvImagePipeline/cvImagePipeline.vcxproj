@@ -103,6 +103,7 @@
     <ClCompile Include="ImgProcSet.cpp" />
     <ClCompile Include="LabeledObject.cpp" />
     <ClCompile Include="Labeler.cpp" />
+    <ClCompile Include="AverageOnline.cpp" />
     <ClCompile Include="OpticalFlowPyrLK.cpp" />
     <ClCompile Include="pugixml-1.4\src\pugixml.cpp" />
     <ClCompile Include="SubMat.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="..\..\include\Labeler.h" />
     <ClInclude Include="..\..\include\OpticalFlowPyrLK.h" />
     <ClInclude Include="..\..\include\SubMat.h" />
+    <ClInclude Include="AverageOnline.h" />
     <ClInclude Include="pugixml-1.4\src\pugiconfig.hpp" />
     <ClInclude Include="pugixml-1.4\src\pugixml.hpp" />
     <ClInclude Include="resource.h" />
