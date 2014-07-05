@@ -1,7 +1,7 @@
 #pragma once
 #include <opencv2/opencv.hpp>
 #include "Labeling.h"
-namespace cvUtils {
+namespace cvImagePipeline {
 	#pragma warning(disable:4251)
 	struct __declspec(dllexport) LabeledObject {
 	public:
@@ -27,4 +27,4 @@ namespace cvUtils {
 	};
 	#pragma warning(default:4251)
 }
-__declspec(dllexport) std::ostream& operator << (std::ostream& os, const cvUtils::LabeledObject& labeledObject);
+__declspec(dllexport) std::ostream& operator << (std::ostream& os, const cvImagePipeline::LabeledObject& labeledObject);

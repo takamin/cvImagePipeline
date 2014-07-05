@@ -2,7 +2,7 @@
 #include <typeinfo>
 #include <time.h>
 using namespace std;
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 		
 		/////////////////////////////////////////////////////////////////////

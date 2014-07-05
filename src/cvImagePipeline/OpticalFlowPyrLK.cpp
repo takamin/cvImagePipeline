@@ -1,7 +1,7 @@
 #include <windows.h>
 #include "OpticalFlowPyrLK.h"
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 
 		using namespace std;

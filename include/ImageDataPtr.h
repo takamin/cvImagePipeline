@@ -1,7 +1,7 @@
 #pragma once
 #include <opencv2/opencv.hpp>
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	// IplImage‚ÌimageData‚ðƒJƒvƒZƒ‹‰»
 	class ImageDataPtr {
 	private:

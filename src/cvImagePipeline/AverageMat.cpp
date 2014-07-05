@@ -1,6 +1,6 @@
 #include "AverageMat.h"
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 		using namespace std;
 		using namespace cv;

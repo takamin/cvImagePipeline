@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by cvUtils.rc
+// Used by cvImagePipeline.rc
 
 // 新しいオブジェクトの次の既定値
 // 

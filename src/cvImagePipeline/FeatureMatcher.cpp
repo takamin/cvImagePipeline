@@ -1,7 +1,7 @@
 #include "FeatureMatcher.h"
 //#define MATCH_SIMGLE
 //#define NO_OMIT_ILLEGAL_MATCH
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 		using namespace std;
 		using namespace cv;

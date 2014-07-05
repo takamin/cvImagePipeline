@@ -2,7 +2,7 @@
 #include <opencv2/superres/optical_flow.hpp>
 #include "ImageProcessor.h"
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 
 		#pragma warning(disable:4251)

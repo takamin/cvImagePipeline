@@ -6,7 +6,7 @@
 #include "TrackingObject.h"
 #pragma warning(disable:4251)
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 		class __declspec(dllexport) FlowTracker : public ImageProcessor {
 		public:

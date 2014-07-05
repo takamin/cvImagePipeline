@@ -1,6 +1,6 @@
 #include "SubMat.h"
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 		using namespace std;
 		using namespace cv;
