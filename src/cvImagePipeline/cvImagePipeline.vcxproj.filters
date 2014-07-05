@@ -125,7 +125,7 @@
     <ClInclude Include="..\..\include\SubMat.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="AverageOnline.h">
+    <ClInclude Include="..\..\include\AverageOnline.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

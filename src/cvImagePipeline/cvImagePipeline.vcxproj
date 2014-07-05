@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\AverageMat.h" />
+    <ClInclude Include="..\..\include\AverageOnline.h" />
     <ClInclude Include="..\..\include\cvUtils.h" />
     <ClInclude Include="..\..\include\EqualizeHist.h" />
     <ClInclude Include="..\..\include\FeatureMatcher.h" />
@@ -123,7 +124,6 @@
     <ClInclude Include="..\..\include\Labeler.h" />
     <ClInclude Include="..\..\include\OpticalFlowPyrLK.h" />
     <ClInclude Include="..\..\include\SubMat.h" />
-    <ClInclude Include="AverageOnline.h" />
     <ClInclude Include="pugixml-1.4\src\pugiconfig.hpp" />
     <ClInclude Include="pugixml-1.4\src\pugixml.hpp" />
     <ClInclude Include="resource.h" />
