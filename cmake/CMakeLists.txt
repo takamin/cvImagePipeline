@@ -1,0 +1,53 @@
+cmake_minimum_required(VERSION 2.8)
+include_directories(
+	/opencv/build/include
+	/opencv/build/include/opencv
+	/opencv/build/include/opencv2
+	../include
+	)
+link_directories(
+	/opencv/build/x86/vc10/lib
+	/opencv/buid/x86/vc10/staticlib
+	)
+add_library(cvImagePipeline SHARED
+	../src/cvImagePipeline/AverageMat.cpp
+	../src/cvImagePipeline/EqualizeHist.cpp
+	../src/cvImagePipeline/FeatureMatcher.cpp
+	../src/cvImagePipeline/FeatureTracker.cpp
+	../src/cvImagePipeline/FlowTracker.cpp
+	../src/cvImagePipeline/ImageDataPtr.cpp
+	../src/cvImagePipeline/ImageProcessor.cpp
+	../src/cvImagePipeline/ImgProcSet.cpp
+	../src/cvImagePipeline/LabeledObject.cpp
+	../src/cvImagePipeline/Labeler.cpp
+	../src/cvImagePipeline/OpticalFlowFarneback.cpp
+	../src/cvImagePipeline/OpticalFlowPyrLK.cpp
+	../src/cvImagePipeline/SubMat.cpp
+	../src/cvImagePipeline/TrackingObject.cpp
+	../src/cvImagePipeline/createVideoAverageImage.cpp
+	../src/cvImagePipeline/cvUtils.cpp
+	../src/cvImagePipeline/xmlLoader.cpp
+	../src/cvImagePipeline/pugixml-1.4/src/pugixml.cpp
+	)
+target_link_libraries(cvImagePipeline
+	opencv_calib3d248.lib
+	opencv_contrib248.lib
+	opencv_core248.lib
+	opencv_features2d248.lib
+	opencv_flann248.lib
+	opencv_gpu248.lib
+	opencv_highgui248.lib
+	opencv_imgproc248.lib
+	opencv_legacy248.lib
+	opencv_ml248.lib
+	opencv_nonfree248.lib
+	opencv_objdetect248.lib
+	opencv_ocl248.lib
+	opencv_photo248.lib
+	opencv_stitching248.lib
+	opencv_superres248.lib
+	opencv_ts248.lib
+	opencv_video248.lib
+	opencv_videostab248.lib
+	opencv_nonfree248.lib
+)
