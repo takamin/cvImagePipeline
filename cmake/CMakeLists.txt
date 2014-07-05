@@ -7,7 +7,7 @@ include_directories(
 	)
 link_directories(
 	/opencv/build/x86/vc10/lib
-	/opencv/buid/x86/vc10/staticlib
+	/opencv/build/x86/vc10/staticlib
 	)
 add_library(cvImagePipeline SHARED
 	../src/cvImagePipeline/AverageMat.cpp
