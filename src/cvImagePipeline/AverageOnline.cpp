@@ -24,23 +24,18 @@ namespace cvImagePipeline {
 			Mat& output_image = refOutputMat();
 			if(output_image.empty()) {
 				output_image = Mat::zeros(input_image.rows, input_image.cols, CV_32FC1);
-			} else {
 			}
-			cv::Mat temp_image;
-			cv::subtract(fmat, output_image, temp_image);
-			for(int y = 0; y < temp_image.rows; y++) {
-				float* p = (float*)(temp_image.data + temp_image.step * y);
-				for(int x = 0; x < temp_image.cols; x++) {
-					*p /= (float)(buffer_count + 1);
-					*p++;
-				}
-			}
-			cv::add(output_image, temp_image, output_image);
-			//cv::Mat add_image;
-			//cv::add(output_image, temp_image, add_image);
-			//output_image = add_image;
 			if(buffer_count < averageCount) {
 				buffer_count++;
+			}
+			for(int y = 0; y < fmat.rows; y++) {
+				float* src = (float*)(fmat.data + fmat.step * y);
+				float* ave = (float*)(output_image.data + output_image.step * y);
+				for(int x = 0; x < fmat.cols; x++) {
+					*ave += (*src - *ave) / buffer_count;
+					src++;
+					ave++;
+				}
 			}
 		}
 	}
