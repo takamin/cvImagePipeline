@@ -1,7 +1,6 @@
 #pragma once
-
-#include <hash_map>
 #include <iostream>
+#include <hash_map>
 #include <list>
 #include <map>
 #include <sstream>
@@ -14,9 +13,7 @@
 
 #pragma warning(disable:4251)
 
-
 namespace cvImagePipeline {
-
 	namespace Filter {
 
 		//property for ImageProcessor
@@ -143,121 +140,6 @@ namespace cvImagePipeline {
 			ImageProcessor& operator >> (FilterInput& dst);
 		public:
 			void setPropertyByXmlNode(pugi::xml_node property);
-		};
-
-		class __declspec(dllexport) ImagePoint : public ImageProcessor {
-		public:
-			DECLARE_CVFILTER;
-			ImagePoint(){}
-			~ImagePoint(){}
-			void execute();
-		};
-		class __declspec(dllexport) ImgProcSet : public ImageProcessor
-		{
-		public:
-			DECLARE_CVFILTER;
-		private:
-			std::list<ImageProcessor*> procs;
-			std::vector<ImageProcessor*> dyn_filters;
-			std::hash_map<std::string, ImageProcessor*> name_to_filter;
-			const ImageProcessor* lastAutoProcessor;
-		public:
-			ImgProcSet();
-			~ImgProcSet();
-			ImageProcessor& add(std::string filter_class_name, std::string filter_instance_name, bool autoBind = true);
-			ImageProcessor& add(ImageProcessor& proc, bool autoBind = true);
-			void setParam(std::string filter_instance_name, std::string parameter_name, int value);
-			ImageProcessor& operator[](std::string filter_instance_name);
-			void execute();
-			bool loadXml(const std::string& filename);
-		private:
-			void addProcessorByXmlNode(pugi::xml_node processor);
-			void setInputMatByXmlNode(ImageProcessor& imageProcessor, pugi::xml_node input);
-		};
-
-		class __declspec(dllexport) VideoCapture : public ImageProcessor {
-		public:
-			DECLARE_CVFILTER;
-			TParam<int> deviceIndex;
-			TParam<std::string> filename;
-			TParam<double> width;
-			TParam<double> height;
-			TParam<int> startFrame;
-			TParam<int> stopFrame;
-		private:
-			cv::VideoCapture videoCapture;
-			int frameNumber;
-		public:
-			VideoCapture();
-			~VideoCapture();
-			bool open(int deviceIndex);
-			bool open(const std::string& filename);
-			bool capture();
-			void execute();
-		};
-
-		class __declspec(dllexport) ImageWindow : public ImageProcessor {
-		public:
-			DECLARE_CVFILTER;
-		private:
-			bool windowCreated;
-			int frameNumber;
-			int tick;
-		public:
-			TParam<std::string> windowName;
-			TParam<bool> showFrameNumber;
-			TParam<bool> showFPS;
-		public:
-			ImageWindow();
-			ImageWindow(std::string windowName);
-			void execute();
-		};
-
-		class __declspec(dllexport) ColorConverter : public ImageProcessor {
-		public:
-			DECLARE_CVFILTER;
-		private:
-			TParam<int> cvtCode;
-		public:
-			ColorConverter();
-			ColorConverter(int cvtCode);
-			void execute();
-		};
-		class __declspec(dllexport) Resizer : public ImageProcessor {
-		public:
-			DECLARE_CVFILTER;
-			TParam<int> width;
-			TParam<int> height;
-		public:
-			Resizer();
-			Resizer(int width, int height);
-			void execute();
-		};
-		class __declspec(dllexport) Flipper : public ImageProcessor {
-		public:
-			DECLARE_CVFILTER;
-		private:
-			TParam<int> flipDir;
-		public:
-			Flipper();
-			Flipper(int flipDir);
-			void execute();
-		};
-		class __declspec(dllexport) GaussianBlur : public ImageProcessor {
-		public:
-			DECLARE_CVFILTER;
-		private:
-			TParam<int> kernelWidth;
-			TParam<int> kernelHeight;
-			TParam<double> sigmaX;
-			TParam<double> sigmaY;
-			TParam<int> borderType;
-		public:
-			GaussianBlur();
-			GaussianBlur(
-				int kernelWidth, int kernelHeight,
-				double sigmaX, double sigmaY = 0.0, int borderType = cv::BORDER_DEFAULT);
-			void execute();
 		};
 	}
 }

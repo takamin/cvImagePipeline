@@ -1,12 +1,11 @@
 ﻿#include "stdafx.h"
 #include <windows.h>
 #include <opencv2/opencv.hpp>
-#include "cvUtils.h"
-#include "OpticalFlowFarneback.h"
-#include "FeatureTracker.h"
-#include "FlowTracker.h"
+#include "cvImagePipeline.h"
+
 using namespace cvImagePipeline;
 using namespace cvImagePipeline::Filter;
+
 #define FEATURE_TRACKER
 #define FLOW_TRACKER
 
