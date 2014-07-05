@@ -172,3 +172,15 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+# cmake folders
+cmake/ALL_BUILD.vcxproj
+cmake/ALL_BUILD.vcxproj.filters
+cmake/CMakeCache.txt
+cmake/CMakeFiles/
+cmake/Project.sln
+cmake/ZERO_CHECK.vcxproj
+cmake/ZERO_CHECK.vcxproj.filters
+cmake/cmake_install.cmake
+cmake/cvImagePipeline.vcxproj
+cmake/cvImagePipeline.vcxproj.filters
