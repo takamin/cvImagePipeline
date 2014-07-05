@@ -6,13 +6,17 @@
   <Processor class="Flipper" name="fripHoriz">
     <Property name="flipDir" value="1"/>
   </Processor>
+  <!--
   <Processor class="Resizer" name="resizer">
 		<Property name="width" value="320"/>
 		<Property name="height" value="240"/>
 	</Processor>
   <Processor class="ColorConverter" name="grayscale"/>
+  -->
+  <!--
   <Processor class="EqualizeHist" name="equalizeHist"/>
   <Processor class="GaussianBlur" name="blur"/>
+  -->
   <Processor class="ImagePoint" name="preprocessed"/>
   <Processor class="ImageWindow" name="window">
     <Property name="windowName" value="Camera"/>
