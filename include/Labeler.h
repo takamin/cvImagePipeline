@@ -6,7 +6,7 @@
 #include "Labeling.h"
 #pragma warning(disable:4251)
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 		class __declspec(dllexport) Labeler : public ImageProcessor
 		{

@@ -1,7 +1,7 @@
 #include "FlowTracker.h"
 #include <vector>
 #include <sstream>
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 		using namespace std;
 		using namespace cv;

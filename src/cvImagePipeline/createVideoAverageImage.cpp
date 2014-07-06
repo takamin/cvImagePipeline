@@ -1,6 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include "ImageDataPtr.h"
-namespace cvUtils {
+namespace cvImagePipeline {
 	__declspec(dllexport) 
 	IplImage* createVideoAverageImage(CvCapture* capture) {
 		CvSize frameSize;

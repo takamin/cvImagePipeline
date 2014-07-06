@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <sstream>
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 
 		using namespace std;

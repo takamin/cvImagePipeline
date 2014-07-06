@@ -7,8 +7,8 @@
 #include "SubMat.h"
 
 using namespace std;
-using namespace cvUtils;
-using namespace cvUtils::Filter;
+using namespace cvImagePipeline;
+using namespace cvImagePipeline::Filter;
 struct test_counter {
 	test_counter() : test_count(0), pass_count(0), fail_count(0) {}  
 	int test_count;

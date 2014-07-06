@@ -7,7 +7,7 @@
 using namespace std;
 using namespace cv;
 
-namespace cvUtils {
+namespace cvImagePipeline {
 
 	LabeledObject::LabeledObject() : region(0,0,0,0), avg_vx(0), avg_vy(0), clock(::clock()) { }
 	bool LabeledObject::operator==(const LabeledObject& that) const {
@@ -34,7 +34,7 @@ namespace cvUtils {
 		}
 	}
 }
-std::ostream& operator << (std::ostream& os, const cvUtils::LabeledObject& obj) {
+std::ostream& operator << (std::ostream& os, const cvImagePipeline::LabeledObject& obj) {
 	obj.putTo(os);
 	return os;
 }

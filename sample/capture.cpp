@@ -5,8 +5,8 @@
 #include "OpticalFlowFarneback.h"
 #include "FeatureTracker.h"
 #include "FlowTracker.h"
-using namespace cvUtils;
-using namespace cvUtils::Filter;
+using namespace cvImagePipeline;
+using namespace cvImagePipeline::Filter;
 #define FEATURE_TRACKER
 #define FLOW_TRACKER
 

@@ -8,7 +8,7 @@ BOOL WINAPI DllMain( HINSTANCE hDLL, DWORD dwReason, LPVOID lpReserved)
 	return TRUE;
 }
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	__declspec(dllexport)
 	int cvWaitKeyEx(int delay /* =1 */) {
 		int ch = cvWaitKey(delay);

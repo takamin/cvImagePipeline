@@ -1,7 +1,7 @@
 #include <windows.h>
 #include "OpticalFlowFarneback.h"
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 
 		using namespace std;

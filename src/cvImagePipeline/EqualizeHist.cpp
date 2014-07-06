@@ -1,6 +1,6 @@
 #include "EqualizeHist.h"
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	namespace Filter {
 		
 		IMPLEMENT_CVFILTER(EqualizeHist);

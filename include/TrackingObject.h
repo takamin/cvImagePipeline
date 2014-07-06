@@ -4,7 +4,7 @@
 #include "LabeledObject.h"
 #pragma warning(disable:4251)
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	struct __declspec(dllexport) TrackingObject {
 		LabeledObject state;
 
@@ -86,4 +86,4 @@ namespace cvUtils {
 	};
 	#pragma warning(default:4251)
 }
- __declspec(dllexport) std::ostream& operator << (std::ostream&, const cvUtils::TrackingObject& trackingObject);
+ __declspec(dllexport) std::ostream& operator << (std::ostream&, const cvImagePipeline::TrackingObject& trackingObject);

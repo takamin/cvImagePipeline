@@ -1,6 +1,6 @@
 #include "TrackingObject.h"
 
-namespace cvUtils {
+namespace cvImagePipeline {
 	using namespace std;
 	using namespace cv;
 
@@ -419,7 +419,7 @@ namespace cvUtils {
 		cv::rectangle(image, state.region, color);
 	}
 }
-std::ostream& operator << (std::ostream& ostr, const cvUtils::TrackingObject& trackingObject) {
+std::ostream& operator << (std::ostream& ostr, const cvImagePipeline::TrackingObject& trackingObject) {
 	trackingObject.putTo(ostr);
 	//ostr << "{life:" << trackingObject.life << ",";
 	//ostr << "rect:(";
