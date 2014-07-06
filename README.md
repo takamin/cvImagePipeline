@@ -22,7 +22,7 @@ OpenCV画像処理フィルタシーケンスライブラリ。
 
 ### ビルド方法
 
-ビルドは [src/cvImagePipeline](https://github.com/takamin/cvImageBlock/blob/master/src/cvImagePipeline)のソリューションでビルドしてください。
+ビルドは [src/cvImagePipeline](https://github.com/takamin/cvImageBlock/blob/master/src)のソリューションでビルドしてください。
 
 CMakeLists.txtを記述していますが、正常動作不明です。
 
