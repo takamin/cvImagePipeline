@@ -93,35 +93,55 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AverageMat.cpp" />
+    <ClCompile Include="ColorConverter.cpp" />
     <ClCompile Include="createVideoAverageImage.cpp" />
     <ClCompile Include="cvUtils.cpp" />
     <ClCompile Include="EqualizeHist.cpp" />
     <ClCompile Include="FeatureMatcher.cpp" />
     <ClCompile Include="FeatureTracker.cpp" />
+    <ClCompile Include="Flipper.cpp" />
     <ClCompile Include="FlowTracker.cpp" />
+    <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="ImageDataPtr.cpp" />
+    <ClCompile Include="ImagePoint.cpp" />
+    <ClCompile Include="ImageWindow.cpp" />
     <ClCompile Include="ImgProcSet.cpp" />
     <ClCompile Include="LabeledObject.cpp" />
     <ClCompile Include="Labeler.cpp" />
+    <ClCompile Include="AverageOnline.cpp" />
     <ClCompile Include="OpticalFlowPyrLK.cpp" />
     <ClCompile Include="pugixml-1.4\src\pugixml.cpp" />
+    <ClCompile Include="Resizer.cpp" />
     <ClCompile Include="SubMat.cpp" />
     <ClCompile Include="TrackingObject.cpp" />
     <ClCompile Include="OpticalFlowFarneback.cpp" />
     <ClCompile Include="ImageProcessor.cpp" />
+    <ClCompile Include="VideoCapture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\AverageMat.h" />
+    <ClInclude Include="..\..\include\AverageOnline.h" />
+    <ClInclude Include="..\..\include\ColorConverter.h" />
+    <ClInclude Include="..\..\include\cvImagePipeline.h" />
     <ClInclude Include="..\..\include\cvUtils.h" />
     <ClInclude Include="..\..\include\EqualizeHist.h" />
     <ClInclude Include="..\..\include\FeatureMatcher.h" />
     <ClInclude Include="..\..\include\FeatureTracker.h" />
+    <ClInclude Include="..\..\include\Flipper.h" />
     <ClInclude Include="..\..\include\FlowTracker.h" />
+    <ClInclude Include="..\..\include\GaussianBlur.h" />
     <ClInclude Include="..\..\include\ImageDataPtr.h" />
+    <ClInclude Include="..\..\include\ImagePoint.h" />
+    <ClInclude Include="..\..\include\ImageWindow.h" />
+    <ClInclude Include="..\..\include\ImgProcSet.h" />
     <ClInclude Include="..\..\include\LabeledObject.h" />
     <ClInclude Include="..\..\include\Labeler.h" />
     <ClInclude Include="..\..\include\OpticalFlowPyrLK.h" />
+    <ClInclude Include="..\..\include\pugiconfig.hpp" />
+    <ClInclude Include="..\..\include\pugixml.hpp" />
+    <ClInclude Include="..\..\include\Resizer.h" />
     <ClInclude Include="..\..\include\SubMat.h" />
+    <ClInclude Include="..\..\include\VideoCapture.h" />
     <ClInclude Include="pugixml-1.4\src\pugiconfig.hpp" />
     <ClInclude Include="pugixml-1.4\src\pugixml.hpp" />
     <ClInclude Include="resource.h" />
