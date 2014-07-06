@@ -90,7 +90,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="certain.xml" />
+    <None Include="certain.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
