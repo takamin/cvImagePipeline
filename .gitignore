@@ -184,3 +184,7 @@ cmake/ZERO_CHECK.vcxproj.filters
 cmake/cmake_install.cmake
 cmake/cvImagePipeline.vcxproj
 cmake/cvImagePipeline.vcxproj.filters
+cmake/sample.vcxproj
+cmake/sample.vcxproj.filters
+cmake/test.vcxproj
+cmake/test.vcxproj.filters
