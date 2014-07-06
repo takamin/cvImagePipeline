@@ -14,22 +14,6 @@ namespace cvImagePipeline {
 		AverageOnline::~AverageOnline()
 		{
 		}
-		static double round(double r) { return (r > 0.0) ? floor(r + 0.5) : ceil(r - 0.5); }
-		template<class T> static void averageOnline(const Mat& new_frame, Mat& average, int count) {
-			assert(new_frame.channels() == average.channels());
-			int channels = new_frame.channels();
-			for(int y = 0; y < new_frame.rows; y++) {
-				T* src = (T*)(new_frame.data + new_frame.step * y);
-				T* ave = (T*)(average.data + average.step * y);
-				for(int x = 0; x < new_frame.cols; x++) {
-					for(int i = 0; i < channels; i++) {
-						ave[i] += (T)round(((double)src[i] - ave[i]) / count);
-					}
-					src += channels;
-					ave += channels;
-				}
-			}
-		}
 		void AverageOnline::execute() {
 			const Mat& input_image = getInputMat();
 			if(input_image.empty()) {
@@ -37,19 +21,43 @@ namespace cvImagePipeline {
 			}
 			int input_channels = input_image.channels();
 			int input_depth = input_image.depth();
+
+			Mat float_image;
+			if(input_depth == CV_32F) {
+				float_image = input_image;
+			} else {
+				double alpha = 1.0;
+				double beta = 0.0;
+				switch(input_depth) {
+				case CV_8U: alpha = 1.0 / 256; beta = 0.0; break;
+				case CV_8S: alpha = 1.0 / 128; beta = 0.5; break;
+				case CV_16U: alpha = 1.0 / 0x1000000; beta = 0.0; break;
+				case CV_16S: alpha = 1.0 / 0x800000;  beta = 0.5; break;
+				}
+				input_image.convertTo(
+					float_image,
+					CV_MAKETYPE(CV_32F, input_channels), alpha, beta);
+			}
+
 			Mat& output_image = refOutputMat();
 			if(output_image.empty()) {
-				output_image = Mat::zeros(input_image.rows, input_image.cols, input_image.type());
+				output_image = Mat::zeros(
+					input_image.rows, input_image.cols,
+					CV_MAKETYPE(CV_32F, input_channels));
 			}
 			if(buffer_count < averageCount) {
 				buffer_count++;
 			}
-			switch(input_depth) {
-			case CV_8U: averageOnline<unsigned char>(input_image, output_image, buffer_count); break;
-			case CV_8S: averageOnline<char>(input_image, output_image, buffer_count); break;
-			case CV_16U: averageOnline<unsigned short>(input_image, output_image, buffer_count); break;
-			case CV_16S: averageOnline<short>(input_image, output_image, buffer_count); break;
-			case CV_32F: averageOnline<float>(input_image, output_image, buffer_count); break;
+			for(int y = 0; y < float_image.rows; y++) {
+				float* src = (float*)(float_image.data + float_image.step * y);
+				float* ave = (float*)(output_image.data + output_image.step * y);
+				for(int x = 0; x < float_image.cols; x++) {
+					for(int i = 0; i < input_channels; i++) {
+						ave[i] += (src[i] - ave[i]) / buffer_count;
+					}
+					src += input_channels;
+					ave += input_channels;
+				}
 			}
 		}
 	}

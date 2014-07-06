@@ -11,17 +11,14 @@
 		<Property name="width" value="320"/>
 		<Property name="height" value="240"/>
 	</Processor>
-  <Processor class="ColorConverter" name="grayscale"/>
   -->
-  <!--
+  <Processor class="ColorConverter" name="grayscale"/>
   <Processor class="EqualizeHist" name="equalizeHist"/>
   <Processor class="GaussianBlur" name="blur"/>
-  -->
   <Processor class="ImagePoint" name="preprocessed"/>
   <Processor class="ImageWindow" name="window">
     <Property name="windowName" value="Camera"/>
   </Processor>
-  
   <Processor class="AverageOnline" name="avg1s" autoBind="false">
     <Property name="averageCount" value="30"/>
     <Input from="preprocessed"/>
