@@ -1,35 +1,35 @@
 cmake_minimum_required(VERSION 2.8)
-include_directories(
-	/opencv/build/include
-	/opencv/build/include/opencv
-	/opencv/build/include/opencv2
-	../include
+set(SRC_DIR ../src/cvImagePipeline)
+set(DLL_SRCS 
+	${SRC_DIR}/AverageMat.cpp
+	${SRC_DIR}/AverageOnline.cpp
+	${SRC_DIR}/ColorConverter.cpp
+	${SRC_DIR}/EqualizeHist.cpp
+	${SRC_DIR}/FeatureMatcher.cpp
+	${SRC_DIR}/FeatureTracker.cpp
+	${SRC_DIR}/Flipper.cpp
+	${SRC_DIR}/FlowTracker.cpp
+	${SRC_DIR}/GaussianBlur.cpp
+	${SRC_DIR}/ImageDataPtr.cpp
+	${SRC_DIR}/ImagePoint.cpp
+	${SRC_DIR}/ImageProcessor.cpp
+	${SRC_DIR}/ImageWindow.cpp
+	${SRC_DIR}/ImgProcSet.cpp
+	${SRC_DIR}/LabeledObject.cpp
+	${SRC_DIR}/Labeler.cpp
+	${SRC_DIR}/OpticalFlowFarneback.cpp
+	${SRC_DIR}/OpticalFlowPyrLK.cpp
+	${SRC_DIR}/Resizer.cpp
+	${SRC_DIR}/SubMat.cpp
+	${SRC_DIR}/TrackingObject.cpp
+	${SRC_DIR}/VideoCapture.cpp
+	${SRC_DIR}/createVideoAverageImage.cpp
+	${SRC_DIR}/cvUtils.cpp
+	${SRC_DIR}/xmlLoader.cpp
+	${SRC_DIR}/pugixml-1.4/src/pugixml.cpp
 	)
-link_directories(
-	/opencv/build/x86/vc10/lib
-	/opencv/build/x86/vc10/staticlib
-	)
-add_library(cvImagePipeline SHARED
-	../src/cvImagePipeline/AverageMat.cpp
-	../src/cvImagePipeline/EqualizeHist.cpp
-	../src/cvImagePipeline/FeatureMatcher.cpp
-	../src/cvImagePipeline/FeatureTracker.cpp
-	../src/cvImagePipeline/FlowTracker.cpp
-	../src/cvImagePipeline/ImageDataPtr.cpp
-	../src/cvImagePipeline/ImageProcessor.cpp
-	../src/cvImagePipeline/ImgProcSet.cpp
-	../src/cvImagePipeline/LabeledObject.cpp
-	../src/cvImagePipeline/Labeler.cpp
-	../src/cvImagePipeline/OpticalFlowFarneback.cpp
-	../src/cvImagePipeline/OpticalFlowPyrLK.cpp
-	../src/cvImagePipeline/SubMat.cpp
-	../src/cvImagePipeline/TrackingObject.cpp
-	../src/cvImagePipeline/createVideoAverageImage.cpp
-	../src/cvImagePipeline/cvUtils.cpp
-	../src/cvImagePipeline/xmlLoader.cpp
-	../src/cvImagePipeline/pugixml-1.4/src/pugixml.cpp
-	)
-target_link_libraries(cvImagePipeline
+set(OPENCV_BUILD_DIR /opencv/build)
+set(OPECV_REL_LIB
 	opencv_calib3d248.lib
 	opencv_contrib248.lib
 	opencv_core248.lib
@@ -51,3 +51,22 @@ target_link_libraries(cvImagePipeline
 	opencv_videostab248.lib
 	opencv_nonfree248.lib
 )
+include_directories(
+	${OPENCV_BUILD_DIR}/include
+	${OPENCV_BUILD_DIR}/include/opencv
+	${OPENCV_BUILD_DIR}/include/opencv2
+	../include
+	)
+link_directories(
+	${OPENCV_BUILD_DIR}/x86/vc10/lib
+	${OPENCV_BUILD_DIR}/x86/vc10/staticlib
+	)
+
+add_library(cvImagePipeline SHARED ${DLL_SRCS})
+target_link_libraries(cvImagePipeline ${OPECV_REL_LIB})
+
+add_executable(test ../test/test.cpp)
+target_link_libraries(test cvImagePipeline ${OPECV_REL_LIB})
+
+add_executable(sample ../sample/capture.cpp)
+target_link_libraries(sample cvImagePipeline ${OPECV_REL_LIB})
