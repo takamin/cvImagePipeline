@@ -31,8 +31,8 @@ namespace cvImagePipeline {
 				switch(input_depth) {
 				case CV_8U: alpha = 1.0 / 256; beta = 0.0; break;
 				case CV_8S: alpha = 1.0 / 128; beta = 0.5; break;
-				case CV_16U: alpha = 1.0 / 0x1000000; beta = 0.0; break;
-				case CV_16S: alpha = 1.0 / 0x800000;  beta = 0.5; break;
+				case CV_16U: alpha = 1.0 / 0x1000; beta = 0.0; break;
+				case CV_16S: alpha = 1.0 / 0x800;  beta = 0.5; break;
 				}
 				input_image.convertTo(
 					float_image,
