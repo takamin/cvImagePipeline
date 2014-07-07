@@ -99,13 +99,13 @@ namespace cvImagePipeline {
 			const std::string& value)
 		{
 			parameters[parameter_name].setString(value);
-			onPropetyChange(parameters[parameter_name]);
+			onPropertyChange(parameters[parameter_name]);
 			return *this;
 		}
 
-		void ImageProcessor::onPropetyChange(Property& property) {
+		void ImageProcessor::onPropertyChange(Property& property) {
 #ifdef _DEBUG
-			std::cout << "ImageProcessor::onPropetyChange("
+			std::cout << "ImageProcessor::onPropertyChange("
 				<< "class " << typeid(property).name() << " "
 				<< property.getName() << " = \""
 				<< property.getString() << "\")"

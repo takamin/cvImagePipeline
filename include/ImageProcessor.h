@@ -99,13 +99,13 @@ namespace cvImagePipeline {
 			ImageProcessor();
 			virtual ~ImageProcessor();
 			virtual void reset();
-			virtual void onPropetyChange(Property& property);
+			virtual void onPropertyChange(Property& property);
 			virtual void onInputMatConnected(const std::string& inputMatName);
 			virtual void onOutputMatConnectedTo(ImageProcessor& dst, const std::string& inputMatName);
 
 			template<class T> ImageProcessor& property(const std::string& parameter_name, T value) {
 				parameters.set(parameter_name, value);
-				onPropetyChange(parameters[parameter_name]);
+				onPropertyChange(parameters[parameter_name]);
 				return *this;
 			}
 			ImageProcessor& setPropertyAsString(const std::string& parameter_name, const std::string& value);
