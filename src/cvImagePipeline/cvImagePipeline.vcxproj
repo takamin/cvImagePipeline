@@ -92,6 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbsDiff.cpp" />
     <ClCompile Include="AverageMat.cpp" />
     <ClCompile Include="ColorConverter.cpp" />
     <ClCompile Include="createVideoAverageImage.cpp" />
@@ -120,6 +121,7 @@
     <ClCompile Include="VideoCapture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\AbsDiff.h" />
     <ClInclude Include="..\..\include\AverageMat.h" />
     <ClInclude Include="..\..\include\AverageOnline.h" />
     <ClInclude Include="..\..\include\ColorConverter.h" />
