@@ -1,7 +1,58 @@
 External Reference Specification
 ================================
 
-## Image Processors
+## ImageProcessor classes in namespace `cvImagePipeline::Filter`
+
+* AbsDiff
+* AverageMat
+* AverageOnline
+* ColorConverter
+* Convert
+* DepthTo32F
+* Dilate
+* EqualizeHist
+* Erode
+* FeatureTracker
+* Flipper
+* FlowTracker
+* GaussianBlur
+* ImagePoint
+* ImageWindow
+* ImgProcSet
+* Labeler
+* OpticalFlowFarneback
+* Resizer
+* Threshold
+* VideoCapture
+
+## Properties of Processors in namespace `cvImagePipeline::Filter`
+
+
+|Class					|Property					|
+|:---					|:---						|
+|AbsDiff				|(none)						|
+|AverageMat				|averageCount				|
+|AverageOnline			|averageCount				|
+|ColorConverter			|cvtCode					|
+|Convert				|rtype, alpha, beta			|
+|DepthTo32F				|(none)						|
+|Dilate					|iterations					|
+|EqualizeHist			|iterations					|
+|Erode					|iterations					|
+|FeatureTracker			|labeling_region_min_size	|
+|Flipper				|flipDir					|
+|FlowTracker			|labeling_vec_thrs, labeling_region_min_size	|
+|GaussianBlur			|kernelWidth, kernelHeight, sigmaX, sigmaY, borderType	|
+|ImagePoint				|(none)						|
+|ImageWindow			|windowName, showFrameNumber, showFPS	|
+|ImgProcSet				|(none)						|
+|Labeler				|labeling_region_min_size	|
+|OpticalFlowFarneback	|pyr_scale, levels, winsize, iterations, poly_n, poly_sigma, flags	|
+|Resizer				|width, height				|
+|Threshold				|thresh, maxval, type		|
+|VideoCapture			|deviceIndex, filename, startFrame, stopFrame, width, height	|
+
+## Image Processor Detail
 
 ### class AbsDiff
 
@@ -61,4 +112,5 @@ cv::Mat::convertTo と同等。
 #### Property
 
 * std::string windowName - ウィンドウ名。
+
 
