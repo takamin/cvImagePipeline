@@ -1,5 +1,4 @@
 #include "AverageOnline.h"
-
 namespace cvImagePipeline {
 	namespace Filter {
 		using namespace std;

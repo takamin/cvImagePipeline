@@ -96,6 +96,7 @@
     <ClCompile Include="ColorConverter.cpp" />
     <ClCompile Include="createVideoAverageImage.cpp" />
     <ClCompile Include="cvUtils.cpp" />
+    <ClCompile Include="DepthTo32F.cpp" />
     <ClCompile Include="EqualizeHist.cpp" />
     <ClCompile Include="FeatureMatcher.cpp" />
     <ClCompile Include="FeatureTracker.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="..\..\include\ColorConverter.h" />
     <ClInclude Include="..\..\include\cvImagePipeline.h" />
     <ClInclude Include="..\..\include\cvUtils.h" />
+    <ClInclude Include="..\..\include\DepthTo32F.h" />
     <ClInclude Include="..\..\include\EqualizeHist.h" />
     <ClInclude Include="..\..\include\FeatureMatcher.h" />
     <ClInclude Include="..\..\include\FeatureTracker.h" />

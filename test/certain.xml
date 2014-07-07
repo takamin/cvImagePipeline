@@ -11,14 +11,18 @@
 		<Property name="width" value="320"/>
 		<Property name="height" value="240"/>
 	</Processor>
-  -->
   <Processor class="ColorConverter" name="grayscale"/>
   <Processor class="EqualizeHist" name="equalizeHist"/>
   <Processor class="GaussianBlur" name="blur"/>
+  -->
+  <!-- 
+  <Processor class="DepthTo32F" name="depthTo32F"/>
+  -->
   <Processor class="ImagePoint" name="preprocessed"/>
   <Processor class="ImageWindow" name="window">
     <Property name="windowName" value="Camera"/>
   </Processor>
+  <!--
   <Processor class="AverageOnline" name="avg1s" autoBind="false">
     <Property name="averageCount" value="30"/>
     <Input from="preprocessed"/>
@@ -26,11 +30,13 @@
   <Processor class="ImageWindow" name="avg1sWindow">
     <Property name="windowName" value="average30frames"/>
   </Processor>
+  -->
   <Processor class="AverageOnline" name="avg10min" autoBind="false">
     <Property name="averageCount" value="18000"/>
     <Input from="preprocessed"/>
   </Processor>
   <Processor class="ImageWindow" name="avg10mWindow">
     <Property name="windowName" value="average18000frames"/>
+    <Property name="showFPS" value="true"/>
   </Processor>
 </cvImagePipeline>
