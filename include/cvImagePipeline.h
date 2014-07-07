@@ -15,6 +15,9 @@
 #include "Resizer.h"
 #include "SubMat.h"
 #include "VideoCapture.h"
+#include "Convert.h"
+#include "MaskCopy.h"
+#include "Threshold.h"
 
 #include "OpticalFlowFarneback.h"
 #include "OpticalFlowPyrLK.h"

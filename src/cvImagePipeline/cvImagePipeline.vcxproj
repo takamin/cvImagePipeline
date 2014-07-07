@@ -95,6 +95,7 @@
     <ClCompile Include="AbsDiff.cpp" />
     <ClCompile Include="AverageMat.cpp" />
     <ClCompile Include="ColorConverter.cpp" />
+    <ClCompile Include="Convert.cpp" />
     <ClCompile Include="createVideoAverageImage.cpp" />
     <ClCompile Include="cvUtils.cpp" />
     <ClCompile Include="DepthTo32F.cpp" />
@@ -111,10 +112,12 @@
     <ClCompile Include="LabeledObject.cpp" />
     <ClCompile Include="Labeler.cpp" />
     <ClCompile Include="AverageOnline.cpp" />
+    <ClCompile Include="MaskCopy.cpp" />
     <ClCompile Include="OpticalFlowPyrLK.cpp" />
     <ClCompile Include="pugixml-1.4\src\pugixml.cpp" />
     <ClCompile Include="Resizer.cpp" />
     <ClCompile Include="SubMat.cpp" />
+    <ClCompile Include="Threshold.cpp" />
     <ClCompile Include="TrackingObject.cpp" />
     <ClCompile Include="OpticalFlowFarneback.cpp" />
     <ClCompile Include="ImageProcessor.cpp" />
@@ -125,6 +128,7 @@
     <ClInclude Include="..\..\include\AverageMat.h" />
     <ClInclude Include="..\..\include\AverageOnline.h" />
     <ClInclude Include="..\..\include\ColorConverter.h" />
+    <ClInclude Include="..\..\include\Convert.h" />
     <ClInclude Include="..\..\include\cvImagePipeline.h" />
     <ClInclude Include="..\..\include\cvUtils.h" />
     <ClInclude Include="..\..\include\DepthTo32F.h" />
@@ -140,11 +144,13 @@
     <ClInclude Include="..\..\include\ImgProcSet.h" />
     <ClInclude Include="..\..\include\LabeledObject.h" />
     <ClInclude Include="..\..\include\Labeler.h" />
+    <ClInclude Include="..\..\include\MaskCopy.h" />
     <ClInclude Include="..\..\include\OpticalFlowPyrLK.h" />
     <ClInclude Include="..\..\include\pugiconfig.hpp" />
     <ClInclude Include="..\..\include\pugixml.hpp" />
     <ClInclude Include="..\..\include\Resizer.h" />
     <ClInclude Include="..\..\include\SubMat.h" />
+    <ClInclude Include="..\..\include\Threshold.h" />
     <ClInclude Include="..\..\include\VideoCapture.h" />
     <ClInclude Include="pugixml-1.4\src\pugiconfig.hpp" />
     <ClInclude Include="pugixml-1.4\src\pugixml.hpp" />

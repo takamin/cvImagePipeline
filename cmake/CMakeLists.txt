@@ -27,6 +27,9 @@ set(DLL_SRCS
 	${SRC_DIR}/cvUtils.cpp
 	${SRC_DIR}/xmlLoader.cpp
 	${SRC_DIR}/pugixml-1.4/src/pugixml.cpp
+	${SRC_DIR}/Convert.cpp
+	${SRC_DIR}/MaskCopy.cpp
+	${SRC_DIR}/Threshold.cpp
 	)
 set(OPENCV_BUILD_DIR /opencv/build)
 set(OPECV_REL_LIB
