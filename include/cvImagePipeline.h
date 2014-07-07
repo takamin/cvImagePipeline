@@ -18,6 +18,8 @@
 #include "Convert.h"
 #include "MaskCopy.h"
 #include "Threshold.h"
+#include "Dilate.h"
+#include "Erode.h"
 
 #include "OpticalFlowFarneback.h"
 #include "OpticalFlowPyrLK.h"

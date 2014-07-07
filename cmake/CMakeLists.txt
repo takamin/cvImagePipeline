@@ -30,6 +30,8 @@ set(DLL_SRCS
 	${SRC_DIR}/Convert.cpp
 	${SRC_DIR}/MaskCopy.cpp
 	${SRC_DIR}/Threshold.cpp
+	${SRC_DIR}/Dilate.cpp
+	${SRC_DIR}/Erode.cpp
 	)
 set(OPENCV_BUILD_DIR /opencv/build)
 set(OPECV_REL_LIB
