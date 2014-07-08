@@ -1,6 +1,7 @@
 #include "ImageProcessor.h"
 #include <typeinfo>
 #include <time.h>
+#include <sstream>
 using namespace std;
 namespace cvImagePipeline {
 	namespace Filter {
@@ -17,6 +18,9 @@ namespace cvImagePipeline {
 		}
 		const Property& PropSet::operator[](const std::string& name) const {
 			return *(namedValueMap.at(name));
+		}
+		bool PropSet::exists(const std::string& name) const {
+			return namedValueMap.count(name) > 0;
 		}
 
 		/////////////////////////////////////////////////////////////////////
@@ -40,9 +44,9 @@ namespace cvImagePipeline {
 		}
 		const cv::Mat& ImageProcessor::getInputMat(std::string name) const
 		{
+			checkInputMatExists(name);
 			return *((ImageProcessor*)this)->inputMat[name];
 		}
-
 		void ImageProcessor::defParam(Property& param) {
 			parameters.add(&param);
 		}
@@ -80,6 +84,7 @@ namespace cvImagePipeline {
 			std::string name,
 			const cv::Mat& mat)
 		{
+			checkInputMatExists(name);
 			inputMat[name] = &mat;
 			onInputMatConnected(name);
 		}
@@ -92,9 +97,16 @@ namespace cvImagePipeline {
 			const std::string& parameter_name,
 			const std::string& value)
 		{
+			checkPropertyExists(parameter_name);
 			parameters[parameter_name].setString(value);
 			onPropertyChange(parameters[parameter_name]);
 			return *this;
+		}
+		const Property& ImageProcessor::property(
+			const std::string& parameter_name) const
+		{
+			checkPropertyExists(parameter_name);
+			return parameters[parameter_name];
 		}
 
 		void ImageProcessor::onPropertyChange(Property& property) {
@@ -194,5 +206,45 @@ namespace cvImagePipeline {
 				<< name << ") “o˜^Ž¸”sBƒe[ƒuƒ‹‚¢‚Á‚Ï‚¢" << std::endl;
 #endif
 		}
+		
+		bool ImageProcessor::checkPropertyExists(const std::string& name) const
+		{
+			if(!parameters.exists(name)) {
+				std::stringstream sbuf;
+				sbuf << "property \"" << name << "\" not exists in "
+					<< std::string(typeid(*this).name()) << ".";
+				const char* const pmsg = sbuf.str().c_str();
+#ifdef _DEBUG
+				std::cerr << pmsg << std::endl;
+#endif
+				throw new std::exception(pmsg);
+			}
+			return true;
+		}
+		bool ImageProcessor::checkInputMatExists(const std::string& name) const
+		{
+			if(inputMat.count(name) <= 0) {
+				std::stringstream sbuf;
+				sbuf << "input mat \"" << name << "\" not exists in "
+					<< std::string(typeid(*this).name()) << ".";
+				const char* const pmsg = sbuf.str().c_str();
+#ifdef _DEBUG
+				std::cerr << pmsg << std::endl;
+#endif
+				throw new std::exception(pmsg);
+			}
+			return true;
+		}
+
+		void ImageProcessor::putDocument(std::ostream& stream) {
+			stream << "# " << typeid(*this).name() << std::endl;
+			stream << std::endl;
+			stream << "## Input " << std::endl;
+			stream << std::endl;
+			stream << "* (standard)" << std::endl;
+			this->inputMat.begin();
+
+		}
+
 	}
 }

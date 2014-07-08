@@ -38,6 +38,15 @@ namespace cvImagePipeline {
 				dyn_filters.push_back(filter);
 				name_to_filter[filter_instance_name] = filter;
 				add(*filter, autoBind);
+			} else {
+				std::stringstream sbuf;
+				sbuf << "ImageProcessor \"" << filter_class_name << "\" not exists in "
+					<< std::string(typeid(*this).name()) << ".";
+				const char* const pmsg = sbuf.str().c_str();
+#ifdef _DEBUG
+				std::cerr << pmsg << std::endl;
+#endif
+				throw new std::exception(pmsg);
 			}
 			return *filter;
 		}
