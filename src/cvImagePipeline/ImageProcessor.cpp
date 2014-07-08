@@ -48,12 +48,6 @@ namespace cvImagePipeline {
 		}
 
 		ImageProcessor&
-		ImageProcessor::operator << (const ImageProcessor& src) {
-			setInputMat(src.getOutputMat());
-			return *this;
-		}
-
-		ImageProcessor&
 		ImageProcessor::operator >> (ImageProcessor& dst) {
 			dst.setInputMat(getOutputMat());
 			onOutputMatConnectedTo(dst, "");

@@ -102,7 +102,6 @@ namespace cvImagePipeline {
 			virtual void onPropertyChange(Property& property);
 			virtual void onInputMatConnected(const std::string& inputMatName);
 			virtual void onOutputMatConnectedTo(ImageProcessor& dst, const std::string& inputMatName);
-
 			template<class T> ImageProcessor& property(const std::string& parameter_name, T value) {
 				parameters.set(parameter_name, value);
 				onPropertyChange(parameters[parameter_name]);
@@ -130,7 +129,6 @@ namespace cvImagePipeline {
 		public:
 			static ImageProcessor* createFilter(std::string name);
 			static void entryFilter(std::string name, FILTER_FACTORY creator);
-			ImageProcessor& operator << (const ImageProcessor& dst);
 			ImageProcessor& operator >> (ImageProcessor& dst);
 			struct FilterInput {
 				ImageProcessor* filter;
