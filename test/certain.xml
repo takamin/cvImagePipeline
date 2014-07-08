@@ -11,13 +11,11 @@
 		<Property name="width" value="320"/>
 		<Property name="height" value="240"/>
 	</Processor>
+  -->
   <Processor class="ColorConverter" name="grayscale"/>
   <Processor class="EqualizeHist" name="equalizeHist"/>
   <Processor class="GaussianBlur" name="blur"/>
-  -->
-  <!-- 
   <Processor class="DepthTo32F" name="depthTo32F"/>
-  -->
   <Processor class="ImagePoint" name="preprocessed"/>
   <Processor class="ImageWindow" name="window">
     <Property name="windowName" value="Camera"/>
@@ -31,12 +29,22 @@
     <Property name="windowName" value="average30frames"/>
   </Processor>
   -->
-  <Processor class="AverageOnline" name="avg10min" autoBind="false">
+  <Processor class="AverageOnline" name="onlineavg10min" autoBind="false">
+    <Property name="averageCount" value="180000"/>
+    <Input from="preprocessed"/>
+  </Processor>
+  <Processor class="ImageWindow" name="onlineavg10mWindow">
+    <Property name="windowName" value="onlineAverage180000frames"/>
+    <Property name="showFPS" value="true"/>
+  </Processor>
+
+  <Processor class="RunningAvg" name="runavg10m" autoBind="false">
     <Property name="averageCount" value="18000"/>
     <Input from="preprocessed"/>
   </Processor>
-  <Processor class="ImageWindow" name="avg10mWindow">
-    <Property name="windowName" value="average18000frames"/>
+  <Processor class="ImageWindow" name="runavg10mWindow">
+    <Property name="windowName" value="runningAverage180000frames"/>
     <Property name="showFPS" value="true"/>
   </Processor>
+
 </cvImagePipeline>

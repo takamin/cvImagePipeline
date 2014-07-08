@@ -3,6 +3,7 @@
 #include "ImgProcSet.h"
 
 #include "AverageMat.h"
+#include "AverageOnline.h"
 #include "ColorConverter.h"
 #include "EqualizeHist.h"
 #include "FeatureMatcher.h"
@@ -20,6 +21,7 @@
 #include "Threshold.h"
 #include "Dilate.h"
 #include "Erode.h"
+#include "RunningAvg.h"
 
 #include "OpticalFlowFarneback.h"
 #include "OpticalFlowPyrLK.h"

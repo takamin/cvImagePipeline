@@ -22,6 +22,7 @@ External Reference Specification
 * Labeler
 * OpticalFlowFarneback
 * Resizer
+* RunningAvg - 移動平均値の平均更新。背景画像（平均画像）作成に便利
 * Threshold
 * VideoCapture
 
@@ -51,6 +52,22 @@ External Reference Specification
 |Resizer				|width, height				|
 |Threshold				|thresh, maxval, type		|
 |VideoCapture			|deviceIndex, filename, startFrame, stopFrame, width, height	|
+
+
+## RunningAvg
+
+移動平均値の平均更新。背景画像（平均画像）作成に便利
+
+### 入力画像のビット深度はCV_32FかCV_64F
+
+プロセッサの出力画像のビット深度は、入力画像と同じになります。
+内部で使用している`cvRunningAvg`の出力画像は、ビット深度がCV_32FかCV_64Fでなければならないため、
+このプロセッサに入力できる画像のビット深度もCV_32FかCV_64Fです。
+
+### Property
+
+average_count
+
 
 ## Image Processor Detail
 

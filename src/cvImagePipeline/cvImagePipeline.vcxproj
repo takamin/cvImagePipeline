@@ -118,6 +118,7 @@
     <ClCompile Include="OpticalFlowPyrLK.cpp" />
     <ClCompile Include="pugixml-1.4\src\pugixml.cpp" />
     <ClCompile Include="Resizer.cpp" />
+    <ClCompile Include="RunningAvg.cpp" />
     <ClCompile Include="SubMat.cpp" />
     <ClCompile Include="Threshold.cpp" />
     <ClCompile Include="TrackingObject.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="..\..\include\pugiconfig.hpp" />
     <ClInclude Include="..\..\include\pugixml.hpp" />
     <ClInclude Include="..\..\include\Resizer.h" />
+    <ClInclude Include="..\..\include\RunningAvg.h" />
     <ClInclude Include="..\..\include\SubMat.h" />
     <ClInclude Include="..\..\include\Threshold.h" />
     <ClInclude Include="..\..\include\VideoCapture.h" />
