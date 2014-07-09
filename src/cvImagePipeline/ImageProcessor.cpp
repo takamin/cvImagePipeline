@@ -25,9 +25,16 @@ namespace cvImagePipeline {
 
 		/////////////////////////////////////////////////////////////////////
 		//ImageProcessor
-		
+		int ImageProcessor::instanceNumber = 0;
 		ImageProcessor::ImageProcessor() {
 			inputMat[""] = 0;
+			
+			// set name;
+			stringstream ss;
+			ss << typeid(*this).name() << "#" << ImageProcessor::instanceNumber;
+			name = ss.str();
+
+			ImageProcessor::instanceNumber++;
 		}
 
 		ImageProcessor::~ImageProcessor()
@@ -38,11 +45,15 @@ namespace cvImagePipeline {
 		{
 		}
 
-		void ImageProcessor::defInputMat(std::string name)
+		void ImageProcessor::defInputMat(const std::string& name)
 		{
 			inputMat[name] = 0;
 		}
-		const cv::Mat& ImageProcessor::getInputMat(std::string name) const
+		const cv::Mat& ImageProcessor::getInputMat() const {
+			checkInputMatExists("");
+			return *((ImageProcessor*)this)->inputMat[""];
+		}
+		const cv::Mat& ImageProcessor::getInputMat(const std::string& name) const
 		{
 			checkInputMatExists(name);
 			return *((ImageProcessor*)this)->inputMat[name];
@@ -81,7 +92,7 @@ namespace cvImagePipeline {
 		}
 
 		void ImageProcessor::setInputMat(
-			std::string name,
+			const std::string& name,
 			const cv::Mat& mat)
 		{
 			checkInputMatExists(name);
@@ -210,41 +221,56 @@ namespace cvImagePipeline {
 		bool ImageProcessor::checkPropertyExists(const std::string& name) const
 		{
 			if(!parameters.exists(name)) {
-				std::stringstream sbuf;
-				sbuf << "property \"" << name << "\" not exists in "
-					<< std::string(typeid(*this).name()) << ".";
-				const char* const pmsg = sbuf.str().c_str();
 #ifdef _DEBUG
-				std::cerr << pmsg << std::endl;
+				std::cerr << "property \"" << name << "\" not exists in "
+					<< name << " instance of class " << std::string(typeid(*this).name()) << "."
+					<< std::endl;
 #endif
-				throw new std::exception(pmsg);
+				throw new std::exception("PropertyNotFound");
 			}
 			return true;
 		}
 		bool ImageProcessor::checkInputMatExists(const std::string& name) const
 		{
 			if(inputMat.count(name) <= 0) {
-				std::stringstream sbuf;
-				sbuf << "input mat \"" << name << "\" not exists in "
-					<< std::string(typeid(*this).name()) << ".";
-				const char* const pmsg = sbuf.str().c_str();
 #ifdef _DEBUG
-				std::cerr << pmsg << std::endl;
+				std::cerr << "input mat \"" << name << "\" not exists in "
+					<< name << " instance of class " << std::string(typeid(*this).name()) << "."
+					<< std::endl;
 #endif
-				throw new std::exception(pmsg);
+				throw new std::exception("InputMatNotFound");
 			}
 			return true;
 		}
 
-		void ImageProcessor::putDocument(std::ostream& stream) {
+		void ImageProcessor::putMarkdown(std::ostream& stream) {
 			stream << "# " << typeid(*this).name() << std::endl;
 			stream << std::endl;
 			stream << "## Input " << std::endl;
 			stream << std::endl;
-			stream << "* (standard)" << std::endl;
-			this->inputMat.begin();
+			
+			MapMat::iterator mapEntry =  inputMat.begin();
+			for(; mapEntry != inputMat.end(); mapEntry++) {
+				MapMat::key_type name = mapEntry->first;
+				MapMat::mapped_type pMap = mapEntry->second;
+				if(name == "") {
+					stream << "* (standard)" << std::endl;
+				} else {
+					stream << "* " << name << std::endl;
+				}
+			}
+			stream << std::endl;
 
+			stream << "## Property" << std::endl;
+			stream << std::endl;
+			const PropList& properties = parameters.getPropertyList();
+			PropList::const_iterator p = properties.begin();
+			for(; p != properties.end(); p++) {
+				Property* property = *p;
+				stream << "* " << property->getName() << " = "
+					<< property->getString() << std::endl;
+			}
+			stream << std::endl;
 		}
-
 	}
 }

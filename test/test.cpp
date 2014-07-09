@@ -84,6 +84,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		(true == imgProcSet.loadXml("..\\..\\test\\certain.xml")),
 		counter);
 	
+	imgProcSet.putMarkdown(std::cerr);
 	while(true) {
 		imgProcSet.execute();
 		if(cvWaitKey(1) == '\x1b') {

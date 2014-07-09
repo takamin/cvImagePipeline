@@ -37,16 +37,15 @@ namespace cvImagePipeline {
 			if(filter != 0) {
 				dyn_filters.push_back(filter);
 				name_to_filter[filter_instance_name] = filter;
+				filter->setName(getName() + "." + filter_instance_name);
 				add(*filter, autoBind);
 			} else {
-				std::stringstream sbuf;
-				sbuf << "ImageProcessor \"" << filter_class_name << "\" not exists in "
-					<< std::string(typeid(*this).name()) << ".";
-				const char* const pmsg = sbuf.str().c_str();
 #ifdef _DEBUG
-				std::cerr << pmsg << std::endl;
+				std::cerr << "ImageProcessor \"" << filter_class_name << "\" is not exist in "
+					<< getName() << " instance of class " << std::string(typeid(*this).name()) << "."
+					<< std::endl;
 #endif
-				throw new std::exception(pmsg);
+				throw new std::exception("ProcessorNotFound");
 			}
 			return *filter;
 		}
@@ -70,21 +69,22 @@ namespace cvImagePipeline {
 			std::string filter_instance_name,
 			std::string parameter_name, int value)
 		{
-			ImageProcessor* filter = name_to_filter[filter_instance_name];
-			if(filter == 0) {
-#ifdef _DEBUG
-				std::cout << filter_instance_name
-					<< "という名前のフィルターがない。"
-					<< std::endl;
-#endif
-			} else {
-				filter->property(parameter_name, value);
-			}
+			(*this)[filter_instance_name].property(parameter_name, value);
 		}
 		ImageProcessor& ImgProcSet::operator[](
 			std::string filter_instance_name)
 		{
-			ImageProcessor* filter = name_to_filter[filter_instance_name];
+			ImageProcessor* filter = 0;
+			if(name_to_filter.count(filter_instance_name) > 0) {
+				filter = name_to_filter[filter_instance_name];
+			} else {
+#ifdef _DEBUG
+				std::cerr << "ImageProcessor named \"" << filter_instance_name << "\" is not exist in "
+					<< getName() << " instance of class " << std::string(typeid(*this).name()) << "."
+					<< std::endl;
+#endif
+				throw new std::exception("ProcessorInstanceNotFound");
+			}
 			return *filter;
 		}
 		
@@ -97,6 +97,15 @@ namespace cvImagePipeline {
 			}
 			if(lastAutoProcessor != 0) {
 				setOutputMat(lastAutoProcessor->getOutputMat());
+			}
+		}
+		void ImgProcSet::putMarkdown(std::ostream& stream) {
+			ImageProcessor::putMarkdown(stream);
+			stream << "----" << std::endl;
+			stream << std::endl;
+			std::list<ImageProcessor*>::iterator proc = procs.begin();
+			for(; proc != procs.end(); proc++) {
+				(*proc)->putMarkdown(stream);
 			}
 		}
 
@@ -114,6 +123,9 @@ namespace cvImagePipeline {
 #ifdef _DEBUG
 			cerr << "[ImgProcSet::loadXml]" << "root node name = " << root_node.name() << endl;
 #endif
+			pugi::xml_attribute root_name_attr = root_node.attribute("name");
+			setName(root_name_attr.as_string());
+
 			xpath_node_set processor_node_set = root_node.select_nodes("Processor");
 			xpath_node_set::const_iterator processor = processor_node_set.begin();
 			while(processor != processor_node_set.end()) {

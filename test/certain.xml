@@ -1,4 +1,4 @@
-<cvImagePipeline>
+<cvImagePipeline name="testProcessor">
   
 	<Processor class="VideoCapture" name="cap">
 		<Property name="deviceIndex" value="0"/>

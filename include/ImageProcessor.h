@@ -22,17 +22,18 @@ namespace cvImagePipeline {
 		protected:
 			Property(std::string name) : name(name) {}
 		public:
-			std::string getName() const { return name; }
+			const std::string& getName() const { return name; }
 			virtual std::string getString() const = 0;
 			virtual void setString(const std::string& s) = 0;
 		};
 
 		//property set
 		typedef std::map<std::string, Property*> PropNameMap;
+		typedef std::list<Property*> PropList;
 		class __declspec(dllexport) PropSet
 		{
 			PropNameMap namedValueMap;
-			std::list<Property*> namedValueList;
+			PropList namedValueList;
 		public:
 			void add(Property* p);
 			Property& operator[](const std::string& name);
@@ -46,6 +47,7 @@ namespace cvImagePipeline {
 				Property* p = namedValueMap.at(name)->setString(value);
 			}
 			bool exists(const std::string& name) const;
+			const PropList& getPropertyList() const { return namedValueList; }
 		};
 
 		//primitive property template
@@ -93,7 +95,7 @@ namespace cvImagePipeline {
 				std::string name;
 			};
 		protected:
-			void defInputMat(std::string name);
+			void defInputMat(const std::string& name);
 			void defParam(Property& param);
 
 			void setOutputMat(const cv::Mat& mat);
@@ -101,6 +103,8 @@ namespace cvImagePipeline {
 		public:
 			ImageProcessor();
 			virtual ~ImageProcessor();
+			const std::string& getName() const { return name; }
+			void setName(const std::string& name) { this->name = name; }
 			virtual void reset();
 			virtual void onPropertyChange(Property& property);
 			virtual void onInputMatConnected(const std::string& inputMatName);
@@ -116,8 +120,9 @@ namespace cvImagePipeline {
 			const Property& property(const std::string& parameter_name) const;
 			
 			void setInputMat(const cv::Mat& mat);
-			void setInputMat(std::string name, const cv::Mat& mat);
-			const cv::Mat& getInputMat(std::string name = "") const;
+			void setInputMat(const std::string& name, const cv::Mat& mat);
+			const cv::Mat& getInputMat() const;
+			const cv::Mat& getInputMat(const std::string& name) const;
 			const cv::Mat& getOutputMat() const { return outputMat; }
 
 			virtual void execute() = 0;
@@ -126,9 +131,10 @@ namespace cvImagePipeline {
 			FilterInput input(std::string name);
 			ImageProcessor& operator >> (FilterInput& dst);
 			void setPropertyByXmlNode(pugi::xml_node property);
-			void putDocument(std::ostream& stream);
+			virtual void putMarkdown(std::ostream& stream);
 		private:
 			typedef std::hash_map<std::string, const cv::Mat*> MapMat;
+			std::string name;
 			PropSet parameters;
 			MapMat inputMat;
 			cv::Mat outputMat;
@@ -144,6 +150,7 @@ namespace cvImagePipeline {
 			bool checkPropertyExists(const std::string& name) const;
 
 		public:
+			static int instanceNumber;
 			static ImageProcessor* createFilter(std::string name);
 			static void entryFilter(std::string name, FILTER_FACTORY creator);
 		};

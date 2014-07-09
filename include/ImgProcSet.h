@@ -27,6 +27,7 @@ namespace cvImagePipeline {
 			ImageProcessor& operator[](std::string filter_instance_name);
 			void execute();
 			bool loadXml(const std::string& filename);
+			virtual void putMarkdown(std::ostream& stream);
 		private:
 			void addProcessorByXmlNode(pugi::xml_node processor);
 			void setInputMatByXmlNode(ImageProcessor& imageProcessor, pugi::xml_node input);
