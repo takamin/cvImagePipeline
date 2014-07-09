@@ -104,6 +104,7 @@
     <ClCompile Include="Erode.cpp" />
     <ClCompile Include="FeatureMatcher.cpp" />
     <ClCompile Include="FeatureTracker.cpp" />
+    <ClCompile Include="FitInGrid.cpp" />
     <ClCompile Include="Flipper.cpp" />
     <ClCompile Include="FlowTracker.cpp" />
     <ClCompile Include="GaussianBlur.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="..\..\include\Erode.h" />
     <ClInclude Include="..\..\include\FeatureMatcher.h" />
     <ClInclude Include="..\..\include\FeatureTracker.h" />
+    <ClInclude Include="..\..\include\FitInGrid.h" />
     <ClInclude Include="..\..\include\Flipper.h" />
     <ClInclude Include="..\..\include\FlowTracker.h" />
     <ClInclude Include="..\..\include\GaussianBlur.h" />

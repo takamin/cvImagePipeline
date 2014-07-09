@@ -49,6 +49,16 @@ namespace cvImagePipeline {
 		{
 			inputMat[name] = 0;
 		}
+		void ImageProcessor::undefInputMat(const std::string& name) {
+			MapMat::iterator input = inputMat.begin();
+			for(; input != inputMat.end(); input++) {
+				if(input->first == name) {
+					inputMat.erase(input);
+					break;
+				}
+			}
+		}
+
 		const cv::Mat& ImageProcessor::getInputMat() const {
 			checkInputMatExists("");
 			return *((ImageProcessor*)this)->inputMat[""];

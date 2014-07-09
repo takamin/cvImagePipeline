@@ -22,6 +22,7 @@
 #include "Dilate.h"
 #include "Erode.h"
 #include "RunningAvg.h"
+#include "FitInGrid.h"
 
 #include "OpticalFlowFarneback.h"
 #include "OpticalFlowPyrLK.h"

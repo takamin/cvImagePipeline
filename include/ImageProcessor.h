@@ -28,7 +28,7 @@ namespace cvImagePipeline {
 		};
 
 		//property set
-		typedef std::map<std::string, Property*> PropNameMap;
+		typedef std::hash_map<std::string, Property*> PropNameMap;
 		typedef std::list<Property*> PropList;
 		class __declspec(dllexport) PropSet
 		{
@@ -96,8 +96,8 @@ namespace cvImagePipeline {
 			};
 		protected:
 			void defInputMat(const std::string& name);
+			void undefInputMat(const std::string& name);
 			void defParam(Property& param);
-
 			void setOutputMat(const cv::Mat& mat);
 			cv::Mat& refOutputMat() { return outputMat; }
 		public:
