@@ -40,11 +40,9 @@ namespace cvImagePipeline {
 				filter->setName(getName() + "." + filter_instance_name);
 				add(*filter, autoBind);
 			} else {
-#ifdef _DEBUG
 				std::cerr << "ImageProcessor \"" << filter_class_name << "\" is not exist in "
 					<< getName() << " instance of class " << std::string(typeid(*this).name()) << "."
 					<< std::endl;
-#endif
 				throw new std::exception("ProcessorNotFound");
 			}
 			return *filter;
@@ -78,11 +76,9 @@ namespace cvImagePipeline {
 			if(name_to_filter.count(filter_instance_name) > 0) {
 				filter = name_to_filter[filter_instance_name];
 			} else {
-#ifdef _DEBUG
 				std::cerr << "ImageProcessor named \"" << filter_instance_name << "\" is not exist in "
 					<< getName() << " instance of class " << std::string(typeid(*this).name()) << "."
 					<< std::endl;
-#endif
 				throw new std::exception("ProcessorInstanceNotFound");
 			}
 			return *filter;

@@ -221,11 +221,9 @@ namespace cvImagePipeline {
 		bool ImageProcessor::checkPropertyExists(const std::string& name) const
 		{
 			if(!parameters.exists(name)) {
-#ifdef _DEBUG
 				std::cerr << "property \"" << name << "\" not exists in "
 					<< name << " instance of class " << std::string(typeid(*this).name()) << "."
 					<< std::endl;
-#endif
 				throw new std::exception("PropertyNotFound");
 			}
 			return true;
@@ -233,11 +231,9 @@ namespace cvImagePipeline {
 		bool ImageProcessor::checkInputMatExists(const std::string& name) const
 		{
 			if(inputMat.count(name) <= 0) {
-#ifdef _DEBUG
 				std::cerr << "input mat \"" << name << "\" not exists in "
 					<< name << " instance of class " << std::string(typeid(*this).name()) << "."
 					<< std::endl;
-#endif
 				throw new std::exception("InputMatNotFound");
 			}
 			return true;
