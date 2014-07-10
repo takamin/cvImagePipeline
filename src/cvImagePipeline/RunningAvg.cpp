@@ -13,6 +13,10 @@ namespace cvImagePipeline {
 		RunningAvg::~RunningAvg()
 		{
 		}
+		void RunningAvg::reset() {
+			buffer_count = 0;
+			refOutputMat() = cv::Mat();
+		}
 		void RunningAvg::execute() {
 			const Mat& input_image = getInputMat();
 			if(input_image.empty()) {

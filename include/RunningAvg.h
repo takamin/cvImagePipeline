@@ -26,6 +26,7 @@ namespace cvImagePipeline {
 		public:
 			RunningAvg();
 			virtual ~RunningAvg();
+			virtual void reset();
 			void execute();
 		private:
 			int buffer_count;
