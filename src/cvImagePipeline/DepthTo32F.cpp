@@ -12,9 +12,6 @@ namespace cvImagePipeline {
 		}
 		void DepthTo32F::execute() {
 			const Mat& input_image = getInputMat();
-			if(input_image.empty()) {
-				return;
-			}
 			Mat& output_image = refOutputMat();
 			int input_depth = input_image.depth();
 			if(input_depth == CV_32F) {

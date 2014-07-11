@@ -14,9 +14,6 @@ namespace cvImagePipeline {
 		Dilate::~Dilate() { }
 		void Dilate::execute() {
 			const Mat& input_image = getInputMat();
-			if(input_image.empty()) {
-				return;
-			}
 			Mat& output = refOutputMat();
 			cv::dilate(input_image, output, cv::Mat(), cv::Point(-1,-1), iterations);
 		}

@@ -20,9 +20,7 @@ namespace cvImagePipeline {
 		}
 		void Resizer::execute() {
 			const cv::Mat& inputMat = getInputMat();
-			if(!inputMat.empty()) {
-				cv::resize(inputMat, refOutputMat(), cv::Size(width, height));
-			}
+			cv::resize(inputMat, refOutputMat(), cv::Size(width, height));
 		}
 	}
 }

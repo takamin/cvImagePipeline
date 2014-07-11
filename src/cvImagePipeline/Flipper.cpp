@@ -14,9 +14,7 @@ namespace cvImagePipeline {
 			{ defParam(this->flipDir); }
 		void Flipper::execute() {
 			const cv::Mat& inputMat = getInputMat();
-			if(!inputMat.empty()) {
-				cv::flip(inputMat, refOutputMat(), flipDir);
-			}
+			cv::flip(inputMat, refOutputMat(), flipDir);
 		}
 	}
 }

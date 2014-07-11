@@ -14,9 +14,7 @@ namespace cvImagePipeline {
 			{ defParam(this->cvtCode); }
 		void ColorConverter::execute() {
 			const cv::Mat& inputMat = getInputMat();
-			if(!inputMat.empty()) {
-				cv::cvtColor(inputMat, refOutputMat(), cvtCode);
-			}
+			cv::cvtColor(inputMat, refOutputMat(), cvtCode);
 		}
 	}
 }

@@ -12,9 +12,6 @@ namespace cvImagePipeline {
 		void MaskCopy::execute() {
 			const Mat& input_image = getInputMat();
 			const Mat& mask = getInputMat("mask");
-			if(input_image.empty()) {
-				return;
-			}
 			Mat& output = refOutputMat();
 			output = cv::Mat::zeros(input_image.rows, input_image.cols, input_image.type());
 			input_image.copyTo(output, mask);

@@ -18,9 +18,6 @@ namespace cvImagePipeline {
 		Convert::~Convert() { }
 		void Convert::execute() {
 			const Mat& input_image = getInputMat();
-			if(input_image.empty()) {
-				return;
-			}
 			Mat& output = refOutputMat();
 			input_image.convertTo(output, rtype, alpha, beta);
 		}

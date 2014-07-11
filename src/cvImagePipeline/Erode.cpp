@@ -14,9 +14,6 @@ namespace cvImagePipeline {
 		Erode::~Erode() { }
 		void Erode::execute() {
 			const Mat& input_image = getInputMat();
-			if(input_image.empty()) {
-				return;
-			}
 			Mat& output = refOutputMat();
 			cv::erode(input_image, output, cv::Mat(), cv::Point(-1,-1), iterations);
 		}
