@@ -23,6 +23,7 @@
 #include "Erode.h"
 #include "RunningAvg.h"
 #include "FitInGrid.h"
+#include "ImgProcThread.h"
 
 #include "OpticalFlowFarneback.h"
 #include "OpticalFlowPyrLK.h"

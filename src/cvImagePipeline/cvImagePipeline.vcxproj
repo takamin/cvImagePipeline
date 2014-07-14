@@ -112,6 +112,7 @@
     <ClCompile Include="ImagePoint.cpp" />
     <ClCompile Include="ImageWindow.cpp" />
     <ClCompile Include="ImgProcSet.cpp" />
+    <ClCompile Include="ImgProcThread.cpp" />
     <ClCompile Include="LabeledObject.cpp" />
     <ClCompile Include="Labeler.cpp" />
     <ClCompile Include="AverageOnline.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="..\..\include\ImagePoint.h" />
     <ClInclude Include="..\..\include\ImageWindow.h" />
     <ClInclude Include="..\..\include\ImgProcSet.h" />
+    <ClInclude Include="..\..\include\ImgProcThread.h" />
     <ClInclude Include="..\..\include\LabeledObject.h" />
     <ClInclude Include="..\..\include\Labeler.h" />
     <ClInclude Include="..\..\include\MaskCopy.h" />
