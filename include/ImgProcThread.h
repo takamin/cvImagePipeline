@@ -19,31 +19,26 @@ namespace cvImagePipeline {
 			//スレッドの終了
 			void stopThread();
 			
-			//スレッドセーフな出力画像の指定
-			void addThreadSafeOutput(std::string name, ImageProcessor& src);
-
-			//出力画像の取得
-			cv::Mat getThreadShareOutput(std::string name) const;
-
 			//処理待ち
-			bool ImgProcThread::WaitEvent(DWORD timeout = INFINITE);
+			bool WaitEvent(DWORD timeout = INFINITE);
 
-			//処理待ちイベントクリア
-			void ImgProcThread::ResetEvent();
+			//スレッドセーフな出力画像の指定
+			void addThreadSafeOutput(const std::string& name, ImageProcessor& src);
 
-			//共有オブジェクトへのアクセス開始
-			void EnterCriticalSection();
-			
-			//共有オブジェクトへのアクセス終了
-			void LeaveCriticalSection();
-			
+			//出力画像を更新
+			void ImgProcThread::updateSharedOutputMat();
+
+			//出力画像の参照取得
+			const cv::Mat& refThreadShareOutput(const std::string& name) const;
+
 		private:
 			
 			//出力画像の排他制御用クリティカルセクション
 			CRITICAL_SECTION cs;
 
 			//出力画像を保持するスレッド間共有プロセッサ
-			ImgProcSet threadShare;
+			ImgProcSet threadShareInnerMat;
+			ImgProcSet threadShareOutputMat;
 			
 			//サブスレッドの実行フラグ
 			bool runProcessorThread;
@@ -58,6 +53,12 @@ namespace cvImagePipeline {
 			HANDLE eventHandle;
 		
 		private:
+			//共有オブジェクトへのアクセス開始
+			void EnterCriticalSection();
+			
+			//共有オブジェクトへのアクセス終了
+			void LeaveCriticalSection();
+			
 			//サブスレッドのルート
 			static DWORD WINAPI Thread(LPVOID *data);
 

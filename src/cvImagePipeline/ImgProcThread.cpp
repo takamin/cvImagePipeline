@@ -15,21 +15,11 @@ namespace cvImagePipeline {
 				::DeleteCriticalSection(&cs);
 			}
 
-			void ImgProcThread::EnterCriticalSection() {
-				::EnterCriticalSection(&cs);
-			}
-			void ImgProcThread::LeaveCriticalSection() {
-				::LeaveCriticalSection(&cs);
-			}
-			void ImgProcThread::execute() {
-
-				ImgProcSet::execute();
-
-				EnterCriticalSection();
-				threadShare.execute();
-				LeaveCriticalSection();
-
-				SetEvent(eventHandle);
+			void ImgProcThread::addThreadSafeOutput(const std::string& name, ImageProcessor& src) {
+				threadShareInnerMat.add("ImagePoint", name, false);
+				threadShareOutputMat.add("ImagePoint", name, false);
+				threadShareInnerMat[name].setInputMat(src.getOutputMat());
+				threadShareOutputMat[name].setInputMat(threadShareInnerMat[name].getOutputMat());
 			}
 			void ImgProcThread::startThread(int interval /* = 0 */) {
 				eventHandle = CreateEvent(NULL, false, false, getName().c_str());
@@ -44,21 +34,34 @@ namespace cvImagePipeline {
 				WaitForSingleObject(thead_handle, INFINITE);
 				CloseHandle(eventHandle);
 			}
+			void ImgProcThread::execute() {
+
+				ImgProcSet::execute();
+
+				EnterCriticalSection();
+				threadShareInnerMat.execute();
+				LeaveCriticalSection();
+
+				SetEvent(eventHandle);
+			}
+			void ImgProcThread::EnterCriticalSection() {
+				::EnterCriticalSection(&cs);
+			}
+			void ImgProcThread::LeaveCriticalSection() {
+				::LeaveCriticalSection(&cs);
+			}
 
 			bool ImgProcThread::WaitEvent(DWORD timeout) {
 				DWORD waitResult = WaitForSingleObject(eventHandle, timeout);
 				return (waitResult == WAIT_OBJECT_0);
 			}
-			void ImgProcThread::ResetEvent() {
-				::ResetEvent(eventHandle);
+			void ImgProcThread::updateSharedOutputMat() {
+				EnterCriticalSection();
+				threadShareOutputMat.execute();
+				LeaveCriticalSection();
 			}
-
-			void ImgProcThread::addThreadSafeOutput(std::string name, ImageProcessor& src) {
-				threadShare.add("ImagePoint", name, false);
-				threadShare[name].setInputMat(src.getOutputMat());
-			}
-			cv::Mat ImgProcThread::getThreadShareOutput(std::string name) const {
-				return ((ImgProcSet&)threadShare)[name].getOutputMat().clone();
+			const cv::Mat& ImgProcThread::refThreadShareOutput(const std::string& name) const {
+				return ((ImgProcSet&)threadShareOutputMat)[name].getOutputMat();
 			}
 
 			DWORD WINAPI ImgProcThread::Thread(LPVOID *data) {
