@@ -70,17 +70,11 @@ namespace cvImagePipeline {
 				clock_t t0 = clock();
 				while(processor->runProcessorThread) {
 					processor->execute();
-					//Sleep(processor->interval);
 					if(processor->interval > 0) {
 						clock_t t1;
-						//int wait_count = 0;
 						while((t1 = clock()) - t0 < processor->interval) {
 							Sleep(processor->interval / 10);
-							//wait_count++;
 						}
-						//if(wait_count == 0) {
-						//	std::cerr << "Thread " << processor->getName() << " overrun " << ((t1 - t0) - processor->interval) << " [ms]" << std::endl;
-						//}
 						t0 = t1;
 					} else {
 						Sleep(0);
