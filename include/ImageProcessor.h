@@ -54,8 +54,6 @@ namespace cvImagePipeline {
 			}
 			bool exists(const std::string& name) const;
 			const PropList& getPropertyList() const { return namedValueList; }
-		private:
-			bool checkPropertyExists(const std::string& name) const;
 		};
 
 		//primitive property template
