@@ -177,7 +177,7 @@ FakesAssemblies/
 cmake/ALL_BUILD.vcxproj
 cmake/ALL_BUILD.vcxproj.filters
 cmake/CMakeCache.txt
-cmake/CMakeFiles/*
+cmake/CMakeFiles/
 cmake/Project.sln
 cmake/ZERO_CHECK.vcxproj
 cmake/ZERO_CHECK.vcxproj.filters
