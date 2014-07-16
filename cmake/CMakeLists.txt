@@ -33,6 +33,12 @@ set(DLL_SRCS
 	${SRC_DIR}/Dilate.cpp
 	${SRC_DIR}/Erode.cpp
 	)
+
+# for ubuntu
+# header-file	/usr/local/include
+# libraries	/usr/local/lib/libopencv_*.a
+
+# for Windows
 set(OPENCV_BUILD_DIR /opencv/build)
 set(OPECV_REL_LIB
 	opencv_calib3d248.lib
