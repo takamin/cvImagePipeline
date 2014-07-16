@@ -18,7 +18,9 @@ namespace cvImagePipeline {
 			void onInputMatConnected(const std::string& inputMatName);
 			void refresh();
 		private:
+#pragma warning(disable:4251)
 			std::vector<cv::Mat*> dynInputMat;
+#pragma warning(default:4251)
 			int gridW;
 			int gridH;
 		};

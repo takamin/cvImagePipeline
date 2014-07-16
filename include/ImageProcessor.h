@@ -41,13 +41,21 @@ namespace cvImagePipeline {
 			template<class T> void set(const std::string& name, T value) {
 				std::stringstream ss;
 				ss << value;
-				namedValueMap.at(name)->setString(ss.str());
+				cvImagePipeline::Filter::Property* p = namedValueMap.at(name);
+				if (p) {
+					p->setString(ss.str());
+				}
 			}
-			template<class T> void set(const std::string& name, const std::string& value) {
-				Property* p = namedValueMap.at(name)->setString(value);
+			void set(const std::string& name, const std::string& value) {
+				cvImagePipeline::Filter::Property* p = namedValueMap.at(name);
+				if (p) {
+					p->setString(value);
+				}
 			}
 			bool exists(const std::string& name) const;
 			const PropList& getPropertyList() const { return namedValueList; }
+		private:
+			bool checkPropertyExists(const std::string& name) const;
 		};
 
 		//primitive property template

@@ -98,7 +98,7 @@ namespace cvImagePipeline {
 					std::cerr << "delete #" << i << ";" << std::endl;
 #endif
 				}
-				while(dynInputMat.size() > next_count) {
+				while(dynInputMat.size() > (size_t)next_count) {
 					dynInputMat.pop_back();
 				}
 #ifdef _DEBUG
