@@ -6,9 +6,9 @@ namespace cvImagePipeline {
 		{
 		public:
 			DECLARE_CVFILTER;
-			TParam<int> thresh;
+			TParam<double> thresh;
 			TParam<double> maxval;
-			TParam<double> type;
+			TParam<int> type;
 		public:
 			Threshold();
 			virtual ~Threshold();

@@ -1,7 +1,6 @@
 #include "LabeledObject.h"
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/nonfree/nonfree.hpp>
-#include <cv.h>
 #include <ctime>
 
 using namespace std;

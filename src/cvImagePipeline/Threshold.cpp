@@ -8,9 +8,9 @@ namespace cvImagePipeline {
 		IMPLEMENT_CVFILTER(Threshold);
 		Threshold::Threshold()
 		:
-		thresh("thresh",0),
-		maxval("maxval",0),
-		type("type",0)
+		thresh("thresh", 0.0),
+		maxval("maxval", 0.0),
+		type("type", 0)
 		{
 			defParam(thresh);
 			defParam(maxval);
