@@ -69,7 +69,7 @@
       <AdditionalDependencies>opencv_core248d.lib;opencv_highgui248d.lib;opencv_imgproc248d.lib;opencv_superres248d.lib;vfw32.lib;opencv_video248d.lib;opencv_features2d248d.lib;opencv_nonfree248d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>
       </ImportLibrary>
-      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc12\lib;C:\opencv\build\x86\vc12\staticlib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,7 +91,7 @@
       <AdditionalDependencies>opencv_core248.lib;opencv_highgui248.lib;opencv_imgproc248.lib;opencv_superres248.lib;vfw32.lib;opencv_video248.lib;opencv_features2d248.lib;opencv_nonfree248.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>
       </ImportLibrary>
-      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc10\lib;C:\opencv\build\x86\vc10\staticlib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc12\lib;C:\opencv\build\x86\vc12\staticlib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
