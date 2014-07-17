@@ -66,7 +66,9 @@ namespace cvImagePipeline {
 
 			DWORD WINAPI ImgProcThread::Thread(LPVOID *data) {
 				ImgProcThread* processor = (ImgProcThread*)data;
+#ifdef _DEBUG
 				std::cerr << processor->getName() << " started." << std::endl;
+#endif
 				clock_t t0 = clock();
 				while(processor->runProcessorThread) {
 					processor->execute();
@@ -80,7 +82,9 @@ namespace cvImagePipeline {
 						Sleep(0);
 					}
 				}
+#ifdef _DEBUG
 				std::cerr << processor->getName() << " end." << std::endl;
+#endif
 				return 0;
 			}
 	}
