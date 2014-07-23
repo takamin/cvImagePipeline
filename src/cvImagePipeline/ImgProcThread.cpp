@@ -35,14 +35,14 @@ namespace cvImagePipeline {
 				CloseHandle(eventHandle);
 			}
 			void ImgProcThread::execute() {
-
-				ImgProcSet::execute();
-
-				EnterCriticalSection();
-				threadShareInnerMat.execute();
-				LeaveCriticalSection();
-
-				SetEvent(eventHandle);
+				if (isEnable()) {
+					ImgProcSet::execute();
+					{
+						CriticalSection lock(*this);
+						threadShareInnerMat.execute();
+					}
+					SetEvent(eventHandle);
+				}
 			}
 			void ImgProcThread::EnterCriticalSection() {
 				::EnterCriticalSection(&cs);

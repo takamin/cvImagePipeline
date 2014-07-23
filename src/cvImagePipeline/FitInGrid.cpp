@@ -19,14 +19,8 @@ namespace cvImagePipeline {
 			refresh();
 		}
 		FitInGrid::~FitInGrid() {
-#ifdef _DEBUG
-			std::cerr << "FitInGrid::~FitInGrid(): ";
-#endif
 			int curr_count = dynInputMat.size();
 			for(int i = 0; i < curr_count; i++) {
-#ifdef _DEBUG
-				std::cerr << "delete dynInputMat[" << i << "];";
-#endif
 				delete dynInputMat.at(i);
 				dynInputMat.at(i) = 0;
 			}
@@ -40,9 +34,6 @@ namespace cvImagePipeline {
 					std::string inputMatName = ss.str();
 					const cv::Mat& inputMat = getInputMat(inputMatName);
 					cv::Mat grid(refOutputMat(), cv::Rect(col * gridW, row * gridH, gridW, gridH));
-#ifdef _DEBUG
-					std::cerr << "fit grid input#" << index << "\"" << inputMatName << "\"" << endl;
-#endif
 					if(inputMat.empty()) {
 						grid = cv::Scalar(0.4, 0.4, 0.4);
 					} else {
@@ -71,9 +62,6 @@ namespace cvImagePipeline {
 			refresh();
 		}
 		void FitInGrid::refresh() {
-#ifdef _DEBUG
-			std::cerr << "FitInGrid::refresh(): " << std::endl;
-#endif
 			gridW = width / cols;
 			gridH = height / rows;
 			refOutputMat() = cv::Mat::zeros(height, width, CV_8UC3);
@@ -81,10 +69,6 @@ namespace cvImagePipeline {
 			int curr_count = dynInputMat.size();
 			int next_count = (int)cols * (int)rows;
 
-#ifdef _DEBUG
-			std::cerr << "curr_count==" << curr_count << ";" << std::endl;
-			std::cerr << "next_count==" << next_count << ";" << std::endl;
-#endif
 			if(next_count < curr_count) {
 				for(int i = next_count; i < curr_count; i++) {
 					stringstream ss;
@@ -93,22 +77,12 @@ namespace cvImagePipeline {
 					undefInputMat(name);
 					delete dynInputMat[i];
 					dynInputMat[i] = 0;
-#ifdef _DEBUG
-					std::cerr << "undefInputMat(" << name << ");";
-					std::cerr << "delete #" << i << ";" << std::endl;
-#endif
 				}
 				while(dynInputMat.size() > (size_t)next_count) {
 					dynInputMat.pop_back();
 				}
-#ifdef _DEBUG
-				std::cerr << "new dynInputMat.size()==" << "dynInputMat.size()" << ";" << std::endl;
-#endif
 			} else if(next_count > curr_count) {
 				for(int i = curr_count; i < next_count; i++) {
-#ifdef _DEBUG
-					std::cerr << "dynInputMat[" << i << "] = new cv::Mat() " << ";" << std::endl;
-#endif
 					cv::Mat* inputMat = new cv::Mat(cv::Mat::zeros(gridH, gridW, CV_8UC3));
 					dynInputMat.push_back(inputMat);
 
@@ -121,17 +95,11 @@ namespace cvImagePipeline {
 			}
 		}
 		void FitInGrid::onInputMatConnected(const std::string& inputMatName) {
-#ifdef _DEBUG
-			std::cerr << "FitInGrid::onInputMatConnected(): " << std::endl;
-#endif
 			stringstream ss(inputMatName);
 			int index;
 			ss >> index;
 			const cv::Mat& inputMat = getInputMat(inputMatName);
 			if(dynInputMat[index] != 0 && dynInputMat[index] != &inputMat) {
-#ifdef _DEBUG
-				std::cerr << "delete dynInputMat[" << index << "];" << std::endl;
-#endif
 				delete dynInputMat[index];
 				dynInputMat[index] = 0;
 			}

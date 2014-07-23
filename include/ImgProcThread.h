@@ -6,6 +6,15 @@ namespace cvImagePipeline {
 		class __declspec(dllexport) ImgProcThread : public ImgProcSet {
 		public:
 			DECLARE_CVFILTER;
+
+			//コンストラクタでロック、デストラクタでアンロック
+			class CriticalSection {
+				ImgProcThread& imgProcThread;
+			public:
+				CriticalSection(ImgProcThread& imgProcThread) : imgProcThread(imgProcThread)
+				{ imgProcThread.EnterCriticalSection(); }
+				~CriticalSection() { imgProcThread.LeaveCriticalSection(); }
+			};
 		public:
 			ImgProcThread();
 			~ImgProcThread();

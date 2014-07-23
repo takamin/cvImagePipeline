@@ -159,6 +159,15 @@ namespace cvImagePipeline {
 			static int instanceNumber;
 			static ImageProcessor* createFilter(std::string name);
 			static void entryFilter(std::string name, FILTER_FACTORY creator);
+
+			//処理の有効化フラグ。効果の有無はサブクラスの実装依存
+		private:
+			bool enable;//コンストラクタでtrueに初期化。
+		public:
+			//設定
+			virtual void setEnable(bool enable) { this->enable = enable; }
+			//取得
+			bool isEnable() const { return enable; }
 		};
 	}
 }

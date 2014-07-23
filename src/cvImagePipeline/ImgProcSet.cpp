@@ -86,13 +86,17 @@ namespace cvImagePipeline {
 		
 		void ImgProcSet::execute()
 		{
-			std::list<ImageProcessor*>::iterator proc = procs.begin();
-			while(proc != procs.end()) {
-				(*proc)->execute();
-				proc++;
-			}
-			if(lastAutoProcessor != 0) {
-				setOutputMat(lastAutoProcessor->getOutputMat());
+			if (isEnable()) {
+				std::list<ImageProcessor*>::iterator proc = procs.begin();
+				while (proc != procs.end()) {
+					if ((*proc)->isEnable()) {
+						(*proc)->execute();
+					}
+					proc++;
+				}
+				if (lastAutoProcessor != 0) {
+					setOutputMat(lastAutoProcessor->getOutputMat());
+				}
 			}
 		}
 		void ImgProcSet::putMarkdown(std::ostream& stream) {

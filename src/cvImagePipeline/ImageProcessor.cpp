@@ -26,7 +26,9 @@ namespace cvImagePipeline {
 		/////////////////////////////////////////////////////////////////////
 		//ImageProcessor
 		int ImageProcessor::instanceNumber = 0;
-		ImageProcessor::ImageProcessor() {
+		ImageProcessor::ImageProcessor()
+			: enable(true)
+		{
 			inputMat[""] = 0;
 			
 			// set name;
