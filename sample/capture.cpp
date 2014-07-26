@@ -6,7 +6,7 @@
 using namespace cvImagePipeline;
 using namespace cvImagePipeline::Filter;
 
-#define FEATURE_TRACKER
+//#define FEATURE_TRACKER
 #define FLOW_TRACKER
 
 template<class T> void operator >> (const std::string& src, T& dst) {
