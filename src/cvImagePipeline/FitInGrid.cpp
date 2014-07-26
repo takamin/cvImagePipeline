@@ -9,12 +9,19 @@ namespace cvImagePipeline {
 		FitInGrid::FitInGrid()
 			: 
 				width("width", 640), height("height", 480),
-				cols("cols", 2), rows("rows", 2)
+				cols("cols", 2), rows("rows", 2),
+				interleave("interleave", 0),
+				interleaveIndex(0),
+				cvInterMode("cvInterMode", CV_INTER_CUBIC)
+
 		{
 			defParam(width);
 			defParam(height);
 			defParam(cols);
 			defParam(rows);
+			defParam(rows);
+			defParam(interleave);
+			defParam(cvInterMode);
 			undefInputMat("");
 			refresh();
 		}
@@ -26,9 +33,12 @@ namespace cvImagePipeline {
 			}
 		}
 		void FitInGrid::execute() {
-			for(int row = 0; row < rows; row++) {
+			for (int row = 0; row < rows; row++) {
 				for(int col = 0; col < cols; col++) {
 					int index = row * cols + col;
+					if (index % (interleave + 1) != interleaveIndex) {
+						continue;
+					}
 					stringstream ss;
 					ss << index;
 					std::string inputMatName = ss.str();
@@ -50,12 +60,16 @@ namespace cvImagePipeline {
 						if(temp.channels() != 3) {
 							cv::Mat temp2;
 							cv::cvtColor(temp, temp2, CV_GRAY2BGR, 3);
-							cv::resize(temp2, grid, cv::Size(gridW, gridH), 0.0, 0.0, CV_INTER_CUBIC);
+							cv::resize(temp2, grid, cv::Size(gridW, gridH), 0.0, 0.0, cvInterMode);
 						} else {
-							cv::resize(temp, grid, cv::Size(gridW, gridH), 0.0, 0.0, CV_INTER_CUBIC);
+							cv::resize(temp, grid, cv::Size(gridW, gridH), 0.0, 0.0, cvInterMode);
 						}
 					}
 				}
+			}
+			interleaveIndex++;
+			if (interleaveIndex > interleave) {
+				interleaveIndex = 0;
 			}
 		}
 		void FitInGrid::onPropertyChange(Property& property) {

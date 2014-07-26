@@ -9,6 +9,8 @@ namespace cvImagePipeline {
 			TParam<int> height;
 			TParam<int> cols;
 			TParam<int> rows;
+			TParam<unsigned int> interleave;
+			TParam<int> cvInterMode;
 		public:
 			FitInGrid();
 			~FitInGrid();
@@ -23,6 +25,7 @@ namespace cvImagePipeline {
 #pragma warning(default:4251)
 			int gridW;
 			int gridH;
+			unsigned int interleaveIndex;
 		};
 	}
 }
