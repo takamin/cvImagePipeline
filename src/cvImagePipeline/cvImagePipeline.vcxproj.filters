@@ -60,16 +60,10 @@
     <ClCompile Include="pugixml-1.4\src\pugixml.cpp">
       <Filter>pugxml</Filter>
     </ClCompile>
-    <ClCompile Include="AverageMat.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SubMat.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ImgProcSet.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="AverageOnline.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ImagePoint.cpp">
@@ -170,13 +164,7 @@
     <ClInclude Include="pugixml-1.4\src\pugixml.hpp">
       <Filter>pugxml</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\AverageMat.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\SubMat.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\AverageOnline.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ImagePoint.h">

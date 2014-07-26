@@ -96,7 +96,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbsDiff.cpp" />
-    <ClCompile Include="AverageMat.cpp" />
     <ClCompile Include="ColorConverter.cpp" />
     <ClCompile Include="Convert.cpp" />
     <ClCompile Include="createVideoAverageImage.cpp" />
@@ -118,7 +117,6 @@
     <ClCompile Include="ImgProcThread.cpp" />
     <ClCompile Include="LabeledObject.cpp" />
     <ClCompile Include="Labeler.cpp" />
-    <ClCompile Include="AverageOnline.cpp" />
     <ClCompile Include="MaskCopy.cpp" />
     <ClCompile Include="OpticalFlowPyrLK.cpp" />
     <ClCompile Include="pugixml-1.4\src\pugixml.cpp" />
@@ -133,8 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\AbsDiff.h" />
-    <ClInclude Include="..\..\include\AverageMat.h" />
-    <ClInclude Include="..\..\include\AverageOnline.h" />
     <ClInclude Include="..\..\include\ColorConverter.h" />
     <ClInclude Include="..\..\include\Convert.h" />
     <ClInclude Include="..\..\include\cvImagePipeline.h" />

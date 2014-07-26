@@ -2,8 +2,6 @@
 #include "ImageProcessor.h"
 #include "ImgProcSet.h"
 
-#include "AverageMat.h"
-#include "AverageOnline.h"
 #include "ColorConverter.h"
 #include "EqualizeHist.h"
 #include "FeatureMatcher.h"
