@@ -90,7 +90,15 @@ namespace cvImagePipeline {
 				std::list<ImageProcessor*>::iterator proc = procs.begin();
 				while (proc != procs.end()) {
 					if ((*proc)->isEnable()) {
-						(*proc)->execute();
+						try {
+							(*proc)->execute();
+						}
+						catch (...) {
+							cerr
+								<< "exception caught in " << getName()
+								<< "from " << (*proc)->getName() << "."
+								<< endl;
+						}
 					}
 					proc++;
 				}
