@@ -134,7 +134,7 @@ namespace cvImagePipeline {
 
 		void ImageProcessor::onPropertyChange(Property& property) {
 #ifdef _DEBUG
-			std::cout << "ImageProcessor::onPropertyChange("
+			std::cerr << "ImageProcessor::onPropertyChange("
 				<< "class " << typeid(property).name() << " "
 				<< property.getName() << " = \""
 				<< property.getString() << "\")"
@@ -143,7 +143,7 @@ namespace cvImagePipeline {
 		}
 		void ImageProcessor::onInputMatConnected(const std::string& inputMatName) {
 #ifdef _DEBUG
-			std::cout << "ImageProcessor::onInputMatConnected(\""
+			std::cerr << "ImageProcessor::onInputMatConnected(\""
 				<< inputMatName << "\")" << std::endl;
 #endif
 		}
@@ -152,7 +152,7 @@ namespace cvImagePipeline {
 			const std::string& inputMatName)
 		{
 #ifdef _DEBUG
-			std::cout << "ImageProcessor::onOutputMatConnectedTo("
+			std::cerr << "ImageProcessor::onOutputMatConnectedTo("
 				<< "class " << typeid(dst).name() << " inputMatName=\"" << inputMatName << "\")" << std::endl;
 #endif
 		}
@@ -169,39 +169,35 @@ namespace cvImagePipeline {
 				if(entry.name == name) {
 					if(entry.creator != 0) {
 						ImageProcessor* filter = (*entry.creator)();
+						if(filter == 0) {
+							std::cerr << "Could not create ImageProcessor \"" << name << "\". createFilter() returns null." << std::endl;
+						}
 #ifdef _DEBUG
-						if(filter != 0) {
-							std::cout << "ImageProcessor::createFilter("
+						else {
+							std::cerr << "ImageProcessor::createFilter("
 								<< name << ") " << typeid(*filter).name()
 								<< "を生成しました。" << std::endl;
-						} else {
-							std::cout << "ImageProcessor::createFilter("
-								<< name << ") 生成失敗。ファクトリがnullを返却"
-								<< std::endl;
 						}
 #endif
 						return filter;
 					} else {
 #ifdef _DEBUG
-						std::cout << "ImageProcessor::createFilter("
+						std::cerr << "ImageProcessor::createFilter("
 							<< name << ") 生成失敗。ファクトリがnull."
 							<< std::endl;
 #endif
+						return 0;
 					}
 				}
 			}
-#ifdef _DEBUG
-			std::cout << "ImageProcessor::createFilter("
-				<< name << ") 生成失敗。ファクトリが見つかりません。"
-				<< std::endl;
-#endif
+			std::cerr << "Could not create ImageProcessor \"" << name << "\". The name is not found." << std::endl;
 			return 0;
 		}
 
 		void ImageProcessor::entryFilter(std::string name, FILTER_FACTORY creator) {
 			if(Factory::table == 0) {
 #ifdef _DEBUG
-				std::cout << "ファクトリテーブル生成" << std::endl;
+				std::cerr << "ファクトリテーブル生成" << std::endl;
 #endif
 				Factory::table = new Factory[Factory::tableSize];
 			}
@@ -209,25 +205,19 @@ namespace cvImagePipeline {
 			for(size_t i = 0; i < n; i++) {
 				Factory& entry = Factory::table[i];
 				if(entry.name == name) {
-#ifdef _DEBUG
-					std::cout << "[" << i << "] ImageProcessor::entryFilter("
-						<< name << ") 登録失敗。名前が重複。" << std::endl;
-#endif
+					std::cerr << "Could not entry ImageProcessor \"" << name << "\". The name is duplicated." << std::endl;
 					return;
 				} else if(entry.name == "" && entry.creator == 0) {
 					entry.name = name;
 					entry.creator = creator;
 #ifdef _DEBUG
-					std::cout << "[" << i << "] ImageProcessor::entryFilter("
+					std::cerr << "[" << i << "] ImageProcessor::entryFilter("
 						<< name << ") ファクトリ登録" << std::endl;
 #endif
 					return;
 				}
 			}
-#ifdef _DEBUG
-			std::cout << "ImageProcessor::entryFilter("
-				<< name << ") 登録失敗。テーブルいっぱい" << std::endl;
-#endif
+			std::cerr << "Could not entry ImageProcessor \"" << name << "\". The factory table full." << std::endl;
 		}
 		
 		bool ImageProcessor::checkPropertyExists(const std::string& name) const
