@@ -102,6 +102,8 @@ namespace cvImagePipeline {
 			};
 		protected:
 			void defInputMat(const std::string& name);
+			void defInputMat(const std::string& name, const std::string& description);
+			void setInputMatDesc(const std::string& name, const std::string& description);
 			void undefInputMat(const std::string& name);
 			void defParam(Property& param);
 			void setOutputMat(const cv::Mat& mat);
@@ -137,12 +139,13 @@ namespace cvImagePipeline {
 			FilterInput input(std::string name);
 			ImageProcessor& operator >> (FilterInput& dst);
 			void setPropertyByXmlNode(pugi::xml_node property);
-			virtual void putMarkdown(std::ostream& stream);
+			virtual void putMarkdown(std::ostream& stream) const;
 		private:
 			typedef std::hash_map<std::string, const cv::Mat*> MapMat;
 			std::string name;
 			PropSet parameters;
 			MapMat inputMat;
+			std::hash_map<std::string, std::string> inputMatDescription;
 			cv::Mat outputMat;
 			struct Factory {
 				std::string name;

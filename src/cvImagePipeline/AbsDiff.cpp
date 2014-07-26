@@ -7,7 +7,8 @@ namespace cvImagePipeline {
 
 		IMPLEMENT_CVFILTER(AbsDiff);
 		AbsDiff::AbsDiff() {
-			defInputMat("subImage");
+			setInputMatDesc("", "“ü—Í‰æ‘œ1");
+			defInputMat("subImage", "“ü—Í‰æ‘œ2");
 		}
 		AbsDiff::~AbsDiff() { }
 		void AbsDiff::execute() {

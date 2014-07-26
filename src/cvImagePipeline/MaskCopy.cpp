@@ -6,7 +6,8 @@ namespace cvImagePipeline {
 		using namespace cv;
 		IMPLEMENT_CVFILTER(MaskCopy);
 		MaskCopy::MaskCopy() {
-			defInputMat("mask");
+			setInputMatDesc("", "コピー元画像");
+			defInputMat("mask", "マスク。出力画像={コピー元画像 and マスク}");
 		}
 		MaskCopy::~MaskCopy() { }
 		void MaskCopy::execute() {

@@ -7,7 +7,8 @@ namespace cvImagePipeline {
 
 		IMPLEMENT_CVFILTER(SubMat);
 		SubMat::SubMat() {
-			defInputMat("subImage");
+			setInputMatDesc("", "Œ¸ŽZ‚³‚ê‚é‰æ‘œ");
+			defInputMat("subImage","Œ¸ŽZ‚·‚é‰æ‘œ");
 		}
 		SubMat::~SubMat() { }
 		void SubMat::execute() {

@@ -20,6 +20,7 @@ namespace cvImagePipeline {
 			defParam(stopFrame);
 			defParam(width);
 			defParam(height);
+			setInputMatDesc("", "‚±‚Ì“ü—Í‰æ‘œ‚ÍŽg—p‚³‚ê‚Ü‚¹‚ñ");
 		}
 		VideoCapture::~VideoCapture() { }
 		bool VideoCapture::open(int deviceIndex)

@@ -49,13 +49,33 @@ namespace cvImagePipeline {
 
 		void ImageProcessor::defInputMat(const std::string& name)
 		{
+			assert(inputMat.count(name) == 0);
 			inputMat[name] = 0;
+			inputMatDescription[name] = string("");
 		}
+		void ImageProcessor::defInputMat(const std::string& name, const std::string& description)
+		{
+			assert(inputMat.count(name) == 0);
+			inputMat[name] = 0;
+			inputMatDescription[name] = description;
+		}
+		void ImageProcessor::setInputMatDesc(const std::string& name, const std::string& description) {
+			assert(inputMat.count(name) > 0);
+			inputMatDescription[name] = description;
+		}
+
 		void ImageProcessor::undefInputMat(const std::string& name) {
 			MapMat::iterator input = inputMat.begin();
 			for(; input != inputMat.end(); input++) {
 				if(input->first == name) {
 					inputMat.erase(input);
+					break;
+				}
+			}
+			hash_map<std::string, std::string>::iterator desc = inputMatDescription.begin();
+			for (; desc != inputMatDescription.end(); desc++) {
+				if (desc->first == name) {
+					inputMatDescription.erase(desc);
 					break;
 				}
 			}
@@ -241,20 +261,27 @@ namespace cvImagePipeline {
 			return true;
 		}
 
-		void ImageProcessor::putMarkdown(std::ostream& stream) {
+		void ImageProcessor::putMarkdown(std::ostream& stream) const {
 			stream << "# " << typeid(*this).name() << std::endl;
 			stream << std::endl;
 			stream << "## Input " << std::endl;
 			stream << std::endl;
 			
-			MapMat::iterator mapEntry =  inputMat.begin();
+			MapMat::const_iterator mapEntry =  inputMat.begin();
 			for(; mapEntry != inputMat.end(); mapEntry++) {
 				MapMat::key_type name = mapEntry->first;
 				MapMat::mapped_type pMap = mapEntry->second;
+				string inputDescription = " - “ü—Í‰æ‘œ";
+				if (inputMatDescription.count(name) > 0) {
+					inputDescription = inputMatDescription.at(name);
+					if (inputDescription != "") {
+						inputDescription = string(" - ") + inputDescription;
+					}
+				}
 				if(name == "") {
-					stream << "* (standard)" << std::endl;
+					stream << "* (standard)" << inputDescription << std::endl;
 				} else {
-					stream << "* " << name << std::endl;
+					stream << "* " << name << inputDescription << std::endl;
 				}
 			}
 			stream << std::endl;
