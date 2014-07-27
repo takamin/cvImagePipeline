@@ -101,6 +101,7 @@ namespace cvImagePipeline {
 				std::string name;
 			};
 		protected:
+			void setDescription(const std::string& description);
 			void defInputMat(const std::string& name);
 			void defInputMat(const std::string& name, const std::string& description);
 			void setInputMatDesc(const std::string& name, const std::string& description);
@@ -113,6 +114,7 @@ namespace cvImagePipeline {
 			virtual ~ImageProcessor();
 			const std::string& getName() const { return name; }
 			void setName(const std::string& name) { this->name = name; }
+			const std::string& getDescription() const { return description; }
 			virtual void reset();
 			virtual void onPropertyChange(Property& property);
 			virtual void onInputMatConnected(const std::string& inputMatName);
@@ -143,6 +145,7 @@ namespace cvImagePipeline {
 		private:
 			typedef std::hash_map<std::string, const cv::Mat*> MapMat;
 			std::string name;
+			std::string description;
 			PropSet parameters;
 			MapMat inputMat;
 			std::hash_map<std::string, std::string> inputMatDescription;

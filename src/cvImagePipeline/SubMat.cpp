@@ -7,15 +7,17 @@ namespace cvImagePipeline {
 
 		IMPLEMENT_CVFILTER(SubMat);
 		SubMat::SubMat() {
-			setInputMatDesc("", "Œ¸Z‚³‚ê‚é‰æ‘œ");
-			defInputMat("subImage","Œ¸Z‚·‚é‰æ‘œ");
+			setDescription("2‰æ‘œ‚Ì·•ª‰æ‘œ‚ğo—ÍB");
+			undefInputMat("");
+			defInputMat("src1", "“ü—Í‰æ‘œ1");
+			defInputMat("src2", "“ü—Í‰æ‘œ2");
 		}
 		SubMat::~SubMat() { }
 		void SubMat::execute() {
-			const Mat& input_image = getInputMat();
-			const Mat& sub_image = getInputMat("subImage");
-			Mat& output = refOutputMat();
-			cv::subtract(input_image, sub_image, output);
+			const Mat& src1 = getInputMat("src1");
+			const Mat& src2 = getInputMat("src2");
+			Mat& dst = refOutputMat();
+			cv::subtract(src1, src2, dst);
 		}
 	}
 }

@@ -15,8 +15,8 @@
     <Property name="averageCount" value="18000"/>
   </Processor>
   <Processor class="AbsDiff" name="diff" autoBind="false">
-    <Input to="" from="pp"/>
-    <Input to="subImage" from="background"/>
+    <Input to="src1" from="pp"/>
+    <Input to="src2" from="background"/>
   </Processor>
   <Processor class="Convert" name="to8UC">
     <Property name="rtype" value="0"/>

@@ -47,6 +47,9 @@ namespace cvImagePipeline {
 		{
 		}
 
+		void ImageProcessor::setDescription(const std::string& description) {
+			this->description = description;
+		}
 		void ImageProcessor::defInputMat(const std::string& name)
 		{
 			assert(inputMat.count(name) == 0);
@@ -264,6 +267,10 @@ namespace cvImagePipeline {
 		void ImageProcessor::putMarkdown(std::ostream& stream) const {
 			stream << "# " << typeid(*this).name() << std::endl;
 			stream << std::endl;
+			if (description != "") {
+				stream << description << std::endl;
+				stream << std::endl;
+			}
 			stream << "## Input " << std::endl;
 			stream << std::endl;
 			

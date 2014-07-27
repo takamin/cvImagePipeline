@@ -7,15 +7,17 @@ namespace cvImagePipeline {
 
 		IMPLEMENT_CVFILTER(AbsDiff);
 		AbsDiff::AbsDiff() {
-			setInputMatDesc("", "“ü—Í‰æ‘œ1");
-			defInputMat("subImage", "“ü—Í‰æ‘œ2");
+			setDescription("2‰æ‘œ‚Ì·•ª(â‘Î’l)‰æ‘œ‚ğo—ÍB");
+			undefInputMat("");
+			defInputMat("src1", "“ü—Í‰æ‘œ1");
+			defInputMat("src2", "“ü—Í‰æ‘œ2");
 		}
 		AbsDiff::~AbsDiff() { }
 		void AbsDiff::execute() {
-			const Mat& input_image = getInputMat();
-			const Mat& sub_image = getInputMat("subImage");
-			Mat& output = refOutputMat();
-			cv::absdiff(input_image, sub_image, output);
+			const Mat& src1 = getInputMat("src1");
+			const Mat& src2 = getInputMat("src2");
+			Mat& dst = refOutputMat();
+			cv::absdiff(src1, src2, dst);
 		}
 	}
 }

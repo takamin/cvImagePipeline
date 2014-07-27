@@ -15,12 +15,6 @@ namespace cvImagePipeline {
 				::DeleteCriticalSection(&cs);
 			}
 
-			void ImgProcThread::addThreadSafeOutput(const std::string& name, ImageProcessor& src) {
-				threadShareInnerMat.add("ImagePoint", name, false);
-				threadShareOutputMat.add("ImagePoint", name, false);
-				threadShareInnerMat[name].setInputMat(src.getOutputMat());
-				threadShareOutputMat[name].setInputMat(threadShareInnerMat[name].getOutputMat());
-			}
 			void ImgProcThread::startThread(int interval /* = 0 */) {
 				eventHandle = CreateEvent(NULL, false, false, getName().c_str());
 				runProcessorThread = true;
@@ -50,17 +44,21 @@ namespace cvImagePipeline {
 			void ImgProcThread::LeaveCriticalSection() {
 				::LeaveCriticalSection(&cs);
 			}
-
 			bool ImgProcThread::WaitEvent(DWORD timeout) {
 				DWORD waitResult = WaitForSingleObject(eventHandle, timeout);
 				return (waitResult == WAIT_OBJECT_0);
 			}
-			void ImgProcThread::updateSharedOutputMat() {
-				EnterCriticalSection();
+			void ImgProcThread::updateThreadShareOutputMat() {
+				CriticalSection lock(*this);
 				threadShareOutputMat.execute();
-				LeaveCriticalSection();
 			}
-			const cv::Mat& ImgProcThread::refThreadShareOutput(const std::string& name) const {
+			void ImgProcThread::defThreadShareOutputMat(const std::string& name, ImageProcessor& src) {
+				threadShareInnerMat.add("ImagePoint", name, false);
+				threadShareOutputMat.add("ImagePoint", name, false);
+				threadShareInnerMat[name].setInputMat(src.getOutputMat());
+				threadShareOutputMat[name].setInputMat(threadShareInnerMat[name].getOutputMat());
+			}
+			const cv::Mat& ImgProcThread::getThreadShareOutputMat(const std::string& name) const {
 				return ((ImgProcSet&)threadShareOutputMat)[name].getOutputMat();
 			}
 

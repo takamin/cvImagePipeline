@@ -3,11 +3,13 @@
 #include "ImgProcSet.h"
 namespace cvImagePipeline {
 	namespace Filter {
+
+		// 独立したスレッドで画像処理を行うプロセッサ
 		class __declspec(dllexport) ImgProcThread : public ImgProcSet {
 		public:
 			DECLARE_CVFILTER;
 
-			//コンストラクタでロック、デストラクタでアンロック
+			//クリティカルセクションのヘルパー
 			class CriticalSection {
 				ImgProcThread& imgProcThread;
 			public:
@@ -32,14 +34,25 @@ namespace cvImagePipeline {
 			bool WaitEvent(DWORD timeout = INFINITE);
 
 			//スレッドセーフな出力画像の指定
-			void addThreadSafeOutput(const std::string& name, ImageProcessor& src);
+			void defThreadShareOutputMat(const std::string& name, ImageProcessor& src);
 
 			//出力画像を更新
-			void ImgProcThread::updateSharedOutputMat();
-
+			void updateThreadShareOutputMat();
+			
 			//出力画像の参照取得
-			const cv::Mat& refThreadShareOutput(const std::string& name) const;
+			const cv::Mat& getThreadShareOutputMat(const std::string& name) const;
 
+			//スレッドセーフな出力画像の指定
+			void addThreadSafeOutput(const std::string& name, ImageProcessor& src) {
+				defThreadShareOutputMat(name, src);
+			}
+			//出力画像を更新
+			void ImgProcThread::updateSharedOutputMat() { updateThreadShareOutputMat(); }
+			
+			//出力画像の参照取得
+			const cv::Mat& refThreadShareOutput(const std::string& name) const {
+				return getThreadShareOutputMat(name);
+			}
 		private:
 			
 			//出力画像の排他制御用クリティカルセクション
