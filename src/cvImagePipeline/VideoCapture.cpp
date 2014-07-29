@@ -38,6 +38,7 @@ namespace cvImagePipeline {
 				videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, height);
 			}
 			captureStart = false;
+			frameNumber = 0;
 			return open_state;
 		}
 		bool VideoCapture::open(const std::string& filename)
@@ -50,6 +51,7 @@ namespace cvImagePipeline {
 				videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, height);
 			}
 			captureStart = false;
+			frameNumber = 0;
 			return open_state;
 		}
 		bool VideoCapture::capture() {
@@ -70,12 +72,13 @@ namespace cvImagePipeline {
 					_sleep(10);
 				} while (mat.empty());
 				captureStart = true;
+				captureEmpty = false;
 			}
 			else if (!captureEmpty) {
 				while (frameNumber < startFrame) {
 					videoCapture >> mat;
 					frameNumber++;
-					if (mat.empty() || frameNumber >= stopFrame) {
+					if (mat.empty() || (stopFrame >= 0 && frameNumber >= stopFrame)) {
 						captureEmpty = true;
 						return true;
 					}
