@@ -12,6 +12,8 @@ namespace cvImagePipeline {
 			startFrame("startFrame", 0), stopFrame("stopFrame", -1),
 			width("width", 0.0),
 			height("height", 0.0),
+			captureStart("captureStart", false),
+			captureEmpty("captureEmpty", false),
 			frameNumber(0)
 		{
 			defParam(deviceIndex);
@@ -20,6 +22,8 @@ namespace cvImagePipeline {
 			defParam(stopFrame);
 			defParam(width);
 			defParam(height);
+			defParam(captureStart);
+			defParam(captureEmpty);
 			setInputMatDesc("", "‚±‚Ì“ü—Í‰æ‘œ‚ÍŽg—p‚³‚ê‚Ü‚¹‚ñ");
 		}
 		VideoCapture::~VideoCapture() { }
@@ -33,6 +37,7 @@ namespace cvImagePipeline {
 			if(height != 0.0) {
 				videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, height);
 			}
+			captureStart = false;
 			return open_state;
 		}
 		bool VideoCapture::open(const std::string& filename)
@@ -44,6 +49,7 @@ namespace cvImagePipeline {
 			if(height != 0.0) {
 				videoCapture.set(CV_CAP_PROP_FRAME_HEIGHT, height);
 			}
+			captureStart = false;
 			return open_state;
 		}
 		bool VideoCapture::capture() {
@@ -57,12 +63,32 @@ namespace cvImagePipeline {
 				}
 			}
 			cv::Mat& mat = refOutputMat(); 
-			while(frameNumber < startFrame) {
-				videoCapture >> mat;
-				frameNumber++;
+			if (captureStart == false) {
+				do {
+					videoCapture >> mat;
+					frameNumber++;
+					_sleep(10);
+				} while (mat.empty());
+				captureStart = true;
 			}
-			videoCapture >> mat;
-			frameNumber++;
+			else if (!captureEmpty) {
+				while (frameNumber < startFrame) {
+					videoCapture >> mat;
+					frameNumber++;
+					if (mat.empty() || frameNumber >= stopFrame) {
+						captureEmpty = true;
+						return true;
+					}
+				}
+				if (stopFrame < 0 || frameNumber < stopFrame) {
+					videoCapture >> mat;
+					frameNumber++;
+					if (mat.empty() || (stopFrame >= 0 && frameNumber >= stopFrame)) {
+						captureEmpty = true;
+						return true;
+					}
+				}
+			}
 			return true;
 		}
 		void VideoCapture::execute() {

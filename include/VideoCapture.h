@@ -11,6 +11,8 @@ namespace cvImagePipeline {
 			TParam<double> height;
 			TParam<int> startFrame;
 			TParam<int> stopFrame;
+			TParam<bool> captureStart;
+			TParam<bool> captureEmpty;
 		private:
 #pragma warning(disable:4251)
 			cv::VideoCapture videoCapture;
