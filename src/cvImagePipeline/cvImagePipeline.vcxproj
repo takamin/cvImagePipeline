@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbsDiff.cpp" />
+    <ClCompile Include="BackgroundSubtractor.cpp" />
     <ClCompile Include="ColorConverter.cpp" />
     <ClCompile Include="Convert.cpp" />
     <ClCompile Include="createVideoAverageImage.cpp" />
@@ -131,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\AbsDiff.h" />
+    <ClInclude Include="..\..\include\BackgroundSubtractor.h" />
     <ClInclude Include="..\..\include\ColorConverter.h" />
     <ClInclude Include="..\..\include\Convert.h" />
     <ClInclude Include="..\..\include\cvImagePipeline.h" />
