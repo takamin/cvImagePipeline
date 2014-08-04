@@ -121,18 +121,20 @@ namespace cvImagePipeline {
 			return *this;
 		}
 
-		void ImageProcessor::setInputMat(const cv::Mat& mat) {
+		ImageProcessor& ImageProcessor::setInputMat(const cv::Mat& mat) {
 			inputMat[""] = &mat;
 			onInputMatConnected("");
+			return *this;
 		}
 
-		void ImageProcessor::setInputMat(
+		ImageProcessor& ImageProcessor::setInputMat(
 			const std::string& name,
 			const cv::Mat& mat)
 		{
 			checkInputMatExists(name);
 			inputMat[name] = &mat;
 			onInputMatConnected(name);
+			return *this;
 		}
 
 		void ImageProcessor::setOutputMat(const cv::Mat& mat) {

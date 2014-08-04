@@ -132,8 +132,8 @@ namespace cvImagePipeline {
 				const std::string& parameter_name, const std::string& value);
 			const Property& property(const std::string& parameter_name) const;
 			
-			void setInputMat(const cv::Mat& mat);
-			void setInputMat(const std::string& name, const cv::Mat& mat);
+			ImageProcessor& setInputMat(const cv::Mat& mat);
+			ImageProcessor& setInputMat(const std::string& name, const cv::Mat& mat);
 			const cv::Mat& getInputMat() const;
 			const cv::Mat& getInputMat(const std::string& name) const;
 			const cv::Mat& getOutputMat() const { return outputMat; }
