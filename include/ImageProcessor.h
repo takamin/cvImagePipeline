@@ -88,10 +88,12 @@ namespace cvImagePipeline {
 			static ImageProcessor* createFilter();\
 			static void entryFilter()
 		#define IMPLEMENT_CVFILTER(class_name) \
-		cvImagePipeline::Filter::ImageProcessor* class_name::createFilter() { return new class_name; } \
-		void class_name::entryFilter() { cvImagePipeline::Filter::ImageProcessor::entryFilter(#class_name, &class_name::createFilter); } \
-		cvImagePipeline::Filter::InitialCallback<class_name, class_name::entryFilter> class_name ## _entry_static_
-		
+			cvImagePipeline::Filter::ImageProcessor* class_name::createFilter() { return new class_name; } \
+			void class_name::entryFilter() { cvImagePipeline::Filter::ImageProcessor::entryFilter(#class_name, &class_name::createFilter); } \
+			cvImagePipeline::Filter::InitialCallback<class_name, class_name::entryFilter> class_name ## _entry_static_
+		#define FORCE_LINK_CVFILTER(class_name) \
+			static FILTER_FACTORY class_name ## _createFilter = class_name::createFilter
+
 		template<class T, void func()> class InitialCallback { public: InitialCallback() { func(); } };
 		
 		//イメージプロセッサ
