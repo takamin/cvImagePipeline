@@ -52,11 +52,12 @@ namespace cvImagePipeline {
 				CriticalSection lock(*this);
 				threadShareOutputMat.execute();
 			}
-			void ImgProcThread::defThreadShareOutputMat(const std::string& name, ImageProcessor& src) {
+			ImgProcThread& ImgProcThread::defThreadShareOutputMat(const std::string& name, ImageProcessor& src) {
 				threadShareInnerMat.add("ImagePoint", name, false);
 				threadShareOutputMat.add("ImagePoint", name, false);
 				threadShareInnerMat[name].setInputMat(src.getOutputMat());
 				threadShareOutputMat[name].setInputMat(threadShareInnerMat[name].getOutputMat());
+				return *this;
 			}
 			const cv::Mat& ImgProcThread::getThreadShareOutputMat(const std::string& name) const {
 				return ((ImgProcSet&)threadShareOutputMat)[name].getOutputMat();

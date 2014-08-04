@@ -34,7 +34,7 @@ namespace cvImagePipeline {
 			bool WaitEvent(DWORD timeout = INFINITE);
 
 			//スレッドセーフな出力画像の指定
-			void defThreadShareOutputMat(const std::string& name, ImageProcessor& src);
+			ImgProcThread& defThreadShareOutputMat(const std::string& name, ImageProcessor& src);
 
 			//出力画像を更新
 			void updateThreadShareOutputMat();
