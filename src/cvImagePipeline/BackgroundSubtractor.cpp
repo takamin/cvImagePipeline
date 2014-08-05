@@ -9,33 +9,25 @@ namespace cvImagePipeline {
 		{
 			defParam(averageCount);
 			defParam(algo);
+			::InitializeCriticalSection(&cs);
 		}
 
 		BackgroundSubtractor::~BackgroundSubtractor()
 		{
-			delete backgroundSubtractor;
+			::DeleteCriticalSection(&cs);
+			shutdown();
 		}
 
 		void BackgroundSubtractor::execute() {
 			const cv::Mat& frame = getInputMat();
 			if (!frame.empty()) {
+				::EnterCriticalSection(&cs);
 				if (buffer_count < averageCount) {
 					buffer_count++;
 				}
 				if (backgroundSubtractor == 0) {
-					switch (algo) {
-					case GMG:
-						backgroundSubtractor = new cv::BackgroundSubtractorGMG();
-						break;
-					case MOG:
-						backgroundSubtractor = new cv::BackgroundSubtractorMOG(averageCount, 3, 0.0);
-						break;
-					case MOG2:
-						backgroundSubtractor = new cv::BackgroundSubtractorMOG2(averageCount, 50, true);
-						break;
-					}
+					create();
 				}
-
 				cv::Mat& mask = refOutputMat();
 				switch (algo) {
 				case GMG:
@@ -49,6 +41,35 @@ namespace cvImagePipeline {
 					(*(cv::BackgroundSubtractorMOG2*)backgroundSubtractor)(frame, mask);
 					break;
 				}
+				backgroundSubtractor->getBackgroundImage(backgroundImage);
+				::LeaveCriticalSection(&cs);
+			}
+		}
+		void BackgroundSubtractor::reset() {
+			::EnterCriticalSection(&cs);
+			shutdown();
+			create();
+			::LeaveCriticalSection(&cs);
+		}
+		const cv::Mat& BackgroundSubtractor::getBackgroundImage() const {
+			return backgroundImage;
+		}
+		void BackgroundSubtractor::shutdown() {
+			delete backgroundSubtractor;
+			backgroundSubtractor = 0;
+		}
+		void BackgroundSubtractor::create() {
+			buffer_count = 0;
+			switch (algo) {
+			case GMG:
+				backgroundSubtractor = new cv::BackgroundSubtractorGMG();
+				break;
+			case MOG:
+				backgroundSubtractor = new cv::BackgroundSubtractorMOG(averageCount, 3, 0.0);
+				break;
+			case MOG2:
+				backgroundSubtractor = new cv::BackgroundSubtractorMOG2(averageCount, 50, true);
+				break;
 			}
 		}
 	}
