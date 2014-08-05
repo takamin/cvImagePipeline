@@ -1,14 +1,26 @@
-cvImagePipeline
-===============
+# cvImagePipeline - OpenCV画像処理フィルタシーケンスライブラリ。
 
 ## 概要
 
-OpenCV画像処理フィルタシーケンスライブラリ。
+OpenCVの画像処理ルーチンを組み合わせて、一連の画像処理を構成できるライブラリです。
 
-既存の複数の画像処理プロセッサをつなぎ合わせて、ひとつの画像処理プロセッサセットを形成し、一連の画像処理をまとめて実行できるライブラリです（⇒[サンプル](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp)）。
-これはXMLファイルからも生成可能です（⇒[XMLファイル例](https://github.com/takamin/cvImageBlock/blob/master/test/certain.xml)）。
+__画像処理プロセッサ__
+このライブラリでは、OpenCVに含まれる画像処理ルーチンを、その入出力イメージ(`cv::Mat`)やパラメータとともに、このライブラリで「[画像処理プロセッサ](#ImageProcessor)」と呼ぶクラスに実装し、
+その出力を、他の入力へ接続することで、一連の画像処理を構成できます。
 
-汎用的な（単純な）画像処理プロセッサは実装済みです。また、新たな画像処理プロセッサクラスも作成可能。
+__拡張可能__  
+いくつかの汎用的な（単純な）画像処理プロセッサは[実装済み](#processor)ですが、足りないものはユーザー独自に作成可能です。
+
+__階層化__  
+一連の画像処理もまた、画像処理プロセッサであるため、画像処理の階層化も簡単に可能。
+
+__XMLファイルからの入力__  
+単純なプロセッサの接続は[XMLファイル例](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)に記述可能です。
+XMLの読み込み関しては[サンプルプログラム](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp)も参照してください。
+
+__動的な組み換え__  
+画像処理プロセッサ間の接続は、実行時にも変更可能です。
+
 
 ### 開発環境
 
@@ -17,16 +29,19 @@ OpenCV画像処理フィルタシーケンスライブラリ。
 * プラットフォーム Win32(x86)
 * OpenCV 2.4.8とリンクします。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
 * 実行時には c:\opencv\build\x86\vc12\bin にPATHを通す必要があります。
+* xmlパーサーとして、[pugixml-1.4](http://pugixml.org/)を利用しています。
+* [capture.cpp](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp).
+
 
 ### ビルド方法
 
 ビルドは [src/cvImagePipeline](https://github.com/takamin/cvImageBlock/blob/master/src)のソリューションで行います。
 
-CMakeLists.txtを記述していますが、正常動作不明です。
+CMake用に、CMakeLists.txtを記述していますが、正常動作不明です。
 
 ## 詳細説明
 
-### 画像処理プロセッサ
+### <a name="ImageProcessor">画像処理プロセッサ</a>
 
 画像処理プロセッサは[抽象クラス`ImageProcessor`]((https://github.com/takamin/cvImageBlock/blob/master/include/ImageProcessor.h))を継承して記述されます。
 
@@ -42,7 +57,7 @@ CMakeLists.txtを記述していますが、正常動作不明です。
 動的生成に対応していない場合は、後述のXMLファイルからの構築はできません。
 
 
-### 実装済み基本プロセッサ
+### <a name="processors">実装済み基本プロセッサ</a>
 
 以下のプロセッサが実装されています。
 
@@ -56,6 +71,7 @@ CMakeLists.txtを記述していますが、正常動作不明です。
 | GaussianBlur		| ガウシアン平滑化(== `cv::GaussianBlur`)	|
 | Flipper			| 反転。(== `cv::flip`)	|
 | Resizer			| リサイズ(== `cv::resize`)	|
+| BackgroundSubtractor	| MOG/MOG2/GMG 背景除去	|
 | RunningAvg		| 長期平均(== `cv::runningAvg`)	|
 | AbsDiff			| 絶対値差分(== `cv::absdiff`)	|
 | SubMat			| 差分(== `cv::sub`)	|
@@ -64,9 +80,10 @@ CMakeLists.txtを記述していますが、正常動作不明です。
 | Erode				| 画像の縮小(== `cv::erode`)	|
 | MaskCopy			| マスク処理(== `cv::copyTo`)	|
 | ImagePoint		| 無処理(== `cv::copyTo`)。入力画像をそのまま出力します。画像の取り出しポイントとして利用可能。	|
-| FitInGrid			| 複数の画像を1枚にまとめる。	|
+| OpticalFlowFarneback	| Farnebackの密なオプティカルフローを計算(== `cv::calcOpticalFlowFarneback`)します。フローを可視化するためのプロセッサも内部クラスに用意しています。	|
+| OpticalFlowPyrLK	| 疎なオプティカルフロー(== `cv::calcOpticalFlowPyrLK`)を計算し、特徴点を描画するサンプルです。|
+| FitInGrid			| 複数の画像をパネル状に並べて1枚にまとめるプロセッサ。	|
 | ImgProcSet		| 任意の画像処理プロセッサで構成可能な汎用の画像処理プロセッサ。	|
-| ImgProcThread		| ImgProcSetの処理をサブスレッドで実行するプロセッサ（試験実装中）	|
 
 ### 画像処理プロセッサセット
 
@@ -78,45 +95,3 @@ CMakeLists.txtを記述していますが、正常動作不明です。
 * 複数の画像処理プロセッサを保持します。
 * XMLファイルを読み込んで、構成できます。
 * 内部のプロセッサの接続がどのようになっていても、画像処理は追加された順序で実行されます。
-
-
-## description
-
-Image processing filter sequence library with OpenCV.
-
-All image processings are executed by image processor.
-
-### build environment
-
-* OpenCV 2.4.8 on C:\\opencv
-* Visual Studio 2010 VC++
-
-## class ImageProcessor
-
-The image processor is a instance of a class that is
-derived from ImageProcessor.
-ImageProcessor provide output image as cv::Mat.
-it can connect to other processor's input.
-And the class may have input images and
-some properties that is accessable with its name.
-
-## create processor by name
-
-A image processor is able to create by its class name.
-And its properties be able to accessed by its name.
-
-## create processor by xml
-
-creates processor set from xml by ImgProcSet::loadXml(const string& filename).
-
-see the sample xml [certain.xml](https://github.com/takamin/cvImageBlock/blob/master/test/certain.xml).
-
-## sample code
-
-see the sample program [capture.cpp](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp).
-
-
-----
-
-This library is using a xml parser [pugixml-1.4](http://pugixml.org/).
-
