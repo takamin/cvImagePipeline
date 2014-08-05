@@ -2,25 +2,24 @@
 
 ## 概要
 
-OpenCVの画像処理ルーチンを組み合わせて、一連の画像処理を構成できるライブラリです。
+[cvImagePipeline](https://github.com/takamin/cvImagePipeline)
+は、OpenCVの画像処理ルーチンを組み合わせて、一連の画像処理を構成できるライブラリです。
+このライブラリでは、OpenCVに含まれる画像処理ルーチンを、その入出力イメージ(`cv::Mat`)やパラメータとともに、
+「[画像処理プロセッサ](#ImageProcessor)」と呼ぶクラスに実装します。
 
-__画像処理プロセッサ__
-このライブラリでは、OpenCVに含まれる画像処理ルーチンを、その入出力イメージ(`cv::Mat`)やパラメータとともに、このライブラリで「[画像処理プロセッサ](#ImageProcessor)」と呼ぶクラスに実装し、
-その出力を、他の入力へ接続することで、一連の画像処理を構成できます。
+__入出力の自由な接続__
+画像処理プロセッサの出力と入力を接続して、一連の画像処理を構成します。
+この接続は、実行時にも変更可能です。
 
 __拡張可能__  
 いくつかの汎用的な（単純な）画像処理プロセッサは[実装済み](#processor)ですが、足りないものはユーザー独自に作成可能です。
 
-__階層化__  
-一連の画像処理もまた、画像処理プロセッサであるため、画像処理の階層化も簡単に可能。
+__階層化・モジュール化__  
+接続された一連の画像処理もまた、画像処理プロセッサであるため、画像処理の階層化、モジュール化が簡単に可能です。
 
 __XMLファイルからの入力__  
-単純なプロセッサの接続は[XMLファイル例](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)に記述可能です。
+プロセッサの単純な接続は[XMLファイル例](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)に記述できます。
 XMLの読み込み関しては[サンプルプログラム](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp)も参照してください。
-
-__動的な組み換え__  
-画像処理プロセッサ間の接続は、実行時にも変更可能です。
-
 
 ### 開発環境
 
@@ -30,7 +29,7 @@ __動的な組み換え__
 * OpenCV 2.4.8とリンクします。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
 * 実行時には c:\opencv\build\x86\vc12\bin にPATHを通す必要があります。
 * xmlパーサーとして、[pugixml-1.4](http://pugixml.org/)を利用しています。
-* [capture.cpp](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp).
+* [capture.cpp](https://github.com/takamin/cvImagePipeline/blob/master/sample/capture.cpp).
 
 
 ### ビルド方法
@@ -41,7 +40,7 @@ CMake用に、CMakeLists.txtを記述していますが、正常動作不明です。
 
 ## 詳細説明
 
-### <a name="ImageProcessor">画像処理プロセッサ</a>
+### <a name="ImageProcessor"></a>画像処理プロセッサ
 
 画像処理プロセッサは[抽象クラス`ImageProcessor`]((https://github.com/takamin/cvImageBlock/blob/master/include/ImageProcessor.h))を継承して記述されます。
 
@@ -57,7 +56,7 @@ CMake用に、CMakeLists.txtを記述していますが、正常動作不明です。
 動的生成に対応していない場合は、後述のXMLファイルからの構築はできません。
 
 
-### <a name="processors">実装済み基本プロセッサ</a>
+### <a name="processors"></a>実装済み基本プロセッサ
 
 以下のプロセッサが実装されています。
 
