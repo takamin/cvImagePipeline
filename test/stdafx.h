@@ -9,7 +9,11 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include <string>
+#include <sstream>
+#include "cvImagePipeline.h"
 
+using namespace std;
+using namespace cvImagePipeline;
+using namespace cvImagePipeline::Filter;
 
-
-// TODO: プログラムに必要な追加ヘッダーをここで参照してください。
