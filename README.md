@@ -1,96 +1,96 @@
-# cvImagePipeline - OpenCV�摜�����t�B���^�V�[�P���X���C�u�����B
+# cvImagePipeline - OpenCV画像処理フィルタシーケンスライブラリ。
 
-## �T�v
+## 概要
 
 [cvImagePipeline](https://github.com/takamin/cvImagePipeline)
-�́AOpenCV�̉摜�������[�`����g�ݍ��킹�āA��A�̉摜�������\���ł��郉�C�u�����ł��B
-���̃��C�u�����ł́AOpenCV�Ɋ܂܂��摜�������[�`�����A���̓��o�̓C���[�W(`cv::Mat`)��p�����[�^�ƂƂ��ɁA
-�u[�摜�����v���Z�b�T](#ImageProcessor)�v�ƌĂԃN���X�Ɏ������܂��B
+は、OpenCVの画像処理ルーチンを組み合わせて、一連の画像処理を構成できるライブラリです。
+このライブラリでは、OpenCVに含まれる画像処理ルーチンを、その入出力イメージ(`cv::Mat`)やパラメータとともに、
+「[画像処理プロセッサ](#ImageProcessor)」と呼ぶクラスに実装します。
 
-__���o�͂̎��R�Ȑڑ�__
-�摜�����v���Z�b�T�̏o�͂Ɠ��͂�ڑ����āA��A�̉摜�������\�����܂��B
-���̐ڑ��́A���s���ɂ��ύX�\�ł��B
+__入出力の自由な接続__  
+画像処理プロセッサの出力と入力を接続して、一連の画像処理を構成します。
+この接続は、実行時にも変更可能です。
 
-__�g���\__  
-�������̔ėp�I�ȁi�P���ȁj�摜�����v���Z�b�T��[�����ς�](#processor)�ł����A����Ȃ����̂̓��[�U�[�Ǝ��ɍ쐬�\�ł��B
+__拡張可能__  
+いくつかの汎用的な（単純な）画像処理プロセッサは[実装済み](#processor)ですが、足りないものはユーザー独自に作成可能です。
 
-__�K�w���E���W���[����__  
-�ڑ����ꂽ��A�̉摜�������܂��A�摜�����v���Z�b�T�ł��邽�߁A�摜�����̊K�w���A���W���[�������ȒP�ɉ\�ł��B
+__階層化・モジュール化__  
+接続された一連の画像処理もまた、画像処理プロセッサであるため、画像処理の階層化、モジュール化が簡単に可能です。
 
-__XML�t�@�C������̓���__  
-�v���Z�b�T�̒P���Ȑڑ���[XML�t�@�C����](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)�ɋL�q�ł��܂��B
-XML�̓ǂݍ��݊ւ��Ă�[�T���v���v���O����](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp)���Q�Ƃ��Ă��������B
+__XMLファイルからの入力__  
+プロセッサの単純な接続は[XMLファイル例](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)に記述できます。
+XMLの読み込み関しては[サンプルプログラム](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp)も参照してください。
 
-### �J����
+### 開発環境
 
-* �o�̓^�[�Q�b�g Win32 DLL
-* �����J���� VisualStudio Express 2013 for Windows Desktop
-* �v���b�g�t�H�[�� Win32(x86)
-* OpenCV 2.4.8�ƃ����N���܂��B[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)����_�E�����[�h����`C:\opencv`�ɓW�J�i`C:\opencv\build`�f�B���N�g���������ԁj�B
-* ���s���ɂ� c:\opencv\build\x86\vc12\bin ��PATH��ʂ��K�v������܂��B
-* xml�p�[�T�[�Ƃ��āA[pugixml-1.4](http://pugixml.org/)�𗘗p���Ă��܂��B
+* 出力ターゲット Win32 DLL
+* 統合開発環境 VisualStudio Express 2013 for Windows Desktop
+* プラットフォーム Win32(x86)
+* OpenCV 2.4.8とリンクします。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
+* 実行時には c:\opencv\build\x86\vc12\bin にPATHを通す必要があります。
+* xmlパーサーとして、[pugixml-1.4](http://pugixml.org/)を利用しています。
 * [capture.cpp](https://github.com/takamin/cvImagePipeline/blob/master/sample/capture.cpp).
 
 
-### �r���h���@
+### ビルド方法
 
-�r���h�� [src/cvImagePipeline](https://github.com/takamin/cvImageBlock/blob/master/src)�̃\�����[�V�����ōs���܂��B
+ビルドは [src/cvImagePipeline](https://github.com/takamin/cvImageBlock/blob/master/src)のソリューションで行います。
 
-CMake�p�ɁACMakeLists.txt���L�q���Ă��܂����A���퓮��s���ł��B
+CMake用に、CMakeLists.txtを記述していますが、正常動作不明です。
 
-## �ڍא���
+## 詳細説明
 
-### <a name="ImageProcessor"></a>�摜�����v���Z�b�T
+### <a name="ImageProcessor"></a>画像処理プロセッサ
 
-�摜�����v���Z�b�T��[���ۃN���X`ImageProcessor`]((https://github.com/takamin/cvImageBlock/blob/master/include/ImageProcessor.h))���p�����ċL�q����܂��B
+画像処理プロセッサは[抽象クラス`ImageProcessor`]((https://github.com/takamin/cvImageBlock/blob/master/include/ImageProcessor.h))を継承して記述されます。
 
-* �ЂƂ̏o�͉摜(`const cv::Mat&`)��񋟂��܂��B
-* �����̓��͉摜(`const cv::Mat&`)���Q�Ƃ��܂��B
-* �����̃v���p�e�B��ێ��ł��܂��B�����̃p�����[�^�Ƃ��Ďg�p�ł��܂��B
-* �o�͉摜�͕����̃v���Z�b�T����Q�Ɖ\�ł��B
-* ���͉摜�ƃv���p�e�B�ɂ͖��O�ɂ��A�N�Z�X���\�B
+* ひとつの出力画像(`const cv::Mat&`)を提供します。
+* 複数の入力画像(`const cv::Mat&`)を参照します。
+* 複数のプロパティを保持できます。処理のパラメータとして使用できます。
+* 出力画像は複数のプロセッサから参照可能です。
+* 入力画像とプロパティには名前によるアクセスが可能。
 
-#### �N���X���ɂ����s�����I�C���X�^���X����
+#### クラス名による実行時動的インスタンス生成
 
-�N���X�錾��DECLARE_CVFILTER�A��`����IMPLEMENT_CVFILTER �}�N�����g�p����΁A�N���X�̖��O�ŃC���X�^���X�𐶐��ł��܂��B
-���I�����ɑΉ����Ă��Ȃ��ꍇ�́A��q��XML�t�@�C������̍\�z�͂ł��܂���B
+クラス宣言でDECLARE_CVFILTER、定義時にIMPLEMENT_CVFILTER マクロを使用すれば、クラスの名前でインスタンスを生成できます。
+動的生成に対応していない場合は、後述のXMLファイルからの構築はできません。
 
 
-### <a name="processors"></a>�����ς݊�{�v���Z�b�T
+### <a name="processors"></a>実装済み基本プロセッサ
 
-�ȉ��̃v���Z�b�T����������Ă��܂��B
+以下のプロセッサが実装されています。
 
-|�N���X				|�T�v															|
+|クラス				|概要															|
 |:---				|:--															|
-| VideoCapture		| �J�����܂��͓���t�@�C���̃L���v�`��(==`cv::VideoCapture`)	|
-| ImageWindow		| ��ʕ\��(== `imshow`)	|
-| Convert			| �t�H�[�}�b�g�ϊ�(== `cv::Mat::convertTo`)	| 
-| ColorConverter	| �`�����l�����ϊ�(== `cv::cvtColor`)	|
-| EqualizeHist		| �q�X�g�O�������R��(== `cv::equalizeHist`)	|
-| GaussianBlur		| �K�E�V�A��������(== `cv::GaussianBlur`)	|
-| Flipper			| ���]�B(== `cv::flip`)	|
-| Resizer			| ���T�C�Y(== `cv::resize`)	|
-| BackgroundSubtractor	| MOG/MOG2/GMG �w�i����	|
-| RunningAvg		| ��������(== `cv::runningAvg`)	|
-| AbsDiff			| ��Βl����(== `cv::absdiff`)	|
-| SubMat			| ����(== `cv::sub`)	|
-| Threshold			| 2�l��(== `cv::threshold`)	|
-| Dilate			| �摜�̖c��(== `cv::dilate`)	|
-| Erode				| �摜�̏k��(== `cv::erode`)	|
-| MaskCopy			| �}�X�N����(== `cv::copyTo`)	|
-| ImagePoint		| ������(== `cv::copyTo`)�B���͉摜�����̂܂܏o�͂��܂��B�摜�̎��o���|�C���g�Ƃ��ė��p�\�B	|
-| OpticalFlowFarneback	| Farneback�̖��ȃI�v�e�B�J���t���[���v�Z(== `cv::calcOpticalFlowFarneback`)���܂��B�t���[���������邽�߂̃v���Z�b�T�������N���X�ɗp�ӂ��Ă��܂��B	|
-| OpticalFlowPyrLK	| �a�ȃI�v�e�B�J���t���[(== `cv::calcOpticalFlowPyrLK`)���v�Z���A�����_��`�悷��T���v���ł��B|
-| FitInGrid			| �����̉摜���p�l����ɕ��ׂ�1���ɂ܂Ƃ߂�v���Z�b�T�B	|
-| ImgProcSet		| �C�ӂ̉摜�����v���Z�b�T�ō\���\�Ȕėp�̉摜�����v���Z�b�T�B	|
+| VideoCapture		| カメラまたは動画ファイルのキャプチャ(==`cv::VideoCapture`)	|
+| ImageWindow		| 画面表示(== `imshow`)	|
+| Convert			| フォーマット変換(== `cv::Mat::convertTo`)	| 
+| ColorConverter	| チャンネル数変換(== `cv::cvtColor`)	|
+| EqualizeHist		| ヒストグラム平坦化(== `cv::equalizeHist`)	|
+| GaussianBlur		| ガウシアン平滑化(== `cv::GaussianBlur`)	|
+| Flipper			| 反転。(== `cv::flip`)	|
+| Resizer			| リサイズ(== `cv::resize`)	|
+| BackgroundSubtractor	| MOG/MOG2/GMG 背景除去	|
+| RunningAvg		| 長期平均(== `cv::runningAvg`)	|
+| AbsDiff			| 絶対値差分(== `cv::absdiff`)	|
+| SubMat			| 差分(== `cv::sub`)	|
+| Threshold			| 2値化(== `cv::threshold`)	|
+| Dilate			| 画像の膨張(== `cv::dilate`)	|
+| Erode				| 画像の縮小(== `cv::erode`)	|
+| MaskCopy			| マスク処理(== `cv::copyTo`)	|
+| ImagePoint		| 無処理(== `cv::copyTo`)。入力画像をそのまま出力します。画像の取り出しポイントとして利用可能。	|
+| OpticalFlowFarneback	| Farnebackの密なオプティカルフローを計算(== `cv::calcOpticalFlowFarneback`)します。フローを可視化するためのプロセッサも内部クラスに用意しています。	|
+| OpticalFlowPyrLK	| 疎なオプティカルフロー(== `cv::calcOpticalFlowPyrLK`)を計算し、特徴点を描画するサンプルです。|
+| FitInGrid			| 複数の画像をパネル状に並べて1枚にまとめるプロセッサ。	|
+| ImgProcSet		| 任意の画像処理プロセッサで構成可能な汎用の画像処理プロセッサ。	|
 
-### �摜�����v���Z�b�T�Z�b�g
+### 画像処理プロセッサセット
 
-�C�ӂ̕����̉摜�����v���Z�b�T��ێ����A�����������s���v���Z�b�T�ł��B
-��[`ImgProcSet`�N���X]((https://github.com/takamin/cvImageBlock/blob/master/include/ImgProcSet.h))�ł��B
+任意の複数の画像処理プロセッサを保持し、順次処理を行うプロセッサです。
+⇒[`ImgProcSet`クラス]((https://github.com/takamin/cvImageBlock/blob/master/include/ImgProcSet.h))です。
 
-�����ɕێ�����v���Z�b�T�Ԃ̐ڑ���؂�ւ��\�B
+内部に保持するプロセッサ間の接続を切り替え可能。
 
-* �����̉摜�����v���Z�b�T��ێ����܂��B
-* XML�t�@�C����ǂݍ���ŁA�\���ł��܂��B
-* �����̃v���Z�b�T�̐ڑ����ǂ̂悤�ɂȂ��Ă��Ă��A�摜�����͒ǉ����ꂽ�����Ŏ��s����܂��B
+* 複数の画像処理プロセッサを保持します。
+* XMLファイルを読み込んで、構成できます。
+* 内部のプロセッサの接続がどのようになっていても、画像処理は追加された順序で実行されます。
