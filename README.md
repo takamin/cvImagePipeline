@@ -18,7 +18,7 @@ __階層化・モジュール化__
 接続された一連の画像処理もまた、画像処理プロセッサであるため、画像処理の階層化、モジュール化が簡単に可能です。
 
 __XMLファイルからの入力__  
-プロセッサの単純な接続は[XMLファイル例](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)に記述できます。
+プロセッサの単純な接続は[XMLファイル](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)に記述できます。
 XMLの読み込み関しては[サンプルプログラム](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp)も参照してください。
 
 ### 開発環境
