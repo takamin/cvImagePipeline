@@ -21,9 +21,6 @@ namespace cvImagePipeline {
 			ImgProcThread();
 			~ImgProcThread();
 			
-			//画像処理の実行
-			void execute();
-			
 			//スレッドの開始
 			void startThread(int interval = 0);
 			

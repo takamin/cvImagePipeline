@@ -28,16 +28,6 @@ namespace cvImagePipeline {
 				WaitForSingleObject(thead_handle, INFINITE);
 				CloseHandle(eventHandle);
 			}
-			void ImgProcThread::execute() {
-				if (isEnable()) {
-					ImgProcSet::execute();
-					{
-						CriticalSection lock(*this);
-						threadShareInnerMat.execute();
-					}
-					SetEvent(eventHandle);
-				}
-			}
 			void ImgProcThread::EnterCriticalSection() {
 				::EnterCriticalSection(&cs);
 			}
@@ -70,16 +60,15 @@ namespace cvImagePipeline {
 #endif
 				clock_t t0 = clock();
 				while(processor->runProcessorThread) {
-					processor->execute();
-					if(processor->interval > 0) {
-						clock_t t1;
-						while((t1 = clock()) - t0 < processor->interval) {
-							Sleep(processor->interval / 10);
+					if (processor->isEnable()){
+						{
+							CriticalSection lock(*processor);
+							processor->execute();
+							processor->threadShareInnerMat.execute();
 						}
-						t0 = t1;
-					} else {
-						Sleep(0);
+						::SetEvent(processor->eventHandle);
 					}
+					Sleep(processor->interval);
 				}
 #ifdef _DEBUG
 				std::cerr << processor->getName() << " end." << std::endl;
