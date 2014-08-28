@@ -1,7 +1,7 @@
 <cvImagePipeline name="testProcessor">
-	<Processor class="VideoCapture" name="cap">
-		<Property name="deviceIndex" value="0"/>
-	</Processor>
+  <Processor class="VideoCapture" name="cap">
+    <Property name="deviceIndex" value="0"/>
+  </Processor>
   <Processor class="Flipper" name="fripHoriz">
     <Property name="flipDir" value="1"/>
   </Processor>
@@ -24,14 +24,17 @@
     <Property name="beta" value="0"/>
   </Processor>
   <Processor class="Threshold" name="binary">
-    <Property name="type" value="8"/>
+    <Property name="type" value="CV_THRESH_BINARY"/>
+    	<!--
+	CV_THRESH_BINARY
+	CV_THRESH_BINARY_INV
+	CV_THRESH_TRUNC
+	CV_THRESH_TOZERO
+	CV_THRESH_TOZERO_INV
+	-->
+    <Property name="otsu" value="1"/>
     <Property name="thresh" value="50"/>
     <Property name="maxval" value="255"/>
-    	<!--
-	CV_THRESH_BINARY(0)
-	CV_THRESH_BINARY_INV(1)
-	CV_THRESH_OTSU(8)
-	-->
   </Processor>
 
   <Processor class="FitInGrid" name="integratedImage" autoBind="false">
