@@ -49,6 +49,13 @@ namespace cvImagePipeline {
 				threadShareOutputMat[name].setInputMat(threadShareInnerMat[name].getOutputMat());
 				return *this;
 			}
+			ImgProcThread& ImgProcThread::defThreadShareOutputMat(const std::string& name, const cv::Mat& src) {
+				threadShareInnerMat.add("ImagePoint", name, false);
+				threadShareOutputMat.add("ImagePoint", name, false);
+				threadShareInnerMat[name].setInputMat(src);
+				threadShareOutputMat[name].setInputMat(threadShareInnerMat[name].getOutputMat());
+				return *this;
+			}
 			const cv::Mat& ImgProcThread::getThreadShareOutputMat(const std::string& name) const {
 				return ((ImgProcSet&)threadShareOutputMat)[name].getOutputMat();
 			}

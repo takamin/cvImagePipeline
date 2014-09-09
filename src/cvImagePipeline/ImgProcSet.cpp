@@ -84,6 +84,12 @@ namespace cvImagePipeline {
 			return *filter;
 		}
 		
+		//最後に追加されたプロセッサへの参照を返す
+		ImageProcessor& ImgProcSet::getLastProc() {
+			std::list<ImageProcessor*>::reverse_iterator last = procs.rbegin();
+			return *(*last);
+		}
+		
 		void ImgProcSet::execute()
 		{
 			if (isEnable()) {

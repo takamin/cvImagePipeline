@@ -28,6 +28,9 @@ namespace cvImagePipeline {
 			void execute();
 			bool loadXml(const std::string& filename);
 			virtual void putMarkdown(std::ostream& stream);
+		protected:
+			//最後に追加されたプロセッサへの参照を返す
+			ImageProcessor& getLastProc();
 		private:
 			void addProcessorByXmlNode(pugi::xml_node processor);
 			void setInputMatByXmlNode(ImageProcessor& imageProcessor, pugi::xml_node input);

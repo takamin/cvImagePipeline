@@ -32,6 +32,7 @@ namespace cvImagePipeline {
 
 			//スレッドセーフな出力画像の指定
 			ImgProcThread& defThreadShareOutputMat(const std::string& name, ImageProcessor& src);
+			ImgProcThread& defThreadShareOutputMat(const std::string& name, const cv::Mat& src);
 
 			//出力画像を更新
 			void updateThreadShareOutputMat();
