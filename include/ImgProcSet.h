@@ -24,7 +24,10 @@ namespace cvImagePipeline {
 			ImageProcessor& add(std::string filter_class_name, std::string filter_instance_name, bool autoBind = true);
 			ImageProcessor& add(ImageProcessor& proc, bool autoBind = true);
 			void setParam(std::string filter_instance_name, std::string parameter_name, int value);
-			ImageProcessor& operator[](std::string filter_instance_name);
+			ImageProcessor& operator[](const std::string& filter_instance_name);
+			const ImageProcessor& operator[](const std::string& filter_instance_name) const;
+			ImageProcessor& processor(const std::string& filter_instance_name);
+			const ImageProcessor& processor(const std::string& filter_instance_name) const;
 			void execute();
 			bool loadXml(const std::string& filename);
 			virtual void putMarkdown(std::ostream& stream);
@@ -35,5 +38,14 @@ namespace cvImagePipeline {
 			void addProcessorByXmlNode(pugi::xml_node processor);
 			void setInputMatByXmlNode(ImageProcessor& imageProcessor, pugi::xml_node input);
 		};
+		inline const ImageProcessor& ImgProcSet::operator[](const std::string& filter_instance_name) const {
+			return (*(ImgProcSet*)this)[filter_instance_name];
+		}
+		inline ImageProcessor& ImgProcSet::processor(const std::string& filter_instance_name) {
+			return (*this)[filter_instance_name];
+		}
+		inline const ImageProcessor& ImgProcSet::processor(const std::string& filter_instance_name) const {
+			return (*(ImgProcSet*)this)[filter_instance_name];
+		}
 	}
 }

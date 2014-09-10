@@ -70,7 +70,7 @@ namespace cvImagePipeline {
 			(*this)[filter_instance_name].property(parameter_name, value);
 		}
 		ImageProcessor& ImgProcSet::operator[](
-			std::string filter_instance_name)
+			const std::string& filter_instance_name)
 		{
 			ImageProcessor* filter = 0;
 			if(name_to_filter.count(filter_instance_name) > 0) {
