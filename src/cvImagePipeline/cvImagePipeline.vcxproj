@@ -121,6 +121,7 @@
     <ClCompile Include="MaskCopy.cpp" />
     <ClCompile Include="OpticalFlowPyrLK.cpp" />
     <ClCompile Include="pugixml-1.4\src\pugixml.cpp" />
+    <ClCompile Include="RegionOfInterest.cpp" />
     <ClCompile Include="Resizer.cpp" />
     <ClCompile Include="RunningAvg.cpp" />
     <ClCompile Include="SubMat.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="..\..\include\OpticalFlowPyrLK.h" />
     <ClInclude Include="..\..\include\pugiconfig.hpp" />
     <ClInclude Include="..\..\include\pugixml.hpp" />
+    <ClInclude Include="..\..\include\RegionOfInterest.h" />
     <ClInclude Include="..\..\include\Resizer.h" />
     <ClInclude Include="..\..\include\RunningAvg.h" />
     <ClInclude Include="..\..\include\SubMat.h" />

@@ -19,6 +19,7 @@
 #include "Threshold.h"
 #include "Dilate.h"
 #include "Erode.h"
+#include "RegionOfInterest.h"
 #include "RunningAvg.h"
 #include "FitInGrid.h"
 #include "ImgProcThread.h"
