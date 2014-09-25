@@ -20,7 +20,7 @@ namespace cvImagePipeline {
 				runProcessorThread = true;
 				this->interval = interval;
 				thead_handle = ::CreateThread(0,0,
-					(LPTHREAD_START_ROUTINE)ImgProcThread::Thread,(LPVOID)this,
+					ImgProcThread::Thread, this,
 					0,NULL);
 			}
 			void ImgProcThread::stopThread() {
@@ -60,7 +60,7 @@ namespace cvImagePipeline {
 				return ((ImgProcSet&)threadShareOutputMat)[name].getOutputMat();
 			}
 
-			DWORD WINAPI ImgProcThread::Thread(LPVOID *data) {
+			DWORD WINAPI ImgProcThread::Thread(LPVOID data) {
 				ImgProcThread* processor = (ImgProcThread*)data;
 #ifdef _DEBUG
 				std::cerr << processor->getName() << " started." << std::endl;

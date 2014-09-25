@@ -80,7 +80,7 @@ namespace cvImagePipeline {
 			void LeaveCriticalSection();
 			
 			//サブスレッドのルート
-			static DWORD WINAPI Thread(LPVOID *data);
+			static DWORD WINAPI Thread(LPVOID data);
 
 		};
 	}
