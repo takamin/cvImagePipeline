@@ -66,8 +66,13 @@ namespace cvImagePipeline {
 				std::cerr << processor->getName() << " started." << std::endl;
 #endif
 				clock_t sleep_time = 0;
-				while(processor->runProcessorThread) {
-					clock_t t0 = clock();
+				long run_counter = 0;
+				clock_t t0 = clock();
+				while (processor->runProcessorThread) {
+					if (run_counter > 0x7ffffff0) {
+						run_counter = 0;
+						t0 = clock();
+					}
 					if (processor->isEnable()){
 						{
 							CriticalSection lock(*processor);
@@ -76,7 +81,7 @@ namespace cvImagePipeline {
 						}
 						::SetEvent(processor->eventHandle);
 					}
-					sleep_time += processor->interval - (clock() - t0);
+					sleep_time += ((t0 + ++run_counter * processor->interval) - clock());
 					if (sleep_time >= 0) {
 						Sleep(sleep_time);
 						sleep_time = 0;
@@ -84,9 +89,6 @@ namespace cvImagePipeline {
 					else {
 						Sleep(1);
 						sleep_time -= 1;
-						if (sleep_time < processor->interval) {
-							std::cerr << "thread overrun. " << processor->getName() << std::endl;
-						}
 					}
 				}
 #ifdef _DEBUG
