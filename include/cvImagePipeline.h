@@ -21,6 +21,7 @@
 #include "Erode.h"
 #include "RegionOfInterest.h"
 #include "RunningAvg.h"
+#include "SuperImpose.h"
 #include "FitInGrid.h"
 #include "ImgProcThread.h"
 

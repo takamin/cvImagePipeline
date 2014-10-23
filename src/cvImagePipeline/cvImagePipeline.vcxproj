@@ -125,6 +125,7 @@
     <ClCompile Include="Resizer.cpp" />
     <ClCompile Include="RunningAvg.cpp" />
     <ClCompile Include="SubMat.cpp" />
+    <ClCompile Include="SuperImpose.cpp" />
     <ClCompile Include="Threshold.cpp" />
     <ClCompile Include="TrackingObject.cpp" />
     <ClCompile Include="OpticalFlowFarneback.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="..\..\include\Resizer.h" />
     <ClInclude Include="..\..\include\RunningAvg.h" />
     <ClInclude Include="..\..\include\SubMat.h" />
+    <ClInclude Include="..\..\include\SuperImpose.h" />
     <ClInclude Include="..\..\include\Threshold.h" />
     <ClInclude Include="..\..\include\VideoCapture.h" />
     <ClInclude Include="pugixml-1.4\src\pugiconfig.hpp" />
