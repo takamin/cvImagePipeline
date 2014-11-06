@@ -12,35 +12,43 @@ __入出力の自由な接続__
 この接続は、実行時にも変更可能です。
 
 __拡張可能__  
-いくつかの汎用的な（単純な）画像処理プロセッサは[実装済み](#processor)ですが、足りないものはユーザー独自に作成可能です。
+いくつかの汎用的な（単純な）画像処理プロセッサは[実装済み](#processor)です。
+新たなプロセッサが必要になれば、自由に追加できます。
 
 __階層化・モジュール化__  
-接続された一連の画像処理もまた、画像処理プロセッサであるため、画像処理の階層化、モジュール化が簡単に可能です。
+接続された一連の画像処理もまた、画像処理プロセッサであるため、画像処理をモジュール化できます。
 
 __XMLファイルからの入力__  
 プロセッサの単純な接続は[XMLファイル](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)に記述できます。
-XMLの読み込み関しては[サンプルプログラム](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp)も参照してください。
+([サンプルプログラム](#sample)参照)
 
 ### 開発環境
 
 * 出力ターゲット Win32 DLL
 * 統合開発環境 VisualStudio Express 2010 for Windows Desktop
 * プラットフォーム Win32(x86)
-* OpenCV 2.4.8とリンクします。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
-* 実行時には c:\opencv\build\x86\vc12\bin にPATHを通す必要があります。
+* OpenCV 2.4が必要です。2.4.8/2.4.9/2.4.10で動作を確認しています。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
 * xmlパーサーとして、[pugixml-1.4](http://pugixml.org/)を利用しています。
-* [capture.cpp](https://github.com/takamin/cvImagePipeline/blob/master/sample/capture.cpp).
 
 
 ### ビルド方法
 
-CMakeLists.txtは、VisualStudio2010で動作を確認しています。
+cmakeを使用してください。VisualStudio2010で動作を確認しています。
 
 ```
 mkdir build
 cd build
 cmake -D OpenCV_DIR='path/to/opencv' ..
 ```
+
+### <a name="sample"></a>サンプルプログラム
+
+[XMLファイル](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)
+を読み込んでカメラ画像を表示する
+[サンプルプログラム](https://github.com/takamin/cvImageBlock/blob/master/sample/capture.cpp)です。
+
+`$ sample `[`sample.xml`](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)
+
 
 ## 詳細説明
 
@@ -91,7 +99,7 @@ cmake -D OpenCV_DIR='path/to/opencv' ..
 ### 画像処理プロセッサセット
 
 任意の複数の画像処理プロセッサを保持し、順次処理を行うプロセッサです。
-⇒[`ImgProcSet`クラス]((https://github.com/takamin/cvImageBlock/blob/master/include/ImgProcSet.h))です。
+⇒[`ImgProcSet`クラス](https://github.com/takamin/cvImageBlock/blob/master/include/ImgProcSet.h)です。
 
 内部に保持するプロセッサ間の接続を切り替え可能。
 
