@@ -24,7 +24,7 @@ XMLの読み込み関しては[サンプルプログラム](https://github.com/t
 ### 開発環境
 
 * 出力ターゲット Win32 DLL
-* 統合開発環境 VisualStudio Express 2013 for Windows Desktop
+* 統合開発環境 VisualStudio Express 2010 for Windows Desktop
 * プラットフォーム Win32(x86)
 * OpenCV 2.4.8とリンクします。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
 * 実行時には c:\opencv\build\x86\vc12\bin にPATHを通す必要があります。
