@@ -3,7 +3,6 @@
 #include <list>
 #include <vector>
 #include <string>
-#include <opencv.hpp>
 #include "ImageProcessor.h"
 #include "../src/cvImagePipeline/pugixml-1.4/src/pugixml.hpp"
 #pragma warning(disable:4251)

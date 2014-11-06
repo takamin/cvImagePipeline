@@ -112,9 +112,6 @@ bool testProcessor(ImageProcessor* proc) {
 void testRunningAvg(std::string processorClassName, test_counter& counter);
 int _tmain(int argc, _TCHAR* argv[])
 {
-	bool test_Convert();
-	test_Convert();
-
 	test_counter counter;
 
 	ImgProcSet imgProcSet;

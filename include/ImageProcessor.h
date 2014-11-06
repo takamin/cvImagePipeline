@@ -6,7 +6,7 @@
 #include <sstream>
 #include <string>
 
-#include <opencv.hpp>
+#include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
 #include "../src/cvImagePipeline/pugixml-1.4/src/pugixml.hpp"

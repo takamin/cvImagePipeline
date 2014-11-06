@@ -34,9 +34,13 @@ XMLの読み込み関しては[サンプルプログラム](https://github.com/t
 
 ### ビルド方法
 
-ビルドは [src/cvImagePipeline](https://github.com/takamin/cvImageBlock/blob/master/src)のソリューションで行います。
+CMakeLists.txtは、VisualStudio2010で動作を確認しています。
 
-CMake用に、CMakeLists.txtを記述していますが、正常動作不明です。
+```
+mkdir build
+cd build
+cmake -D OpenCV_DIR='path/to/opencv' ..
+```
 
 ## 詳細説明
 
