@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include "ImageProcessor.h"
-#include "../src/cvImagePipeline/pugixml-1.4/src/pugixml.hpp"
 #pragma warning(disable:4251)
 namespace cvImagePipeline {
 	namespace Filter {
