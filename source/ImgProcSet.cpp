@@ -43,7 +43,11 @@ namespace cvImagePipeline {
 				std::cerr << "ImageProcessor \"" << filter_class_name << "\" is not exist in "
 					<< getName() << " instance of class " << std::string(typeid(*this).name()) << "."
 					<< std::endl;
-				throw new std::exception("ProcessorNotFound");
+#if defined(_MSC_VER)
+				throw new std::exception("PropertyNotFound");
+#else
+                throw new std::runtime_error("PropertyNotFound");
+#endif
 			}
 			return *filter;
 		}
@@ -79,12 +83,15 @@ namespace cvImagePipeline {
 				std::cerr << "ImageProcessor named \"" << filter_instance_name << "\" is not exist in "
 					<< getName() << " instance of class " << std::string(typeid(*this).name()) << "."
 					<< std::endl;
+#if defined(_MSC_VER)
 				throw new std::exception("ProcessorInstanceNotFound");
+#else
+                throw new std::runtime_error("ProcessorInstanceNotFound");
+#endif
 			}
 			return *filter;
 		}
 		
-		//最後に追加されたプロセッサへの参照を返す
 		ImageProcessor& ImgProcSet::getLastProc() {
 			std::list<ImageProcessor*>::reverse_iterator last = procs.rbegin();
 			return *(*last);

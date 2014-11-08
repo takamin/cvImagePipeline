@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <opencv2/opencv.hpp>
+#include "ImageProcessor.h"
 #include "LabeledObject.h"
 #pragma warning(disable:4251)
 

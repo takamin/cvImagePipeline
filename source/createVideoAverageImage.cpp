@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include "ImageDataPtr.h"
+#include "ImageProcessor.h"
 namespace cvImagePipeline {
 	SHARED 
 	IplImage* createVideoAverageImage(CvCapture* capture) {

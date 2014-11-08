@@ -1,6 +1,7 @@
 #pragma once
 #include <opencv2/opencv.hpp>
 #include "Labeling.h"
+#include "ImageProcessor.h"
 namespace cvImagePipeline {
 	#pragma warning(disable:4251)
 	struct SHARED LabeledObject {

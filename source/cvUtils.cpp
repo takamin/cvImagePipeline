@@ -2,6 +2,7 @@
 #include <sstream>
 #include <opencv2/opencv.hpp>
 #include <opencv2/nonfree/nonfree.hpp>
+#include "ImageProcessor.h"
 
 BOOL WINAPI DllMain( HINSTANCE hDLL, DWORD dwReason, LPVOID lpReserved)
 {

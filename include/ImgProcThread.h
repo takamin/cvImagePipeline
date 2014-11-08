@@ -49,8 +49,10 @@ namespace cvImagePipeline {
 				return getThreadShareOutputMat(name);
 			}
 		private:
-			
+#if defined(_MSC_VER)
 			CRITICAL_SECTION cs;
+#else
+#endif
 
 			//processor that composit thread-share output images
 			ImgProcSet threadShareInnerMat;

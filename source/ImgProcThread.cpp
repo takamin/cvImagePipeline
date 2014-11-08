@@ -9,10 +9,16 @@ namespace cvImagePipeline {
 			: runProcessorThread(false), thead_handle(INVALID_HANDLE_VALUE), interval(0),
 				eventHandle(INVALID_HANDLE_VALUE)
 			{
+#if defined(_MSC_VER)
 				::InitializeCriticalSection(&cs);
+#else
+#endif
 			}
 			ImgProcThread::~ImgProcThread() {
+#if defined(_MSC_VER)
 				::DeleteCriticalSection(&cs);
+#else
+#endif
 			}
 
 			void ImgProcThread::startThread(int interval /* = 0 */) {
@@ -29,10 +35,16 @@ namespace cvImagePipeline {
 				CloseHandle(eventHandle);
 			}
 			void ImgProcThread::EnterCriticalSection() {
+#if defined(_MSC_VER)
 				::EnterCriticalSection(&cs);
+#else
+#endif
 			}
 			void ImgProcThread::LeaveCriticalSection() {
+#if defined(_MSC_VER)
 				::LeaveCriticalSection(&cs);
+#else
+#endif
 			}
 			bool ImgProcThread::WaitEvent(DWORD timeout) {
 				DWORD waitResult = WaitForSingleObject(eventHandle, timeout);
