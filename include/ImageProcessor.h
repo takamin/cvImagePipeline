@@ -96,7 +96,6 @@ namespace cvImagePipeline {
 			}
 		};
 
-		//ImageProcessorの派生クラスのインスタンスをクラス名から生成するための定義
 		class ImageProcessor;
 		typedef ImageProcessor*(*FILTER_FACTORY)();
 		#define DECLARE_CVFILTER \
@@ -111,7 +110,6 @@ namespace cvImagePipeline {
 
 		template<class T, void func()> class InitialCallback { public: InitialCallback() { func(); } };
 		
-		//イメージプロセッサ
 		class SHARED ImageProcessor {
 		public:
 			struct FilterInput {
@@ -184,13 +182,10 @@ namespace cvImagePipeline {
 			static ImageProcessor* createFilter(std::string name);
 			static void entryFilter(std::string name, FILTER_FACTORY creator);
 
-			//処理の有効化フラグ。効果の有無はサブクラスの実装依存
 		private:
-			bool enable;//コンストラクタでtrueに初期化。
+			bool enable;
 		public:
-			//設定
 			virtual void setEnable(bool enable) { this->enable = enable; }
-			//取得
 			bool isEnable() const { return enable; }
 		};
 	}

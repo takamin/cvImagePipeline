@@ -22,17 +22,26 @@ namespace cvImagePipeline {
 			}
 
 			void ImgProcThread::startThread(int interval /* = 0 */) {
+#if defined(_MSC_VER)
 				eventHandle = CreateEvent(NULL, false, false, getName().c_str());
+#else
+#endif
 				runProcessorThread = true;
 				this->interval = interval;
+#if defined(_MSC_VER)
 				thead_handle = ::CreateThread(0,0,
 					ImgProcThread::Thread, this,
 					0,NULL);
+#else
+#endif
 			}
 			void ImgProcThread::stopThread() {
 				runProcessorThread = false;
+#if defined(_MSC_VER)
 				WaitForSingleObject(thead_handle, INFINITE);
 				CloseHandle(eventHandle);
+#else
+#endif
 			}
 			void ImgProcThread::EnterCriticalSection() {
 #if defined(_MSC_VER)
@@ -47,8 +56,12 @@ namespace cvImagePipeline {
 #endif
 			}
 			bool ImgProcThread::WaitEvent(DWORD timeout) {
+#if defined(_MSC_VER)
 				DWORD waitResult = WaitForSingleObject(eventHandle, timeout);
 				return (waitResult == WAIT_OBJECT_0);
+#else
+                return true;
+#endif
 			}
 			void ImgProcThread::updateThreadShareOutputMat() {
 				CriticalSection lock(*this);
@@ -91,15 +104,24 @@ namespace cvImagePipeline {
 							processor->execute();
 							processor->threadShareInnerMat.execute();
 						}
+#if defined(_MSC_VER)
 						::SetEvent(processor->eventHandle);
+#else
+#endif
 					}
 					sleep_time += ((t0 + ++run_counter * processor->interval) - clock());
 					if (sleep_time >= 0) {
+#if defined(_MSC_VER)
 						Sleep(sleep_time);
+#else
+#endif
 						sleep_time = 0;
 					}
 					else {
+#if defined(_MSC_VER)
 						Sleep(1);
+#else
+#endif
 						sleep_time -= 1;
 					}
 				}

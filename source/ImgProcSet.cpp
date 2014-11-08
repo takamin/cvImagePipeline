@@ -1,6 +1,9 @@
 #include "ImgProcSet.h"
 #include <typeinfo>
 #include <time.h>
+#if !defined(_MSC_VER)
+#include <stdexcept>
+#endif
 using namespace std;
 
 namespace cvImagePipeline {
@@ -217,7 +220,9 @@ namespace cvImagePipeline {
 			cerr << "[ImageProcessor::setInputMatByXmlNode]    " << "Input "
 				<< "from \"" << srcProcName << "\", to " << dstInMatName << endl;
 #endif
-			(*this)[srcProcName] >> imageProcessor.input(dstInMatName);
+            FilterInput fi = imageProcessor.input(dstInMatName);
+			(*this)[srcProcName] >> fi;
+			//(*this)[srcProcName] >> imageProcessor.input(dstInMatName);
 		}
 
 		void ImageProcessor::setPropertyByXmlNode(xml_node property) {

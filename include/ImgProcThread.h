@@ -1,5 +1,14 @@
 #pragma once
+#if defined(_MSC_VER)
 #include <windows.h>
+#else
+typedef unsigned long DWORD;
+typedef void* LPVOID;
+typedef DWORD HANDLE;
+#define WINAPI
+#define INFINITE ((DWORD)-1)
+#define INVALID_HANDLE_VALUE ((DWORD)-1)
+#endif
 #include "ImgProcSet.h"
 namespace cvImagePipeline {
 	namespace Filter {
@@ -42,7 +51,7 @@ namespace cvImagePipeline {
 				defThreadShareOutputMat(name, src);
 			}
 			//update output images
-			void ImgProcThread::updateSharedOutputMat() { updateThreadShareOutputMat(); }
+			void updateSharedOutputMat() { updateThreadShareOutputMat(); }
 			
 			//get ref to output image
 			const cv::Mat& refThreadShareOutput(const std::string& name) const {
