@@ -1,14 +1,21 @@
+#if defined(_MSC_VER)
 #include <windows.h>
+#endif
+#include <stdio.h>
 #include <sstream>
 #include <opencv2/opencv.hpp>
+#if defined(_MSC_VER)
 #include <opencv2/nonfree/nonfree.hpp>
+#endif
 #include "ImageProcessor.h"
 
+#if defined(_MSC_VER)
 BOOL WINAPI DllMain( HINSTANCE hDLL, DWORD dwReason, LPVOID lpReserved)
 {
 	cv::initModule_nonfree(); 
 	return TRUE;
 }
+#endif
 
 namespace cvImagePipeline {
 	SHARED

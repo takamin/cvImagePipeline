@@ -1,6 +1,8 @@
 #include "LabeledObject.h"
 #include <opencv2/features2d/features2d.hpp>
+#if defined(_MSC_VER)
 #include <opencv2/nonfree/nonfree.hpp>
+#endif
 #include <ctime>
 
 using namespace std;

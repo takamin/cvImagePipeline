@@ -110,7 +110,11 @@ bool testProcessor(ImageProcessor* proc) {
 
 
 void testRunningAvg(std::string processorClassName, test_counter& counter);
+#if defined(_MSC_VER)
 int _tmain(int argc, _TCHAR* argv[])
+#else
+int main(int argc, char* argv[])
+#endif
 {
 	test_counter counter;
 

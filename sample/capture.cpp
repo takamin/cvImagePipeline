@@ -1,12 +1,21 @@
 ﻿#include "stdafx.h"
+#if defined(_MSC_VER)
 #include <windows.h>
+#else
+#include <unistd.h>
+#define Sleep(millisec) usleep(millisec * 1000)
+#endif
 #include <opencv2/opencv.hpp>
 #include "cvImagePipeline.h"
 
 using namespace cvImagePipeline;
 using namespace cvImagePipeline::Filter;
 
+#if defined(_MSC_VER)
 int _tmain(int argc, _TCHAR* argv[])
+#else
+int main(int argc, char* argv[])
+#endif
 {
 	cvInitSystem(argc, argv);
 	ImgProcSet processors;

@@ -1,3 +1,6 @@
+#if !defined(_MSC_VER)
+#include <unistd.h>
+#endif
 #include "VideoCapture.h"
 using namespace std;
 namespace cvImagePipeline {
@@ -24,7 +27,7 @@ namespace cvImagePipeline {
 			defParam(height);
 			defParam(captureStart);
 			defParam(captureEmpty);
-			setInputMatDesc("", "‚±‚Ì“ü—Í‰æ‘œ‚ÍŽg—p‚³‚ê‚Ü‚¹‚ñ");
+			setInputMatDesc("", "");
 		}
 		VideoCapture::~VideoCapture() { }
 		bool VideoCapture::open(int deviceIndex)
@@ -69,7 +72,11 @@ namespace cvImagePipeline {
 				do {
 					videoCapture >> mat;
 					frameNumber++;
+#if defined(_MSC_VER)
 					_sleep(10);
+#else
+					usleep(10 * 1000);
+#endif
 				} while (mat.empty());
 				captureStart = true;
 				captureEmpty = false;

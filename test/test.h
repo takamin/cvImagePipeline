@@ -5,7 +5,7 @@ struct test_counter {
 	int test_count;
 	int pass_count;
 	int fail_count;
-	static int test_counter::types[];
+	static int types[];
 	static cv::Mat mat[];
 	static int typesCount();
 	static int matCount();
