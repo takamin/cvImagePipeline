@@ -201,14 +201,14 @@ namespace cvImagePipeline {
 						else {
 							std::cerr << "ImageProcessor::createFilter("
 								<< name << ") " << typeid(*filter).name()
-								<< "を生成しました。" << std::endl;
+								<< " created." << std::endl;
 						}
 #endif
 						return filter;
 					} else {
 #ifdef _DEBUG
 						std::cerr << "ImageProcessor::createFilter("
-							<< name << ") 生成失敗。ファクトリがnull."
+							<< name << ") fail to create. NULL factory."
 							<< std::endl;
 #endif
 						return 0;
@@ -222,7 +222,7 @@ namespace cvImagePipeline {
 		void ImageProcessor::entryFilter(std::string name, FILTER_FACTORY creator) {
 			if(Factory::table == 0) {
 #ifdef _DEBUG
-				std::cerr << "ファクトリテーブル生成" << std::endl;
+				std::cerr << "create factory table" << std::endl;
 #endif
 				Factory::table = new Factory[Factory::tableSize];
 			}
@@ -237,7 +237,7 @@ namespace cvImagePipeline {
 					entry.creator = creator;
 #ifdef _DEBUG
 					std::cerr << "[" << i << "] ImageProcessor::entryFilter("
-						<< name << ") ファクトリ登録" << std::endl;
+						<< name << ") factory entried" << std::endl;
 #endif
 					return;
 				}
@@ -280,7 +280,7 @@ namespace cvImagePipeline {
 			for(; mapEntry != inputMat.end(); mapEntry++) {
 				MapMat::key_type name = mapEntry->first;
 				MapMat::mapped_type pMap = mapEntry->second;
-				string inputDescription = " - 入力画像";
+				string inputDescription = " - input image";
 				if (inputMatDescription.count(name) > 0) {
 					inputDescription = inputMatDescription.at(name);
 					if (inputDescription != "") {
