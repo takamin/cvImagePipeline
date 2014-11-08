@@ -2,6 +2,9 @@
 #include <typeinfo>
 #include <time.h>
 #include <sstream>
+#if !defined(_MSC_VER)
+#include <stdexcept>
+#endif
 using namespace std;
 namespace cvImagePipeline {
 	namespace Filter {
@@ -251,7 +254,11 @@ namespace cvImagePipeline {
 				std::cerr << "property \"" << name << "\" not exists in "
 					<< name << " instance of class " << std::string(typeid(*this).name()) << "."
 					<< std::endl;
+#if defined(_MSC_VER)
 				throw new std::exception("PropertyNotFound");
+#else
+                throw new std::runtime_error("PropertyNotFound");
+#endif
 			}
 			return true;
 		}
@@ -261,7 +268,11 @@ namespace cvImagePipeline {
 				std::cerr << "input mat \"" << name << "\" not exists in "
 					<< name << " instance of class " << std::string(typeid(*this).name()) << "."
 					<< std::endl;
+#if defined(_MSC_VER)
 				throw new std::exception("InputMatNotFound");
+#else
+                throw new std::runtime_error("InputMatNotFound");
+#endif
 			}
 			return true;
 		}
