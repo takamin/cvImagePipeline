@@ -75,7 +75,7 @@ namespace cvImagePipeline {
 					break;
 				}
 			}
-			hash_map<std::string, std::string>::iterator desc = inputMatDescription.begin();
+			map<std::string, std::string>::iterator desc = inputMatDescription.begin();
 			for (; desc != inputMatDescription.end(); desc++) {
 				if (desc->first == name) {
 					inputMatDescription.erase(desc);

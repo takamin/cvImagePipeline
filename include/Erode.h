@@ -2,7 +2,7 @@
 #include "ImageProcessor.h"
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) Erode : public ImageProcessor
+		class SHARED Erode : public ImageProcessor
 		{
 		public:
 			DECLARE_CVFILTER;

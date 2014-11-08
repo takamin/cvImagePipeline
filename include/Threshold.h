@@ -2,7 +2,7 @@
 #include "ImageProcessor.h"
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) Threshold : public ImageProcessor
+		class SHARED Threshold : public ImageProcessor
 		{
 		public:
 			enum Type {

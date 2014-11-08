@@ -9,7 +9,7 @@
 
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) FeatureTracker : public ImageProcessor {
+		class SHARED FeatureTracker : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 			FeatureTracker();
@@ -17,7 +17,7 @@ namespace cvImagePipeline {
 			virtual void execute();
 		public:
 			//input buffer in labeling by feature
-			class  __declspec(dllexport) Buffer : public Labeler::Buffer {
+			class  SHARED Buffer : public Labeler::Buffer {
 			public:
 				void setFeature(
 					int cols, int rows,

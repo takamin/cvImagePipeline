@@ -1,5 +1,5 @@
 #pragma once
-#include <hash_map>
+#include <map>
 #include <list>
 #include <vector>
 #include <string>
@@ -7,14 +7,14 @@
 #pragma warning(disable:4251)
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) ImgProcSet : public ImageProcessor
+		class SHARED ImgProcSet : public ImageProcessor
 		{
 		public:
 			DECLARE_CVFILTER;
 		private:
 			std::list<ImageProcessor*> procs;
 			std::vector<ImageProcessor*> dyn_filters;
-			std::hash_map<std::string, ImageProcessor*> name_to_filter;
+			std::map<std::string, ImageProcessor*> name_to_filter;
 			const ImageProcessor* lastAutoProcessor;
 		public:
 			ImgProcSet();

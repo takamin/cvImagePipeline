@@ -17,7 +17,7 @@ namespace cvImagePipeline {
 		 * `buffer_count` is incremented to property `averageCount`
 		 *
 		 */
-		class __declspec(dllexport) RunningAvg : public ImageProcessor
+		class SHARED RunningAvg : public ImageProcessor
 		{
 		public:
 			DECLARE_CVFILTER;

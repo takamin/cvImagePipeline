@@ -5,7 +5,7 @@ namespace cvImagePipeline {
 	namespace Filter {
 
 		// Threading processor
-		class __declspec(dllexport) ImgProcThread : public ImgProcSet {
+		class SHARED ImgProcThread : public ImgProcSet {
 		public:
 			DECLARE_CVFILTER;
 

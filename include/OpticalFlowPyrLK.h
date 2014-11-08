@@ -7,7 +7,7 @@ namespace cvImagePipeline {
 
 		#pragma warning(disable:4251)
 		///PyrLKで疎なオプティカルフローを計算する
-		class __declspec(dllexport) OpticalFlowPyrLK : public ImageProcessor {
+		class SHARED OpticalFlowPyrLK : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 		private:

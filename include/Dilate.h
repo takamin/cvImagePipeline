@@ -2,7 +2,7 @@
 #include "ImageProcessor.h"
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) Dilate : public ImageProcessor
+		class SHARED Dilate : public ImageProcessor
 		{
 		public:
 			DECLARE_CVFILTER;

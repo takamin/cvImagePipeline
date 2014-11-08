@@ -2,7 +2,7 @@
 #include "ImageProcessor.h"
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) VideoCapture : public ImageProcessor {
+		class SHARED VideoCapture : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 			TParam<int> deviceIndex;

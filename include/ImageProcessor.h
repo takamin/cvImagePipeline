@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <hash_map>
 #include <list>
 #include <map>
 #include <sstream>
@@ -13,11 +12,27 @@
 
 #pragma warning(disable:4251)
 
+#if defined(_MSC_VER)
+    //  Microsoft 
+    #define EXPORT __declspec(dllexport)
+    #define IMPORT __declspec(dllimport)
+#elif defined(_GCC)
+    //  GCC
+    #define EXPORT __attribute__((visibility("default")))
+    #define IMPORT
+#else
+    //  do nothing and hope for the best?
+    #define EXPORT
+    #define IMPORT
+    #pragma warning Unknown dynamic link import/export semantics.
+#endif
+#define SHARED EXPORT
+
 namespace cvImagePipeline {
 	namespace Filter {
 
 		//property for ImageProcessor
-		class __declspec(dllexport) Property {
+		class SHARED Property {
 			std::string name;
 		protected:
 			Property(std::string name) : name(name) {}
@@ -28,9 +43,9 @@ namespace cvImagePipeline {
 		};
 
 		//property set
-		typedef std::hash_map<std::string, Property*> PropNameMap;
+		typedef std::map<std::string, Property*> PropNameMap;
 		typedef std::list<Property*> PropList;
-		class __declspec(dllexport) PropSet
+		class SHARED PropSet
 		{
 			PropNameMap namedValueMap;
 			PropList namedValueList;
@@ -57,7 +72,7 @@ namespace cvImagePipeline {
 		};
 
 		//primitive property template
-		template<class ValueType> class __declspec(dllexport) TParam : public Property
+		template<class ValueType> class SHARED TParam : public Property
 		{
 			ValueType value;
 		public:
@@ -97,7 +112,7 @@ namespace cvImagePipeline {
 		template<class T, void func()> class InitialCallback { public: InitialCallback() { func(); } };
 		
 		//イメージプロセッサ
-		class __declspec(dllexport) ImageProcessor {
+		class SHARED ImageProcessor {
 		public:
 			struct FilterInput {
 				ImageProcessor* filter;
@@ -146,12 +161,12 @@ namespace cvImagePipeline {
 			void setPropertyByXmlNode(pugi::xml_node property);
 			virtual void putMarkdown(std::ostream& stream) const;
 		private:
-			typedef std::hash_map<std::string, const cv::Mat*> MapMat;
+			typedef std::map<std::string, const cv::Mat*> MapMat;
 			std::string name;
 			std::string description;
 			PropSet parameters;
 			MapMat inputMat;
-			std::hash_map<std::string, std::string> inputMatDescription;
+			std::map<std::string, std::string> inputMatDescription;
 			cv::Mat outputMat;
 			struct Factory {
 				std::string name;

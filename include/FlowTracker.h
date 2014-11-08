@@ -8,10 +8,10 @@
 
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) FlowTracker : public ImageProcessor {
+		class SHARED FlowTracker : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
-			class  __declspec(dllexport) Buffer : public Labeler::Buffer {
+			class  SHARED Buffer : public Labeler::Buffer {
 			public:
 				void drawFlow(const cv::Mat& flow, cv::Mat& dst, double labeling_vec_thrs);
 				void setFlow(const cv::Mat& flow, double labeling_vec_thrs);

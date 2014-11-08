@@ -1,6 +1,7 @@
 #pragma once
+#if defined(_MSC_VER)
 #include <Windows.h>
-#include <hash_map>
+#endif
 #include "ImageProcessor.h"
 #define GMG 0
 #define MOG 1
@@ -8,9 +9,11 @@
 #define _BackgroundSubtractor_ALG MOG
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) BackgroundSubtractor : public ImageProcessor
+		class SHARED BackgroundSubtractor : public ImageProcessor
 		{
+#if defined(_MSC_VER)
 			CRITICAL_SECTION cs;
+#endif
 		public:
 			DECLARE_CVFILTER;
 			enum Algorithm { AlgorithmGMG = GMG, AlgorithmMOG = MOG, AlgorithmMOG2 = MOG2 };
@@ -39,10 +42,10 @@ namespace cvImagePipeline {
 		};
 	}
 }
-__declspec(dllexport) std::istringstream& operator >> (
+SHARED std::istringstream& operator >> (
 	std::istringstream& is,
 	cvImagePipeline::Filter::BackgroundSubtractor::Algorithm& value);
-__declspec(dllexport) std::stringstream& operator << (
+SHARED std::stringstream& operator << (
 	std::stringstream& ss, 
 	const cvImagePipeline::Filter::BackgroundSubtractor::Algorithm& value);
 

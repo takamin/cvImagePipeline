@@ -5,7 +5,7 @@
 #pragma warning(disable:4251)
 
 namespace cvImagePipeline {
-	struct __declspec(dllexport) TrackingObject {
+	struct SHARED TrackingObject {
 		LabeledObject state;
 
 		int life;
@@ -86,4 +86,4 @@ namespace cvImagePipeline {
 	};
 	#pragma warning(default:4251)
 }
- __declspec(dllexport) std::ostream& operator << (std::ostream&, const cvImagePipeline::TrackingObject& trackingObject);
+ SHARED std::ostream& operator << (std::ostream&, const cvImagePipeline::TrackingObject& trackingObject);

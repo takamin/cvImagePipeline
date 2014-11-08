@@ -8,7 +8,7 @@
 
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) FeatureMatcher : public ImageProcessor
+		class SHARED FeatureMatcher : public ImageProcessor
 		{
 		public:
 			DECLARE_CVFILTER;

@@ -12,19 +12,25 @@ namespace cvImagePipeline {
 			defParam(algorithm);
 			defParam(averageCount);
 			defParam(MOG2_shadowDetection);
+#if defined(_MSC_VER)
 			::InitializeCriticalSection(&cs);
+#endif
 		}
 
 		BackgroundSubtractor::~BackgroundSubtractor()
 		{
+#if defined(_MSC_VER)
 			::DeleteCriticalSection(&cs);
+#endif
 			shutdown();
 		}
 
 		void BackgroundSubtractor::execute() {
 			const cv::Mat& frame = getInputMat();
 			if (!frame.empty()) {
+#if defined(_MSC_VER)
 				::EnterCriticalSection(&cs);
+#endif
 				if (buffer_count < averageCount) {
 					buffer_count++;
 				}
@@ -34,14 +40,20 @@ namespace cvImagePipeline {
 				cv::Mat& mask = refOutputMat();
 				(this->*executeAlgorithm)(frame, mask);
 				backgroundSubtractor->getBackgroundImage(backgroundImage);
+#if defined(_MSC_VER)
 				::LeaveCriticalSection(&cs);
+#endif
 			}
 		}
 		void BackgroundSubtractor::reset() {
+#if defined(_MSC_VER)
 			::EnterCriticalSection(&cs);
+#endif
 			shutdown();
 			create();
+#if defined(_MSC_VER)
 			::LeaveCriticalSection(&cs);
+#endif
 		}
 		const cv::Mat& BackgroundSubtractor::getBackgroundImage() const {
 			return backgroundImage;

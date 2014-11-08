@@ -2,7 +2,7 @@
 #include "ImageProcessor.h"
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) SuperImpose : public ImageProcessor {
+		class SHARED SuperImpose : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 			TParam<int> left;

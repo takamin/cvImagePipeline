@@ -2,7 +2,7 @@
 #include "ImageProcessor.h"
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) Resizer : public ImageProcessor {
+		class SHARED Resizer : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 			TParam<int> width;

@@ -1,7 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include "ImageDataPtr.h"
 namespace cvImagePipeline {
-	__declspec(dllexport) 
+	SHARED 
 	IplImage* createVideoAverageImage(CvCapture* capture) {
 		CvSize frameSize;
 		frameSize.width = (int)cvGetCaptureProperty(capture, CV_CAP_PROP_FRAME_WIDTH);

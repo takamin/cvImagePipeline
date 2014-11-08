@@ -8,7 +8,7 @@ namespace cvImagePipeline {
 		#pragma warning(disable:4251)
 
 		///Farnebackのアルゴリズムで密なオプティカルフローを計算する
-		class __declspec(dllexport) OpticalFlowFarneback : public ImageProcessor {
+		class SHARED OpticalFlowFarneback : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 		private:
@@ -29,7 +29,7 @@ namespace cvImagePipeline {
 			void calc(const cv::Mat& prev, const cv::Mat& next, cv::Mat& flow);
 		};
 
-		class __declspec(dllexport) OpticalFlowVisualizer : public ImageProcessor {
+		class SHARED OpticalFlowVisualizer : public ImageProcessor {
 		public:
 			void execute();
 		};

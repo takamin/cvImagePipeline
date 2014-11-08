@@ -3,7 +3,7 @@
 #include "Labeling.h"
 namespace cvImagePipeline {
 	#pragma warning(disable:4251)
-	struct __declspec(dllexport) LabeledObject {
+	struct SHARED LabeledObject {
 	public:
 		cv::Rect region;
 		//int left;	//óÃàÊç∂í[
@@ -27,4 +27,4 @@ namespace cvImagePipeline {
 	};
 	#pragma warning(default:4251)
 }
-__declspec(dllexport) std::ostream& operator << (std::ostream& os, const cvImagePipeline::LabeledObject& labeledObject);
+SHARED std::ostream& operator << (std::ostream& os, const cvImagePipeline::LabeledObject& labeledObject);

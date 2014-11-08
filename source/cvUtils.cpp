@@ -10,7 +10,7 @@ BOOL WINAPI DllMain( HINSTANCE hDLL, DWORD dwReason, LPVOID lpReserved)
 }
 
 namespace cvImagePipeline {
-	__declspec(dllexport)
+	SHARED
 	int cvWaitKeyEx(int delay /* =1 */) {
 		int ch = cvWaitKey(delay);
 		if (ch == '\x1b') {
@@ -19,7 +19,7 @@ namespace cvImagePipeline {
 		}
 		return ch;
 	}
-	__declspec(dllexport)
+	SHARED
 	std::string summary(const cv::Mat& image) {
 		using namespace std;
 		stringstream ss;

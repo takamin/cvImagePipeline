@@ -8,11 +8,11 @@
 
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) Labeler : public ImageProcessor
+		class SHARED Labeler : public ImageProcessor
 		{
 		public:
 			DECLARE_CVFILTER;
-			class  __declspec(dllexport) Buffer {
+			class  SHARED Buffer {
 				friend class Labeler;
 			protected:
 				size_t bufsize;

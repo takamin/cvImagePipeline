@@ -2,7 +2,7 @@
 #include "ImageProcessor.h"
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) Flipper : public ImageProcessor {
+		class SHARED Flipper : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 		private:

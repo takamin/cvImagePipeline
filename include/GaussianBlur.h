@@ -2,7 +2,7 @@
 #include "ImageProcessor.h"
 namespace cvImagePipeline {
 	namespace Filter {
-		class __declspec(dllexport) GaussianBlur : public ImageProcessor {
+		class SHARED GaussianBlur : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 		private:
