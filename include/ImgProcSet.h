@@ -30,7 +30,7 @@ namespace cvImagePipeline {
 			bool loadXml(const std::string& filename);
 			virtual void putMarkdown(std::ostream& stream);
 		protected:
-			//最後に追加されたプロセッサへの参照を返す
+			//returns ref to last added processor
 			ImageProcessor& getLastProc();
 		private:
 			void addProcessorByXmlNode(pugi::xml_node processor);

@@ -4,12 +4,12 @@
 namespace cvImagePipeline {
 	namespace Filter {
 
-		// 独立したスレッドで画像処理を行うプロセッサ
+		// Threading processor
 		class __declspec(dllexport) ImgProcThread : public ImgProcSet {
 		public:
 			DECLARE_CVFILTER;
 
-			//クリティカルセクションのヘルパー
+			// Helper for critical section
 			class CriticalSection {
 				ImgProcThread& imgProcThread;
 			public:
@@ -21,65 +21,54 @@ namespace cvImagePipeline {
 			ImgProcThread();
 			~ImgProcThread();
 			
-			//スレッドの開始
 			void startThread(int interval = 0);
 			
-			//スレッドの終了
 			void stopThread();
 			
-			//処理待ち
 			bool WaitEvent(DWORD timeout = INFINITE);
 
-			//スレッドセーフな出力画像の指定
+			//declare thread-safe output image
 			ImgProcThread& defThreadShareOutputMat(const std::string& name, ImageProcessor& src);
 			ImgProcThread& defThreadShareOutputMat(const std::string& name, const cv::Mat& src);
 
-			//出力画像を更新
+			//update output images
 			void updateThreadShareOutputMat();
 			
-			//出力画像の参照取得
+			//get ref to output image
 			const cv::Mat& getThreadShareOutputMat(const std::string& name) const;
 
-			//スレッドセーフな出力画像の指定
+			//declare thread-safe output image
 			void addThreadSafeOutput(const std::string& name, ImageProcessor& src) {
 				defThreadShareOutputMat(name, src);
 			}
-			//出力画像を更新
+			//update output images
 			void ImgProcThread::updateSharedOutputMat() { updateThreadShareOutputMat(); }
 			
-			//出力画像の参照取得
+			//get ref to output image
 			const cv::Mat& refThreadShareOutput(const std::string& name) const {
 				return getThreadShareOutputMat(name);
 			}
 		private:
 			
-			//出力画像の排他制御用クリティカルセクション
 			CRITICAL_SECTION cs;
 
-			//出力画像を保持するスレッド間共有プロセッサ
+			//processor that composit thread-share output images
 			ImgProcSet threadShareInnerMat;
 			ImgProcSet threadShareOutputMat;
 			
-			//サブスレッドの実行フラグ
+			// thread property
 			bool runProcessorThread;
-			
-			//サブスレッドのハンドル
 			HANDLE thead_handle;
-			
-			//サブスレッドの実行インターバル
 			int interval;
 
-			//出力画像更新イベント
+			//event that output images are updated
 			HANDLE eventHandle;
 		
 		private:
-			//共有オブジェクトへのアクセス開始
 			void EnterCriticalSection();
-			
-			//共有オブジェクトへのアクセス終了
 			void LeaveCriticalSection();
 			
-			//サブスレッドのルート
+			//thread main
 			static DWORD WINAPI Thread(LPVOID data);
 
 		};

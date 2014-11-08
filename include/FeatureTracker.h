@@ -16,7 +16,7 @@ namespace cvImagePipeline {
 			virtual ~FeatureTracker();
 			virtual void execute();
 		public:
-			//特徴点によってラベリングする場合の入力バッファ
+			//input buffer in labeling by feature
 			class  __declspec(dllexport) Buffer : public Labeler::Buffer {
 			public:
 				void setFeature(
@@ -28,9 +28,9 @@ namespace cvImagePipeline {
 			std::list<TrackingObject>& getObjectList() { return tracking_object_list; }
 		private:
 			std::list<TrackingObject> tracking_object_list;
-			FeatureMatcher featureMatcher;	//特徴点抽出プロセッサ
-			Buffer labeler_buffer;			//ラベリング用の入力バッファ
-			Labeler labeler;				//ラベリングプロセッサ
+			FeatureMatcher featureMatcher;	//processor to get feature
+			Buffer labeler_buffer;			//input buffer for labeling
+			Labeler labeler;				//labeling processor
 		};
 		#pragma warning(default:4251)
 	}

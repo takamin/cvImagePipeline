@@ -21,7 +21,6 @@ namespace cvImagePipeline {
 			sumPtr = sum;
 		}
 
-		//ピクセルごとの全フレームの総和
 		while(captured_frame != 0) {
 			imgPtr = captured_frame;
 			for(int y = 0; y < frameSize.height; y++) {
@@ -38,7 +37,6 @@ namespace cvImagePipeline {
 			captured_frame = cvQueryFrame(capture);
 		}
 
-		//平均化
 		IplImage* avg = cvCreateImage(frameSize, depth, channels);
 
 		sumPtr = sum;
