@@ -7,20 +7,20 @@ namespace cvImagePipeline {
 
 		#pragma warning(disable:4251)
 
-		///Farnebackのアルゴリズムで密なオプティカルフローを計算する
+		///cacl optical flow by Farneback algorithm
 		class SHARED OpticalFlowFarneback : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 		private:
-			TParam<double> pyr_scale;	//画像ピラミッドのスケール。0.5で下層のサイズが半分になる。
-			TParam<int> levels;			//計算レベル？
-			TParam<int> winsize;		//ウィンドウサイズ。検出する最小の大きさ。
-			TParam<int> iterations;		//繰り返し計算回数
-			TParam<int> poly_n;			//?
-			TParam<double> poly_sigma;	//?
-			TParam<int> flags;			//?
+			TParam<double> pyr_scale;	//scale of image pyramid. 0.5 : half
+			TParam<int> levels;
+			TParam<int> winsize;		//detection window size
+			TParam<int> iterations;	
+			TParam<int> poly_n;	
+			TParam<double> poly_sigma;
+			TParam<int> flags;
 
-			cv::Mat prevMat;					//前回のフレーム
+			cv::Mat prevMat;
 		public:
 			OpticalFlowFarneback();
 			void reset();

@@ -113,7 +113,6 @@ namespace cvImagePipeline {
 			tracking_obj.push_back(TrackingObject(*labeledObject));
 		}
 	}
-	//トラッキングオブジェクトに、特徴点情報を持たせる
 	void TrackingObject::setFeatures(
 		std::list<TrackingObject>& trackingOjectListByFlow,
 		const std::vector<DMatch>& dmatches,
@@ -198,7 +197,6 @@ namespace cvImagePipeline {
 		const std::list<TrackingObject>& tracking_object_list,
 		const std::list<TrackingObject>& trackingOjectListByFlow)
 	{
-		//スコアの降順で並べ替え
 		std::vector<DMatch>::iterator match0 = matches.begin();
 		for(; match0 != matches.end(); match0++) {
 			std::vector<DMatch>::iterator match1 = match0;
@@ -211,7 +209,6 @@ namespace cvImagePipeline {
 				}
 			}
 		}
-		//旧オブジェクトの最高スコアのオブジェクトのみを残す
 		int train_object_count = tracking_object_list.size();
 		for(int trainIdx = 0; trainIdx < train_object_count; trainIdx++) {
 			bool found = false;
@@ -229,7 +226,6 @@ namespace cvImagePipeline {
 			}
 		}
 
-		//新オブジェクトに関する最高スコアのオブジェクトのみを残す
 		int query_object_count = trackingOjectListByFlow.size();
 		for(int queryIdx = 0; queryIdx < query_object_count; queryIdx++) {
 			bool found = false;
@@ -260,9 +256,7 @@ namespace cvImagePipeline {
 				std::vector<DMatch>::const_iterator match = matches.begin();
 				while(match != matches.end()) {
 					if(queryIdx == match->queryIdx && trainIdx == match->trainIdx) {
-						//物体の位置などを更新
 						trainObj->update(*queryObj);
-						//今回検出された物体のリストから削除
 						trackingOjectListByFlow.remove(*queryObj);
 						updated = true;
 						break;
@@ -273,12 +267,10 @@ namespace cvImagePipeline {
 					break;
 				}
 			}
-			//動かなかった物体
 			if(!updated) {
 				trainObj->noupdate();
 			}
 		}
-		//新たに出現した物体を追加
 		std::list<TrackingObject>::iterator itnew = trackingOjectListByFlow.begin();
 		//bool add = false;
 		while(itnew != trackingOjectListByFlow.end()) {
@@ -286,9 +278,6 @@ namespace cvImagePipeline {
 			itnew++;
 			//add = true;
 		}
-		//if(add) {
-		//	cout << "追跡オブジェクト数 " << tracking_object_list.size() << endl;
-		//}
 	}
 	void TrackingObject::eraceOutMatches(
 		std::list<TrackingObject>& tracking_object_list,

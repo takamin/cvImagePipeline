@@ -7,12 +7,8 @@ namespace cvImagePipeline {
 	struct SHARED LabeledObject {
 	public:
 		cv::Rect region;
-		//int left;	//領域左端
-		//int top;	//領域上端
-		//int right;	//領域右端
-		//int bottom;	//領域下端
-		float avg_vx;	//領域内移動ベクトルX成分
-		float avg_vy;	//領域内移動ベクトルY成分
+		float avg_vx;
+		float avg_vy;
 		long clock;
 	public:
 		LabeledObject();

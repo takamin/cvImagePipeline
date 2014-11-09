@@ -7,10 +7,10 @@ namespace cvImagePipeline {
 
 		IMPLEMENT_CVFILTER(AbsDiff);
 		AbsDiff::AbsDiff() {
-			setDescription("2‰æ‘œ‚Ì·•ª(â‘Î’l)‰æ‘œ‚ğo—ÍB");
+			setDescription("difference between 2 images. output=abs(src1-src2)");
 			undefInputMat("");
-			defInputMat("src1", "“ü—Í‰æ‘œ1");
-			defInputMat("src2", "“ü—Í‰æ‘œ2");
+			defInputMat("src1", "src1");
+			defInputMat("src2", "src2");
 		}
 		AbsDiff::~AbsDiff() { }
 		void AbsDiff::execute() {

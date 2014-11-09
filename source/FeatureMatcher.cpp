@@ -28,7 +28,6 @@ namespace cvImagePipeline {
 			FeatureMatcher::featureDetector->detect(inputImage, queryKeyPoints);
 			FeatureMatcher::extractor->compute(inputImage, queryKeyPoints, queryDescriptors);
 
-			//前回の画像から抽出した特徴点とマッチングする
 			std::list<TrackingObject> trackingObjListByFeature;
 			if(	queryDescriptors.cols == trainDescriptors.cols &&
 				queryDescriptors.data != 0 && trainDescriptors.data != 0 &&
@@ -46,84 +45,87 @@ namespace cvImagePipeline {
 
 		void FeatureMatcher::prepareAlgorithm() {
 
-			//画像全体の特徴点を抽出
 			if(FeatureMatcher::featureDetector == 0) {
 				//detector: FAST，FASTX，STAR，SIFT，SURF，ORB，BRISK，MSER，GFTT，HARRIS，Dense，SimpleBlob
 				//descriptor: SIFT，SURF，BRIEF，BRISK，ORB，FREAK
 
-				//速い。特徴点が同心円状に得られる。半径が大きい。マッチングで誤検出が少ない
+				//fast. large radius. few miss onmatching
 				FeatureMatcher::featureDetector = FeatureDetector::create("ORB");
 				FeatureMatcher::extractor = cv::DescriptorExtractor::create("ORB");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 				FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming");
 
-				////速い。特徴点が同心円状に得られる。マッチングで誤検出が少ない。FREAKが不要な特徴点を絞っている？
+				//fast. large radius. few miss onmatching
 				//FeatureMatcher::featureDetector = FeatureDetector::create("ORB");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("FREAK");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 
-				////マッチング誤検出多い。
+				////much miss matching
 				//FeatureMatcher::featureDetector = FeatureDetector::create("SimpleBlob");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("FREAK");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 
-				////超遅い、マッチング誤検出多い。密度が高い。
+				////slow, much miss matching
 				//FeatureMatcher::featureDetector = FeatureDetector::create("Dense");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("FREAK");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 
-				////速いがマッチングで誤検出多い
+				////fast, much miss matching
 				//FeatureMatcher::featureDetector = FeatureDetector::create("HARRIS");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("FREAK");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 
-				////速いが。マッチングで誤検出多い
+				////fast, much miss matching
 				//FeatureMatcher::featureDetector = FeatureDetector::create("GFTT");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("FREAK");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 
-				////遅い。特徴点が少ない。マッチングで誤検出がある。
+				////slow, few features, much miss matching
 				//FeatureMatcher::featureDetector = FeatureDetector::create("MSER");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("FREAK");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 
-				////遅い。特徴点が少ない。半径が大きいマッチングで誤検出がある。
+				////slow, few features, large radius, much miss matching
 				//FeatureMatcher::featureDetector = FeatureDetector::create("MSER");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("ORB");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 
+				////fast, simular SIFT/SURF, miss matching
 				////速い。SIFT,SURFに似ている。マッチングで誤検出がすこしある。
 				//FeatureMatcher::featureDetector = FeatureDetector::create("BRISK");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("BRISK");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("BruteForce-Hamming(2)");
 
+				////fast, few miss matching, fixed radius of feature point
 				////まあまあ速い。マッチングで誤検出が少ない。特徴点の半径が一定
 				//FeatureMatcher::featureDetector = FeatureDetector::create("FASTX");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("SIFT");
 
+				////slow feature detection, few miss matching
 				////特徴点抽出が、すこし遅い。マッチングで誤検出が少ない
 				//FeatureMatcher::featureDetector = FeatureDetector::create("FAST");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("SIFT");
 
+				////fast, lot of miss matching
 				////速い。マッチングで誤検出がある
 				//FeatureMatcher::featureDetector = FeatureDetector::create("FASTX");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("SURF");
 
-				////すこし遅い
+				////slow
 				//FeatureMatcher::featureDetector = FeatureDetector::create("SIFT");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("SURF");
 
-				////SIFT/SIFT 半径が大きいのから小さいのまで。少し遅い
+				////slow
 				//FeatureMatcher::featureDetector = FeatureDetector::create("SIFT");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("SIFT");
 				
-				////SURF/SURF 大量の特徴点 半径が総じて大きい。少し遅い
+				////slow, much feature point, radius large
 				//FeatureMatcher::featureDetector = FeatureDetector::create("SURF");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("SURF");
 				//FeatureMatcher::matcher = cv::DescriptorMatcher::create("FlannBased");
 
 
-				////大量の特徴点、半径が大きい、遅い。使えない
+				////slow, much feature point, radius large
 				//FeatureMatcher::featureDetector = FeatureDetector::create("SURF");
 				//FeatureMatcher::extractor = cv::DescriptorExtractor::create("SIFT");
 
@@ -144,7 +146,6 @@ namespace cvImagePipeline {
 #ifdef MATCH_SIMGLE
 			FeatureMatcher::matcher->match(queryDescriptors, trainDescriptors, dmatches);
 #else
-			//誤判定が多いので双方向のチェックを行う
 			std::vector<cv::DMatch> match12;
 			std::vector<cv::DMatch> match21;
 			FeatureMatcher::matcher->match(queryDescriptors, trainDescriptors, match12);
@@ -160,15 +161,12 @@ namespace cvImagePipeline {
 #endif
 
 #ifndef NO_OMIT_ILLEGAL_MATCH
-		//マッチした特徴点間の距離の異常値を排除する。
-		//（元のdistanceではうまく排除できないため距離を計算する）
 		std::vector<cv::DMatch> dmatches_all = dmatches;
 		dmatches.clear();
 		//measureDistance(dmatches_all, queryKeyPoints, trainKeyPoints);
 		filterByDistanceStdDev(dmatches_all, 1.0, dmatches);
 #endif
 		}
-		//DMatch::distanceの値が信用ならないので独自に計算する。
 		void FeatureMatcher::measureDistance(
 			std::vector<cv::DMatch>& matches,
 			const std::vector<cv::KeyPoint>& queryKeyPoints,
@@ -186,7 +184,6 @@ namespace cvImagePipeline {
 			float range_factor,
 			std::vector<cv::DMatch>& dmatches)
 		{
-			//マッチした特徴点同士の距離とその平均値を求める
 			float ave_distance = 0.0;
 			size_t src_count = matches_src.size();
 			for (size_t i = 0; i < src_count; i++) {
@@ -194,7 +191,6 @@ namespace cvImagePipeline {
 			}
 			ave_distance /= src_count;
 
-			//標準偏差を求める
 			float sdev_distance = 0.0;
 			for (size_t i = 0; i < src_count; i++) {
 				float diff_ave = matches_src[i].distance - ave_distance;
@@ -202,7 +198,6 @@ namespace cvImagePipeline {
 			}
 			sdev_distance = sqrt(sdev_distance / src_count);
 
-			//異常値を排除する。
 			float distance_min = ave_distance - sdev_distance * range_factor;
 			float distance_max = ave_distance + sdev_distance * range_factor;
 			for (size_t i = 0; i < src_count; i++) {

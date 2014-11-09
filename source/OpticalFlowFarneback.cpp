@@ -66,10 +66,10 @@ namespace cvImagePipeline {
 					float dx = psrc[0];
 					float dy = psrc[1];
 					
-					//   ªÂ
-					//Ô©¨—Î
-					//   «
-					//   ‰©F
+					//     ªBlue
+					//Red ©¨ Green
+					//     «
+					//   Yellow
 					float r = (dx < 0.0) ? abs(dx) : 0;
 					float g = (dx > 0.0) ? dx : 0;
 					float b = (dy < 0.0) ? abs(dy) : 0;

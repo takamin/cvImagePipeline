@@ -6,12 +6,11 @@ namespace cvImagePipeline {
 	namespace Filter {
 
 		#pragma warning(disable:4251)
-		///PyrLKで疎なオプティカルフローを計算する
 		class SHARED OpticalFlowPyrLK : public ImageProcessor {
 		public:
 			DECLARE_CVFILTER;
 		private:
-			cv::Mat prevMat; //前回のフレーム
+			cv::Mat prevMat;
 		public:
 			OpticalFlowPyrLK();
 			void reset();

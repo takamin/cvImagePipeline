@@ -25,7 +25,6 @@ namespace cvImagePipeline {
 			labeler.setInputMat(flow);
 			labeler.execute();
 
-			//オプティカルフローの結果からトラッキング対象のオブジェクトを生成する。
 			std::list<LabeledObject> labeled_obj_list = labeler.getLabeledObjects();
 			LabeledObject::chooseByArea(labeled_obj_list, cv::Size(flow.cols, flow.rows).area() * 0.3);
 			std::list<TrackingObject> trackingOjectListByFlow;
@@ -70,7 +69,6 @@ namespace cvImagePipeline {
 			const std::list<TrackingObject>& tracking_object_list,
 			const std::list<TrackingObject>& trackingOjectListByFlow)
 		{
-			//新オブジェクトと旧オブジェクトのマッチスコアを計算
 			std::list<TrackingObject>::const_iterator trainObj = tracking_object_list.begin();
 			for(int trainIdx = 0; trainObj != tracking_object_list.end(); trainObj++, trainIdx++) {
 				std::list<TrackingObject>::const_iterator queryObj = trackingOjectListByFlow.begin();

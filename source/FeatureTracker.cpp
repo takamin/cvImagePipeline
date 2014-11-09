@@ -64,7 +64,6 @@ namespace cvImagePipeline {
 					new_state.dmatches = new_matches;
 					tracking_object->update(new_state);
 					feature_match_object.push_back(*tracking_object);
-					//cout << "特徴点で追跡：" << *tracking_object << endl;
 					tracking_object = tracking_object_list.erase(tracking_object);
 				} else {
 					tracking_object++;
@@ -77,7 +76,6 @@ namespace cvImagePipeline {
 			}
 			/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
 
-			//ラベリング
 			labeler_buffer.setFeature(
 				originalImage.cols, originalImage.rows,
 				dmatches, queryKeyPoints, trainKeyPoints);
@@ -85,17 +83,14 @@ namespace cvImagePipeline {
 			labeler.setInputMat(originalImage);
 			labeler.execute();
 
-			//オプティカルフローの結果からトラッキング対象のオブジェクトを生成する。
 			std::list<LabeledObject> labeled_obj_list = labeler.getLabeledObjects();
 			LabeledObject::chooseByArea(labeled_obj_list, cv::Size(originalImage.cols,
 				originalImage.rows).area() * 0.3);
 			std::list<TrackingObject> new_tracking_object_list;
 			TrackingObject::createTrackingObjects(labeled_obj_list, new_tracking_object_list);
 
-			//新しいトラッキングオブジェクトに、特徴点情報を持たせる
 			TrackingObject::setFeatures(new_tracking_object_list, dmatches, queryKeyPoints);
 
-			//新オブジェクトと旧オブジェクトのマッチスコアを計算
 			std::vector<DMatch> match_scores;
 			std::list<TrackingObject>::const_iterator trainObj = tracking_object_list.begin();
 			for(int trainIdx = 0; trainObj != tracking_object_list.end(); trainObj++, trainIdx++) {
@@ -124,7 +119,6 @@ namespace cvImagePipeline {
 					if(t0->state.region.contains(t1->state.region.tl())
 						&& t0->state.region.contains(t1->state.region.br()))
 					{
-						//cout << "内包する物体を削除：" << *t1 << endl;
 						t1 = tracking_object_list.erase(t1);
 					} else {
 						t1++;

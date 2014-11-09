@@ -22,7 +22,7 @@ namespace cvImagePipeline {
 	int cvWaitKeyEx(int delay /* =1 */) {
 		int ch = cvWaitKey(delay);
 		if (ch == '\x1b') {
-			fprintf(stderr, "もう一度ESCを押せば終了。それ以外で再開。");
+			fprintf(stderr, "push [ESC] to exit, or continue.");
 			while((ch = cvWaitKey(100)) == -1) {/**/}
 		}
 		return ch;

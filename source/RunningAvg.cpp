@@ -8,7 +8,7 @@ namespace cvImagePipeline {
 			: averageCount("averageCount", 60*10),
 			buffer_count(0)
 		{
-			setDescription("“ü—Í‰æ‘œ‚Ì’·Šú•½‹Ï‰æ‘œ‚ğo—Í‚·‚éB");
+			setDescription("output average image for a long term");
 			defParam(averageCount);
 		}
 		RunningAvg::~RunningAvg()
