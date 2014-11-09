@@ -1,5 +1,9 @@
 #include "ImgProcThread.h"
 #include <time.h>
+#if !defined(_MSC_VER)
+#include <unistd.h>
+#define Sleep(ms) usleep((ms)*1000)
+#endif
 
 namespace cvImagePipeline {
 	namespace Filter {
@@ -111,17 +115,11 @@ namespace cvImagePipeline {
 					}
 					sleep_time += ((t0 + ++run_counter * processor->interval) - clock());
 					if (sleep_time >= 0) {
-#if defined(_MSC_VER)
 						Sleep(sleep_time);
-#else
-#endif
 						sleep_time = 0;
 					}
 					else {
-#if defined(_MSC_VER)
 						Sleep(1);
-#else
-#endif
 						sleep_time -= 1;
 					}
 				}

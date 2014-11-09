@@ -1,5 +1,6 @@
 #if !defined(_MSC_VER)
 #include <unistd.h>
+#define _sleep(ms) usleep((ms) * 1000)
 #endif
 #include "VideoCapture.h"
 using namespace std;
@@ -76,12 +77,7 @@ namespace cvImagePipeline {
 				do {
 					videoCapture >> mat;
 					frameNumber++;
-#if defined(_MSC_VER)
 					_sleep(10);
-#else
-					usleep(10 * 1000);
-break;
-#endif
 				} while (mat.empty());
 				captureStart = true;
 				captureEmpty = false;
@@ -107,7 +103,6 @@ break;
 			return true;
 		}
 		void VideoCapture::execute() {
-std::cerr << "[VideoCapture::execute()] ." << std::endl;
 			capture();
 		}
 	}
