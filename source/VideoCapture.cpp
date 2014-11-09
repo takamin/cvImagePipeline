@@ -60,9 +60,13 @@ namespace cvImagePipeline {
 		bool VideoCapture::capture() {
 			if(!videoCapture.isOpened()) {
 				if(deviceIndex >= 0) {
-					open(deviceIndex);
+					if(!open(deviceIndex)) {
+                        return false;
+                    }
 				} else if((string)filename != "") {
-					open((string)filename);
+					if(!open((string)filename)) {
+                        return false;
+                    }
 				} else {
 					return false;
 				}
@@ -76,6 +80,7 @@ namespace cvImagePipeline {
 					_sleep(10);
 #else
 					usleep(10 * 1000);
+break;
 #endif
 				} while (mat.empty());
 				captureStart = true;
@@ -102,6 +107,7 @@ namespace cvImagePipeline {
 			return true;
 		}
 		void VideoCapture::execute() {
+std::cerr << "[VideoCapture::execute()] ." << std::endl;
 			capture();
 		}
 	}
