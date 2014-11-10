@@ -20,16 +20,10 @@ __XMLファイルからの入力__
 プロセッサの接続は[XMLファイル](https://github.com/takamin/cvImageBlock/blob/master/sample/sample.xml)に記述できます。
 詳細は[サンプルプログラム](#sample)を参照してください。
 
-### 開発環境
-
-* 出力ターゲット Win32 DLL
-* 統合開発環境 VisualStudio Express 2010 for Windows Desktop
-* プラットフォーム Win32(x86)
-* OpenCV 2.4が必要です。2.4.8/2.4.9/2.4.10で動作を確認しています。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
-
 ### ビルド方法
 
 cmakeを使用してください。Windows 7(32bit)Visual Studio 2010、Ubuntu 14.04 LTS で動作を確認しています。
+OpenCV 2.4が必要です。2.4.8/2.4.9/2.4.10で動作を確認しています。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
 
 ```
 mkdir build
