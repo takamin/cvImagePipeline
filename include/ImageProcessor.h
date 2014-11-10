@@ -8,7 +8,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#include "../source/pugixml-1.4/src/pugixml.hpp"
+#include "pugixml.hpp"
 
 #pragma warning(disable:4251)
 

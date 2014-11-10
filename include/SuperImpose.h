@@ -14,7 +14,9 @@ namespace cvImagePipeline {
 			~SuperImpose(){}
 			void execute();
 		private:
+#pragma warning(disable:4251)
 			static cv::Mat empty_image;
+#pragma warning(default:4251)
 		};
 	}
 }
