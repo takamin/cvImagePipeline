@@ -23,7 +23,7 @@ __XMLファイルからの入力__
 ### ビルド方法
 
 cmakeを使用してください。Windows 7(32bit)Visual Studio 2010、Ubuntu 14.04 LTS で動作を確認しています。
-OpenCV 2.4が必要です。2.4.8/2.4.9/2.4.10で動作を確認しています。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードして`C:\opencv`に展開（`C:\opencv\build`ディレクトリがある状態）。
+OpenCV 2.4が必要です。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードできます。
 
 ```
 mkdir build
