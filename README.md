@@ -25,10 +25,11 @@ __XMLファイルからの入力__
 cmakeを使用してください。Windows 7(32bit)Visual Studio 2010、Ubuntu 14.04 LTS で動作を確認しています。
 OpenCV 2.4が必要です。[DOWNLOADS|OpenCV](http://opencv.org/downloads.html)からダウンロードできます。
 
+__Windowsの場合のビルド例__
 ```
 mkdir build
 cd build
-cmake -D OpenCV_DIR='path/to/opencv' ..
+cmake -D OpenCV_DIR='path/to/opencv' -D CMAKE_INSTALL_PREFIX='C:/cvImagePipeline' ..
 ```
 
 ### <a name="sample"></a>サンプルプログラム
@@ -76,5 +77,5 @@ cmake -D OpenCV_DIR='path/to/opencv' ..
 ### クラス名による実行時動的インスタンス生成について
 
 クラス宣言でDECLARE_CVFILTER、定義時にIMPLEMENT_CVFILTER マクロを使用すれば、クラスの名前でインスタンスを生成できます。
-動的生成に対応していない場合は、後述のXMLファイルからの構築はできません。
+動的生成に対応していない場合は、XMLファイルからの構築はできません。
 

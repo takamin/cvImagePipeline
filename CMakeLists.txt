@@ -51,3 +51,46 @@ target_link_libraries(test cvImagePipeline ${OpenCV_LIBS})
 
 add_executable(sample sample/capture.cpp)
 target_link_libraries(sample cvImagePipeline ${OpenCV_LIBS})
+
+install (TARGETS cvImagePipeline DESTINATION .)
+install (FILES
+    include/AbsDiff.h
+    include/BackgroundSubtractor.h
+    include/ColorConverter.h
+    include/Convert.h
+    include/DepthTo32F.h
+    include/Dilate.h
+    include/EqualizeHist.h
+    include/Erode.h
+    include/FeatureMatcher.h
+    include/FeatureTracker.h
+    include/FitInGrid.h
+    include/Flipper.h
+    include/FlowTracker.h
+    include/GaussianBlur.h
+    include/ImageDataPtr.h
+    include/ImagePoint.h
+    include/ImageProcessor.h
+    include/ImageWindow.h
+    include/ImgProcSet.h
+    include/ImgProcThread.h
+    include/LabeledObject.h
+    include/Labeler.h
+    include/Labeling.h
+    include/MaskCopy.h
+    include/OpticalFlowFarneback.h
+    include/OpticalFlowPyrLK.h
+    include/RegionOfInterest.h
+    include/Resizer.h
+    include/RunningAvg.h
+    include/SubMat.h
+    include/SuperImpose.h
+    include/Threshold.h
+    include/TrackingObject.h
+    include/VideoCapture.h
+    include/cvImagePipeline.h
+    include/cvUtils.h
+    include/pugiconfig.hpp
+    include/pugixml.hpp
+    DESTINATION include
+)
