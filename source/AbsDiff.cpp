@@ -16,11 +16,20 @@ namespace cvImagePipeline {
 		void AbsDiff::execute() {
 			const Mat& src1 = getInputMat("src1");
 			const Mat& src2 = getInputMat("src2");
-			if (src1.empty() || src2.empty()) {
-				return;
-			}
 			Mat& dst = refOutputMat();
-			cv::absdiff(src1, src2, dst);
+            if (src1.empty()) {
+                if (src2.empty()) {
+                    return;
+                } else {
+                    dst = src2;
+                }
+            } else {
+                if (src2.empty()) {
+                    dst = src1;
+                } else {
+			        cv::absdiff(src1, src2, dst);
+                }
+            }
 		}
 	}
 }
