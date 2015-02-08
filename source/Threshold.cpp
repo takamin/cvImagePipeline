@@ -27,7 +27,7 @@ namespace cvImagePipeline {
 				return;
 			}
 			Mat& output = refOutputMat();
-			cv::threshold(input_image, output, thresh_type, maxval, type);
+			cv::threshold(input_image, output, thresh, maxval, thresh_type);
 		}
 		void Threshold::onPropertyChange(Property& property) {
 			const string& name = property.getName();
