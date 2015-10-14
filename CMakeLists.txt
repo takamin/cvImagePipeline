@@ -45,6 +45,7 @@ find_package( OpenCV REQUIRED )
 include_directories( include )
 add_library(cvImagePipeline SHARED ${SOURCES})
 target_link_libraries(cvImagePipeline ${OpenCV_LIBS})
+add_definitions(-DBUILD_DLL)
 
 add_executable(test test/test.cpp)
 target_link_libraries(test cvImagePipeline ${OpenCV_LIBS})
