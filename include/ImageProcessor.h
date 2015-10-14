@@ -26,7 +26,12 @@
     #define IMPORT
     #pragma warning Unknown dynamic link import/export semantics.
 #endif
+
+#ifdef BUILD_DLL
 #define SHARED EXPORT
+#else
+#define SHARED IMPORT
+#endif
 
 namespace cvImagePipeline {
 	namespace Filter {
