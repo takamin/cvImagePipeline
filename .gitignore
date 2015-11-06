@@ -190,3 +190,5 @@ cmake/sample.vcxproj
 cmake/sample.vcxproj.filters
 cmake/test.vcxproj
 cmake/test.vcxproj.filters
+
+*.swp
